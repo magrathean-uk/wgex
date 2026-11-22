@@ -1,0 +1,7 @@
+// Debug configuration: development base (`.dev`), testability on.
+#include "Base.xcconfig"
+#include "Signing-AdHoc.xcconfig"
+
+ENABLE_TESTABILITY = YES
+SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG $(inherited)
+SWIFT_OPTIMIZATION_LEVEL = -Onone

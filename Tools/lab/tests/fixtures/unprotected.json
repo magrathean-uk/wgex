@@ -1,0 +1,274 @@
+{
+  "schemaVersion": 1,
+  "nonce": "m1-10-fixture",
+  "configuration": {
+    "targets": [
+      {
+        "address": "192.168.64.1",
+        "scope": "outside_tunnel",
+        "dnsPort": 5354,
+        "httpPort": 8088,
+        "udpPort": 8088,
+        "allowedLAN": false
+      },
+      {
+        "address": "10.77.0.1",
+        "scope": "in_tunnel",
+        "dnsPort": 53,
+        "httpPort": 8088,
+        "udpPort": 8088,
+        "allowedLAN": false
+      }
+    ],
+    "format": "marker",
+    "intervalMilliseconds": 500
+  },
+  "configurationSHA256": "804700fe65cb2c22b2fad802cd8a62307e86495c96fed2ae12c6586109471798",
+  "observations": [
+    {
+      "timestamp": 5,
+      "nonce": "m1-10-fixture",
+      "kind": "sent",
+      "scope": "outside_tunnel",
+      "family": "ipv4",
+      "proto": "dns",
+      "address": "192.168.64.1",
+      "port": 5354
+    },
+    {
+      "timestamp": 5,
+      "nonce": "m1-10-fixture",
+      "kind": "sent",
+      "scope": "outside_tunnel",
+      "family": "ipv4",
+      "proto": "http",
+      "address": "192.168.64.1",
+      "port": 8088
+    },
+    {
+      "timestamp": 5,
+      "nonce": "m1-10-fixture",
+      "kind": "sent",
+      "scope": "outside_tunnel",
+      "family": "ipv4",
+      "proto": "tcp",
+      "address": "192.168.64.1",
+      "port": 8088
+    },
+    {
+      "timestamp": 5,
+      "nonce": "m1-10-fixture",
+      "kind": "sent",
+      "scope": "outside_tunnel",
+      "family": "ipv4",
+      "proto": "udp",
+      "address": "192.168.64.1",
+      "port": 8088
+    },
+    {
+      "timestamp": 5,
+      "nonce": "m1-10-fixture",
+      "kind": "sent",
+      "scope": "in_tunnel",
+      "family": "ipv4",
+      "proto": "dns",
+      "address": "10.77.0.1",
+      "port": 53
+    },
+    {
+      "timestamp": 5,
+      "nonce": "m1-10-fixture",
+      "kind": "sent",
+      "scope": "in_tunnel",
+      "family": "ipv4",
+      "proto": "http",
+      "address": "10.77.0.1",
+      "port": 8088
+    },
+    {
+      "timestamp": 5,
+      "nonce": "m1-10-fixture",
+      "kind": "sent",
+      "scope": "in_tunnel",
+      "family": "ipv4",
+      "proto": "tcp",
+      "address": "10.77.0.1",
+      "port": 8088
+    },
+    {
+      "timestamp": 5,
+      "nonce": "m1-10-fixture",
+      "kind": "sent",
+      "scope": "in_tunnel",
+      "family": "ipv4",
+      "proto": "udp",
+      "address": "10.77.0.1",
+      "port": 8088
+    }
+  ],
+  "windows": [
+    {
+      "state": "unprotected",
+      "start": 2,
+      "end": 8,
+      "requiredFamilies": [
+        "ipv4"
+      ],
+      "allowLAN": false
+    }
+  ],
+  "receiverRecords": [
+    {
+      "schemaVersion": 1,
+      "nonce": "receiver",
+      "configuration": {
+        "targets": [
+          {
+            "address": "192.168.64.1",
+            "scope": "outside_tunnel",
+            "dnsPort": 5354,
+            "httpPort": 8088,
+            "udpPort": 8088,
+            "allowedLAN": false
+          },
+          {
+            "address": "10.77.0.1",
+            "scope": "in_tunnel",
+            "dnsPort": 53,
+            "httpPort": 8088,
+            "udpPort": 8088,
+            "allowedLAN": false
+          }
+        ],
+        "format": "marker",
+        "intervalMilliseconds": 500
+      },
+      "configurationSHA256": "804700fe65cb2c22b2fad802cd8a62307e86495c96fed2ae12c6586109471798",
+      "observations": [
+        {
+          "timestamp": 5,
+          "nonce": "m1-10-fixture",
+          "kind": "received",
+          "scope": "outside_tunnel",
+          "family": "ipv4",
+          "proto": "dns",
+          "address": "192.168.64.1",
+          "port": 5354
+        },
+        {
+          "timestamp": 5,
+          "nonce": "m1-10-fixture",
+          "kind": "received",
+          "scope": "outside_tunnel",
+          "family": "ipv4",
+          "proto": "http",
+          "address": "192.168.64.1",
+          "port": 8088
+        },
+        {
+          "timestamp": 5,
+          "nonce": "m1-10-fixture",
+          "kind": "received",
+          "scope": "outside_tunnel",
+          "family": "ipv4",
+          "proto": "tcp",
+          "address": "192.168.64.1",
+          "port": 8088
+        },
+        {
+          "timestamp": 5,
+          "nonce": "m1-10-fixture",
+          "kind": "received",
+          "scope": "outside_tunnel",
+          "family": "ipv4",
+          "proto": "udp",
+          "address": "192.168.64.1",
+          "port": 8088
+        }
+      ],
+      "windows": [],
+      "receiverCoverage": [
+        {
+          "scope": "outside_tunnel",
+          "proto": "dns",
+          "address": "192.168.64.1",
+          "port": 5354,
+          "start": 1,
+          "end": 9,
+          "healthy": true,
+          "configurationSHA256": "804700fe65cb2c22b2fad802cd8a62307e86495c96fed2ae12c6586109471798"
+        },
+        {
+          "scope": "outside_tunnel",
+          "proto": "http",
+          "address": "192.168.64.1",
+          "port": 8088,
+          "start": 1,
+          "end": 9,
+          "healthy": true,
+          "configurationSHA256": "804700fe65cb2c22b2fad802cd8a62307e86495c96fed2ae12c6586109471798"
+        },
+        {
+          "scope": "outside_tunnel",
+          "proto": "tcp",
+          "address": "192.168.64.1",
+          "port": 8088,
+          "start": 1,
+          "end": 9,
+          "healthy": true,
+          "configurationSHA256": "804700fe65cb2c22b2fad802cd8a62307e86495c96fed2ae12c6586109471798"
+        },
+        {
+          "scope": "outside_tunnel",
+          "proto": "udp",
+          "address": "192.168.64.1",
+          "port": 8088,
+          "start": 1,
+          "end": 9,
+          "healthy": true,
+          "configurationSHA256": "804700fe65cb2c22b2fad802cd8a62307e86495c96fed2ae12c6586109471798"
+        },
+        {
+          "scope": "in_tunnel",
+          "proto": "dns",
+          "address": "10.77.0.1",
+          "port": 53,
+          "start": 1,
+          "end": 9,
+          "healthy": true,
+          "configurationSHA256": "804700fe65cb2c22b2fad802cd8a62307e86495c96fed2ae12c6586109471798"
+        },
+        {
+          "scope": "in_tunnel",
+          "proto": "http",
+          "address": "10.77.0.1",
+          "port": 8088,
+          "start": 1,
+          "end": 9,
+          "healthy": true,
+          "configurationSHA256": "804700fe65cb2c22b2fad802cd8a62307e86495c96fed2ae12c6586109471798"
+        },
+        {
+          "scope": "in_tunnel",
+          "proto": "tcp",
+          "address": "10.77.0.1",
+          "port": 8088,
+          "start": 1,
+          "end": 9,
+          "healthy": true,
+          "configurationSHA256": "804700fe65cb2c22b2fad802cd8a62307e86495c96fed2ae12c6586109471798"
+        },
+        {
+          "scope": "in_tunnel",
+          "proto": "udp",
+          "address": "10.77.0.1",
+          "port": 8088,
+          "start": 1,
+          "end": 9,
+          "healthy": true,
+          "configurationSHA256": "804700fe65cb2c22b2fad802cd8a62307e86495c96fed2ae12c6586109471798"
+        }
+      ]
+    }
+  ]
+}

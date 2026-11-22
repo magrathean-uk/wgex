@@ -1,0 +1,4 @@
+# shellcheck defaults for WGEX scripts
+shell=bash
+external-sources=true
+enable=avoid-nullary-conditions

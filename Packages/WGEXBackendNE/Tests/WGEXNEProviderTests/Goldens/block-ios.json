@@ -1,0 +1,1 @@
+{"dns":{"allowFailover":false,"matchDomains":["internal.test"],"searchDomains":["wgex.test"],"servers":["10.8.0.1"]},"ipv4":{"addresses":["10.8.0.2/32"],"excludedRoutes":[],"includedRoutes":["0.0.0.0/0"]},"ipv6":{"addresses":["fdf0:7765:7800::1/128"],"excludedRoutes":[],"includedRoutes":["::/0"]},"mtu":1280,"tunnelRemoteAddress":"127.0.0.1"}

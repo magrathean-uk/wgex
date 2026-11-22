@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{margin:0;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro",system-ui,"Helvetica Neue",Helvetica,sans-serif;-webkit-font-smoothing:antialiased;font-size:13px;color:var(--label);
+--wall:radial-gradient(1100px 700px at 18% 8%,#e4ebf4 0%,transparent 70%),linear-gradient(160deg,#cdd8e6 0%,#e6e0d8 100%);
+--label:rgba(0,0,0,.86);--label2:rgba(0,0,0,.56);--label3:rgba(0,0,0,.3);--sep:rgba(0,0,0,.08);--sep2:rgba(0,0,0,.15);
+--win:#F6F6F7;--card:#FFFFFF;--cardEdge:rgba(0,0,0,.07);--fill:rgba(0,0,0,.05);--fill2:rgba(0,0,0,.08);--segOn:#FFFFFF;
+--sidebar:rgba(234,234,238,.82);--glass:rgba(255,255,255,.66);--glassShadow:rgba(0,0,0,.08);--menubar:rgba(244,244,247,.6);--popover:rgba(250,250,252,.88);
+--selBg:rgba(0,122,255,.14);--code:#F2F2F4;
+--green:#34C759;--greenT:#1E7F36;--orange:#FF9500;--orangeT:#A84B00;--red:#FF3B30;--redT:#C9001A;--gray:#8E8E93;--blue:#007AFF;--blueT:#0062CC;--indigo:#5856D6;
+--orbFill:radial-gradient(circle at 34% 26%,#FFFFFF 0%,#F3F3F6 46%,#E2E2E8 100%);--orbHi:rgba(255,255,255,.95);--orbShade:rgba(0,0,0,.06);--orbDrop:rgba(0,0,0,.12);
+--shadow:0 30px 80px rgba(0,0,0,.26),0 0 0 .5px rgba(0,0,0,.22)}
+body[data-theme="dark"]{--wall:radial-gradient(1100px 700px at 18% 8%,#26314a 0%,transparent 70%),linear-gradient(160deg,#141822 0%,#221d29 100%);
+--label:rgba(255,255,255,.9);--label2:rgba(255,255,255,.58);--label3:rgba(255,255,255,.3);--sep:rgba(255,255,255,.08);--sep2:rgba(255,255,255,.16);
+--win:#1E1E20;--card:#2A2A2D;--cardEdge:rgba(255,255,255,.07);--fill:rgba(255,255,255,.08);--fill2:rgba(255,255,255,.12);--segOn:rgba(255,255,255,.2);
+--sidebar:rgba(44,44,48,.8);--glass:rgba(72,72,78,.55);--glassShadow:rgba(0,0,0,.3);--menubar:rgba(28,28,32,.55);--popover:rgba(40,40,44,.9);
+--selBg:rgba(10,132,255,.3);--code:#18181A;
+--green:#30D158;--greenT:#30D158;--orange:#FF9F0A;--orangeT:#FFB340;--red:#FF453A;--redT:#FF6961;--gray:#98989D;--blue:#0A84FF;--blueT:#4DA3FF;--indigo:#7D7AFF;
+--orbFill:radial-gradient(circle at 34% 26%,#505056 0%,#36363A 50%,#262629 100%);--orbHi:rgba(255,255,255,.2);--orbShade:rgba(0,0,0,.35);--orbDrop:rgba(0,0,0,.5);
+--shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 .5px rgba(255,255,255,.14)}
+a{color:var(--blueT);text-decoration:none}a:hover{text-decoration:underline}
+input{font:inherit;color:inherit}
+@keyframes wgexSpin{to{transform:rotate(360deg)}}
+@keyframes wgexBreath{0%,100%{transform:scale(1)}50%{transform:scale(1.025)}}
+@keyframes wgexPulse{0%{transform:scale(1);opacity:.5}100%{transform:scale(1.38);opacity:0}}
+@keyframes wgexTick{0%{opacity:1}55%,100%{opacity:.15}}
+@keyframes wgexBlink{0%,100%{opacity:1}50%{opacity:.3}}
+</style>
+</helmet>
+<div style="position:relative;width:100vw;height:100vh;overflow:hidden;background:var(--wall)">
+<div style="{{ stageStyle }}">
+
+<!-- macOS menu bar -->
+<div style="position:absolute;left:0;top:0;right:0;height:28px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;background:var(--menubar);backdrop-filter:blur(30px) saturate(1.8);font-size:13px;z-index:60">
+  <div style="display:flex;align-items:center;gap:18px">
+    <div onClick="{{ toggleAppMenu }}" style="font-weight:700;padding:2px 8px;border-radius:5px;background:{{ appMenuBg }}">WGEX</div>
+    <div style="display:flex;gap:18px;color:var(--label)"><span>File</span><span>Edit</span><span>View</span><span>Window</span><span>Help</span></div>
+  </div>
+  <div style="display:flex;align-items:center;gap:14px">
+    <div onClick="{{ toggleMenu }}" title="{{ statusTip }}" style="height:22px;width:30px;display:flex;align-items:center;justify-content:center;border-radius:5px;background:{{ menuBtnBg }}"><span style="{{ statusGlyph }}"></span></div>
+    <span style="width:16px;height:16px;background:var(--label);mask:url(https://unpkg.com/lucide-static@0.460.0/icons/wifi.svg) center/contain no-repeat"></span>
+    <span style="font-variant-numeric:tabular-nums">Sun 25 Oct {{ clock }}</span>
+  </div>
+</div>
+
+<div style="position:absolute;left:170px;top:912px;width:1100px;font-size:11.5px;color:var(--label2);display:flex;gap:10px;align-items:center">
+  <span style="font:600 10.5px ui-monospace,Menlo,monospace;padding:2px 7px;border-radius:5px;background:var(--label);color:var(--win)">{{ caption.id }}</span>
+  <span style="font-weight:600;color:var(--label)">{{ caption.name }}</span><span>{{ caption.text }}</span>
+</div>
+
+<!-- MAIN WINDOW -->
+<div onMouseDown="{{ focusMain }}" style="position:absolute;left:170px;top:44px;width:1100px;height:860px;border-radius:22px;background:var(--win);box-shadow:var(--shadow);overflow:hidden;z-index:{{ z.main }}">
+  <!-- Sidebar -->
+  <div style="position:absolute;left:8px;top:8px;bottom:8px;width:244px;border-radius:16px;background:var(--sidebar);backdrop-filter:blur(30px) saturate(1.6);box-shadow:0 0 0 .5px var(--sep2),0 4px 18px var(--glassShadow);display:flex;flex-direction:column">
+    <div style="height:46px;display:flex;align-items:center;gap:8px;padding:0 14px">
+      <span style="width:12px;height:12px;border-radius:50%;background:#FF5F57;box-shadow:inset 0 0 0 .5px rgba(0,0,0,.15)"></span>
+      <span style="width:12px;height:12px;border-radius:50%;background:#FEBC2E;box-shadow:inset 0 0 0 .5px rgba(0,0,0,.15)"></span>
+      <span style="width:12px;height:12px;border-radius:50%;background:#28C840;box-shadow:inset 0 0 0 .5px rgba(0,0,0,.15)"></span>
+    </div>
+    <div style="padding:4px 18px 4px;font-size:11px;font-weight:600;color:var(--label2)">Tunnels</div>
+    <div style="display:flex;flex-direction:column;gap:2px;padding:2px 8px;flex:1;overflow:auto">
+      <sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:10px;font-size:12px;color:var(--label2);line-height:1.45">No tunnels yet.</div>
+      </sc-if>
+      <sc-for list="{{ profiles }}" as="p" hint-placeholder-count="4">
+        <div onClick="{{ p.select }}" style="display:flex;align-items:center;gap:10px;padding:7px 10px;border-radius:9px;background:{{ p.bg }}">
+          <span style="width:8px;height:8px;border-radius:50%;flex:none;background:{{ p.dot }}"></span>
+          <div style="display:flex;flex-direction:column;gap:1px;min-width:0;flex:1">
+            <span style="font-size:13px;font-weight:500">{{ p.name }}</span>
+            <span style="font-size:11px;color:var(--label2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ p.sub }}</span>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="display:flex;align-items:center;gap:2px;padding:8px 10px;border-top:.5px solid var(--sep)">
+      <div onClick="{{ openImport }}" title="Import Tunnel…" style="width:28px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--label2)"><span style="width:15px;height:15px;background:currentColor;mask:url(https://unpkg.com/lucide-static@0.460.0/icons/plus.svg) center/contain no-repeat"></span></div>
+      <div title="Remove Tunnel" style="width:28px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--label3)"><span style="width:15px;height:15px;background:currentColor;mask:url(https://unpkg.com/lucide-static@0.460.0/icons/minus.svg) center/contain no-repeat"></span></div>
+      <div style="flex:1"></div>
+      <div onClick="{{ openSettings }}" title="Settings…" style="width:28px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--label2)"><span style="width:15px;height:15px;background:currentColor;mask:url(https://unpkg.com/lucide-static@0.460.0/icons/settings.svg) center/contain no-repeat"></span></div>
+    </div>
+  </div>
+
+  <!-- Detail column -->
+  <div style="position:absolute;left:260px;top:0;right:0;bottom:0;display:flex;flex-direction:column">
+    <div style="height:54px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 14px 0 20px">
+      <div style="display:flex;flex-direction:column;gap:1px">
+        <span style="font-size:15px;font-weight:600">{{ winTitle }}</span>
+        <span style="font-size:11px;color:var(--label2)">{{ winSub }}</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="display:flex;align-items:center;height:32px;border-radius:16px;background:var(--glass);backdrop-filter:blur(20px);box-shadow:0 0 0 .5px var(--sep2),0 1px 4px var(--glassShadow);padding:0 4px">
+          <div onClick="{{ openImport }}" title="Import Tunnel…" style="width:34px;height:28px;display:flex;align-items:center;justify-content:center;color:var(--label)"><span style="width:16px;height:16px;background:currentColor;mask:url(https://unpkg.com/lucide-static@0.460.0/icons/plus.svg) center/contain no-repeat"></span></div>
+          <div title="Edit Tunnel" style="width:34px;height:28px;display:flex;align-items:center;justify-content:center;color:var(--label)"><span style="width:15px;height:15px;background:currentColor;mask:url(https://unpkg.com/lucide-static@0.460.0/icons/pencil.svg) center/contain no-repeat"></span></div>
+          <div title="Export…" style="width:34px;height:28px;display:flex;align-items:center;justify-content:center;color:var(--label)"><span style="width:16px;height:16px;background:currentColor;mask:url(https://unpkg.com/lucide-static@0.460.0/icons/share.svg) center/contain no-repeat"></span></div>
+        </div>
+        <sc-if value="{{ dirB }}" hint-placeholder-val="{{ false }}">
+          <div onClick="{{ toggleInspector }}" title="Show Inspector" style="width:36px;height:32px;border-radius:16px;display:flex;align-items:center;justify-content:center;background:{{ inspBtnBg }};backdrop-filter:blur(20px);box-shadow:0 0 0 .5px var(--sep2),0 1px 4px var(--glassShadow);color:var(--label)"><span style="width:16px;height:16px;background:currentColor;mask:url(https://unpkg.com/lucide-static@0.460.0/icons/panel-right.svg) center/contain no-repeat"></span></div>
+        </sc-if>
+      </div>
+    </div>
+
+    <div style="flex:1;display:flex;min-height:0">
+      <div style="flex:1;overflow:auto;min-width:0">
+
+        <!-- EMPTY -->
+        <sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ false }}">
+          <div style="height:740px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center">
+            <div style="width:64px;height:64px;border-radius:50%;background:var(--fill);display:flex;align-items:center;justify-content:center;color:var(--label2)"><span style="width:30px;height:30px;background:currentColor;mask:url(https://unpkg.com/lucide-static@0.460.0/icons/file-down.svg) center/contain no-repeat"></span></div>
+            <div style="font-size:20px;font-weight:700">No Tunnels</div>
+            <div style="font-size:13px;color:var(--label2);max-width:340px;line-height:1.45;text-wrap:pretty">Import a WireGuard configuration made for this Mac, or drop a .conf or .zip file anywhere in this window.</div>
+            <div style="display:flex;gap:10px;margin-top:6px">
+              <div onClick="{{ openImport }}" style="height:30px;padding:0 18px;border-radius:10px;background:var(--blue);color:#fff;font-weight:600;display:flex;align-items:center">Import from File…</div>
+              <div onClick="{{ openImport }}" style="height:30px;padding:0 18px;border-radius:10px;background:var(--fill2);font-weight:500;display:flex;align-items:center">Paste Configuration</div>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- DIRECTION A — Instrument -->
+        <sc-if value="{{ dirA }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-direction:column;gap:30px;padding:8px 32px 40px">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:14px;padding-top:14px">
+              <div onClick="{{ orbClick }}" title="{{ v.action }}" style="cursor:pointer">{{ orbMain }}</div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:5px;margin-top:4px">
+                <div style="font-size:26px;font-weight:700;letter-spacing:-.4px;color:{{ v.titleColor }}">{{ v.title }}</div>
+                <div style="font-size:13px;color:var(--label2);text-align:center;max-width:440px;text-wrap:pretty;line-height:1.4">{{ v.sub }}</div>
+              </div>
+              <div style="display:flex;gap:8px">
+                <sc-if value="{{ showTransport }}"><div style="display:flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:10px;background:var(--glass);box-shadow:0 0 0 .5px var(--sep2);font-size:11px;font-weight:600;color:var(--label2)"><span style="width:12px;height:12px;background:var(--blue);mask:url(https://unpkg.com/lucide-static@0.460.0/icons/globe.svg) center/contain no-repeat"></span>Direct WireGuard</div></sc-if>
+                <div style="display:flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:10px;background:var(--glass);box-shadow:0 0 0 .5px var(--sep2);font-size:11px;font-weight:600;color:var(--label2)"><span style="width:12px;height:12px;background:currentColor;mask:url(https://unpkg.com/lucide-static@0.460.0/icons/activity.svg) center/contain no-repeat"></span>{{ v.healthLine }}</div>
+              </div>
+              <div style="display:flex;gap:10px;margin-top:2px">
+                <div onClick="{{ primary }}" style="height:32px;min-width:120px;padding:0 22px;border-radius:10px;background:var(--blue);color:#fff;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 2px 8px rgba(0,122,255,.3)">{{ v.action }}</div>
+                <sc-if value="{{ hasSecondary }}"><div onClick="{{ secondaryClick }}" title="Temporarily allow unprotected web traffic for network sign-in" style="height:32px;padding:0 18px;border-radius:10px;background:var(--fill2);font-size:13px;font-weight:500;display:flex;align-items:center">Open Captive Window…</div></sc-if>
+              </div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <span style="font-size:15px;font-weight:600">Session</span>
+                <div style="display:flex;padding:2px;border-radius:8px;background:var(--fill)">
+                  <sc-for list="{{ rangeSeg }}" as="o" hint-placeholder-count="3"><div onClick="{{ o.click }}" style="padding:3px 12px;border-radius:6px;font-size:12px;font-weight:500;background:{{ o.bg }};box-shadow:{{ o.shadow }};color:{{ o.color }}">{{ o.label }}</div></sc-for>
+                </div>
+              </div>
+              <div style="background:var(--card);border-radius:10px;box-shadow:0 0 0 .5px var(--cardEdge),0 1px 2px var(--glassShadow);padding:16px 18px 14px">
+                <sc-if value="{{ hasSession }}" hint-placeholder-val="{{ true }}">
+                  <div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-bottom:14px">
+                    <sc-for list="{{ totals }}" as="tt" hint-placeholder-count="5"><div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:11px;color:var(--label2)">{{ tt.label }}</span><span style="font-size:17px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-.2px">{{ tt.value }}</span></div></sc-for>
+                  </div>
+                  {{ chartMain }}
+                  <div style="display:flex;gap:16px;margin-top:10px;font-size:11px;color:var(--label2);flex-wrap:wrap">
+                    <span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:3px;border-radius:2px;background:var(--blue)"></span>Download</span>
+                    <span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:3px;border-radius:2px;background:var(--indigo)"></span>Upload</span>
+                    <span style="display:flex;align-items:center;gap:5px"><span style="width:1px;height:8px;background:var(--label3)"></span>Handshake</span>
+                    <span style="display:flex;align-items:center;gap:5px"><span style="width:8px;height:8px;border-radius:2px;background:var(--gray);opacity:.35"></span>Reconnecting</span>
+                    <span style="display:flex;align-items:center;gap:5px"><span style="width:8px;height:8px;border-radius:2px;background:var(--orange);opacity:.35"></span>Blocked</span>
+                    <span style="flex:1"></span><span>Not stored. Resets when the tunnel disconnects.</span>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ noSession }}" hint-placeholder-val="{{ false }}">
+                  <div style="height:170px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--label2)">{{ noSessionText }}</div>
+                </sc-if>
+              </div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <span style="font-size:15px;font-weight:600">Activity</span>
+                <div style="display:flex;align-items:center;gap:8px">
+                  <div onClick="{{ live.click }}" title="{{ live.tip }}" style="display:flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:10px;background:var(--fill);font-size:12px;font-weight:500"><span style="width:7px;height:7px;border-radius:50%;background:{{ live.dot }};animation:{{ live.anim }}"></span>{{ live.label }}</div>
+                  <div style="display:flex;padding:2px;border-radius:8px;background:var(--fill)">
+                    <sc-for list="{{ logSeg }}" as="o" hint-placeholder-count="2"><div onClick="{{ o.click }}" style="padding:3px 12px;border-radius:6px;font-size:12px;font-weight:500;background:{{ o.bg }};box-shadow:{{ o.shadow }};color:{{ o.color }}">{{ o.label }}</div></sc-for>
+                  </div>
+                  <div onClick="{{ exportDiag }}" style="display:flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:10px;background:var(--fill);font-size:12px;font-weight:500"><span style="width:13px;height:13px;background:currentColor;mask:url(https://unpkg.com/lucide-static@0.460.0/icons/package.svg) center/contain no-repeat"></span>Export Diagnostics…</div>
+                </div>
+              </div>
+              <div style="background:var(--card);border-radius:10px;box-shadow:0 0 0 .5px var(--cardEdge),0 1px 2px var(--glassShadow);overflow:hidden">
+                <sc-if value="{{ isTimeline }}" hint-placeholder-val="{{ true }}">
+                  <sc-for list="{{ events }}" as="e" hint-placeholder-count="5">
+                    <div style="display:grid;grid-template-columns:64px 26px minmax(0,1fr);align-items:start;padding:11px 16px;border-top:{{ e.border }}">
+                      <span style="font-size:12px;color:var(--label2);font-variant-numeric:tabular-nums;padding-top:1px">{{ e.time }}</span>
+                      <span style="{{ e.icon }}"></span>
+                      <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:13px;font-weight:500">{{ e.title }}</span><span style="font-size:12px;color:var(--label2)">{{ e.detail }}</span></div>
+                    </div>
+                  </sc-for>
+                  <sc-if value="{{ noEvents }}"><div style="padding:22px 16px;font-size:13px;color:var(--label2)">No activity for this tunnel since WGEX started.</div></sc-if>
+                </sc-if>
+                <sc-if value="{{ isRaw }}" hint-placeholder-val="{{ false }}">
+                  <div style="background:var(--code);padding:12px 16px;font:11.5px/1.75 ui-monospace,SFMono-Regular,Menlo,monospace;max-height:300px;overflow:auto">
+                    <sc-for list="{{ rawLines }}" as="l" hint-placeholder-count="8"><div style="display:flex;gap:12px;white-space:nowrap"><span style="color:var(--label3)">{{ l.ts }}</span><span style="width:40px;color:{{ l.color }}">{{ l.lvl }}</span><span style="width:52px;color:var(--label2)">{{ l.src }}</span><span>{{ l.msg }}</span></div></sc-for>
+                  </div>
+                </sc-if>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- DIRECTION B — Ledger -->
+        <sc-if value="{{ dirB }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:18px;padding:6px 24px 32px">
+            <div style="display:flex;align-items:center;gap:26px;background:var(--card);border-radius:10px;box-shadow:0 0 0 .5px var(--cardEdge),0 1px 2px var(--glassShadow);padding:22px 24px">
+              <div onClick="{{ orbClick }}" title="{{ v.action }}" style="cursor:pointer">{{ orbMain }}</div>
+              <div style="display:flex;flex-direction:column;gap:12px;flex:1;min-width:0">
+                <div style="display:flex;flex-direction:column;gap:4px">
+                  <div style="font-size:22px;font-weight:700;letter-spacing:-.3px;color:{{ v.titleColor }}">{{ v.title }}</div>
+                  <div style="font-size:12.5px;color:var(--label2);line-height:1.4;text-wrap:pretty">{{ v.sub }}</div>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+                  <div style="display:flex;flex-direction:column;gap:3px;padding:9px 11px;border-radius:10px;background:var(--fill)">
+                    <span style="font-size:10.5px;font-weight:600;color:var(--label2);letter-spacing:.2px">PROTECTION</span>
+                    <div style="display:flex;align-items:center;gap:6px"><span style="width:7px;height:7px;border-radius:50%;background:{{ v.c }}"></span><span style="font-size:13px;font-weight:600">{{ v.prot }}</span></div>
+                    <span style="font-size:11px;color:var(--label2)">{{ v.protNote }}</span>
+                  </div>
+                  <div style="display:flex;flex-direction:column;gap:3px;padding:9px 11px;border-radius:10px;background:var(--fill)">
+                    <span style="font-size:10.5px;font-weight:600;color:var(--label2);letter-spacing:.2px">TUNNEL HEALTH</span>
+                    <div style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;background:var(--label2);mask:url(https://unpkg.com/lucide-static@0.460.0/icons/activity.svg) center/contain no-repeat"></span><span style="font-size:13px;font-weight:600">{{ v.healthV }}</span></div>
+                    <span style="font-size:11px;color:var(--label2)">{{ v.healthNote }}</span>
+                  </div>
+                </div>
+                <div style="display:flex;gap:8px">
+                  <div onClick="{{ primary }}" style="height:30px;padding:0 20px;border-radius:10px;background:var(--blue);color:#fff;font-size:13px;font-weight:600;display:flex;align-items:center">{{ v.action }}</div>
+                  <sc-if value="{{ hasSecondary }}"><div onClick="{{ secondaryClick }}" style="height:30px;padding:0 16px;border-radius:10px;background:var(--fill2);font-size:13px;font-weight:500;display:flex;align-items:center">Open Captive Window…</div></sc-if>
+                </div>
+              </div>
+            </div>
+
+            <div style="background:var(--card);border-radius:10px;box-shadow:0 0 0 .5px var(--cardEdge),0 1px 2px var(--glassShadow);padding:16px 18px">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+                <span style="font-size:13px;font-weight:600">Session</span>
+                <div style="display:flex;padding:2px;border-radius:8px;background:var(--fill)">
+                  <sc-for list="{{ rangeSeg }}" as="o" hint-placeholder-count="3"><div onClick="{{ o.click }}" style="padding:3px 10px;border-radius:6px;font-size:11.5px;font-weight:500;background:{{ o.bg }};box-shadow:{{ o.shadow }};color:{{ o.color }}">{{ o.label }}</div></sc-for>
+                </div>
+              </div>
+              <sc-if value="{{ hasSession }}" hint-placeholder-val="{{ true }}">
+                <div style="display:flex;align-items:flex-end;gap:22px;margin-bottom:12px">
+                  <div style="display:flex;flex-direction:column"><span style="font-size:11px;color:var(--label2)">Download now</span><span style="font-size:24px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--blueT);letter-spacing:-.4px">{{ nowDown }}</span></div>
+                  <div style="display:flex;flex-direction:column"><span style="font-size:11px;color:var(--label2)">Upload now</span><span style="font-size:24px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--indigo);letter-spacing:-.4px">{{ nowUp }}</span></div>
+                  <div style="flex:1"></div>
+                  <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;font-size:11.5px;color:var(--label2);font-variant-numeric:tabular-nums"><span>{{ totalsLine1 }}</span><span>{{ totalsLine2 }}</span></div>
+                </div>
+                {{ chartMain }}
+              </sc-if>
+              <sc-if value="{{ noSession }}" hint-placeholder-val="{{ false }}"><div style="height:200px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--label2)">{{ noSessionText }}</div></sc-if>
+            </div>
+
+            <div style="background:var(--card);border-radius:10px;box-shadow:0 0 0 .5px var(--cardEdge),0 1px 2px var(--glassShadow);overflow:hidden">
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px">
+                <span style="font-size:13px;font-weight:600">Activity</span>
+                <div style="display:flex;align-items:center;gap:6px">
+                  <div onClick="{{ live.click }}" title="{{ live.tip }}" style="display:flex;align-items:center;gap:6px;height:22px;padding:0 9px;border-radius:10px;background:var(--fill);font-size:11.5px;font-weight:500"><span style="width:7px;height:7px;border-radius:50%;background:{{ live.dot }};animation:{{ live.anim }}"></span>{{ live.label }}</div>
+                  <div style="display:flex;padding:2px;border-radius:7px;background:var(--fill)">
+                    <sc-for list="{{ logSeg }}" as="o" hint-placeholder-count="2"><div onClick="{{ o.click }}" style="padding:2px 10px;border-radius:5px;font-size:11.5px;font-weight:500;background:{{ o.bg }};box-shadow:{{ o.shadow }};color:{{ o.color }}">{{ o.label }}</div></sc-for>
+                  </div>
+                  <div onClick="{{ exportDiag }}" title="Export Diagnostics…" style="width:28px;height:22px;border-radius:10px;background:var(--fill);display:flex;align-items:center;justify-content:center"><span style="width:13px;height:13px;background:currentColor;mask:url(https://unpkg.com/lucide-static@0.460.0/icons/package.svg) center/contain no-repeat"></span></div>
+                </div>
+              </div>
+              <sc-if value="{{ isTimeline }}" hint-placeholder-val="{{ true }}">
+                <div style="display:grid;grid-template-columns:70px 150px minmax(0,1fr);padding:5px 16px;font-size:11px;font-weight:600;color:var(--label2);border-top:.5px solid var(--sep);border-bottom:.5px solid var(--sep);background:var(--fill)"><span>Time</span><span>Event</span><span>Detail</span></div>
+                <sc-for list="{{ events }}" as="e" hint-placeholder-count="5">
+                  <div style="display:grid;grid-template-columns:70px 150px minmax(0,1fr);align-items:center;padding:7px 16px;font-size:12px;background:{{ e.zebra }}">
+                    <span style="color:var(--label2);font-variant-numeric:tabular-nums">{{ e.time }}</span>
+                    <span style="display:flex;align-items:center;gap:6px;font-weight:500"><span style="{{ e.iconSm }}"></span>{{ e.short }}</span>
+                    <span style="color:var(--label2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ e.detail }}</span>
+                  </div>
+                </sc-for>
+                <sc-if value="{{ noEvents }}"><div style="padding:18px 16px;font-size:12px;color:var(--label2)">No activity for this tunnel since WGEX started.</div></sc-if>
+              </sc-if>
+              <sc-if value="{{ isRaw }}" hint-placeholder-val="{{ false }}">
+                <div style="background:var(--code);padding:10px 16px;font:11px/1.75 ui-monospace,SFMono-Regular,Menlo,monospace;max-height:280px;overflow:auto;border-top:.5px solid var(--sep)">
+                  <sc-for list="{{ rawLines }}" as="l" hint-placeholder-count="8"><div style="display:flex;gap:10px;white-space:nowrap"><span style="color:var(--label3)">{{ l.ts }}</span><span style="width:38px;color:{{ l.color }}">{{ l.lvl }}</span><span style="width:50px;color:var(--label2)">{{ l.src }}</span><span>{{ l.msg }}</span></div></sc-for>
+                </div>
+              </sc-if>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- DIRECTION C — Evidence -->
+        <sc-if value="{{ dirC }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:26px;padding:8px 32px 40px">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:14px;padding-top:10px">
+              <div onClick="{{ orbClick }}" title="{{ v.action }}" style="cursor:pointer">{{ orbMain }}</div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:5px">
+                <div style="font-size:26px;font-weight:700;letter-spacing:-.4px;color:{{ v.titleColor }}">{{ v.title }}</div>
+                <div style="font-size:13px;color:var(--label2);text-align:center;max-width:440px;text-wrap:pretty;line-height:1.4">{{ v.sub }}</div>
+              </div>
+              <div style="display:flex;align-items:stretch;border-radius:10px;background:var(--card);box-shadow:0 0 0 .5px var(--cardEdge),0 1px 2px var(--glassShadow)">
+                <sc-for list="{{ readouts }}" as="r" hint-placeholder-count="4">
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:1px;padding:8px 20px;border-left:{{ r.border }}"><span style="font-size:10.5px;color:var(--label2)">{{ r.label }}</span><span style="font-size:15px;font-weight:600;font-variant-numeric:tabular-nums;color:{{ r.color }}">{{ r.value }}</span></div>
+                </sc-for>
+              </div>
+              <div style="display:flex;gap:10px">
+                <div onClick="{{ primary }}" style="height:32px;min-width:120px;padding:0 22px;border-radius:10px;background:var(--blue);color:#fff;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 2px 8px rgba(0,122,255,.3)">{{ v.action }}</div>
+                <sc-if value="{{ hasSecondary }}"><div onClick="{{ secondaryClick }}" style="height:32px;padding:0 18px;border-radius:10px;background:var(--fill2);font-size:13px;font-weight:500;display:flex;align-items:center">Open Captive Window…</div></sc-if>
+              </div>
+            </div>
+
+            <div style="background:var(--card);border-radius:10px;box-shadow:0 0 0 .5px var(--cardEdge),0 1px 2px var(--glassShadow);overflow:hidden">
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px 6px">
+                <div style="display:flex;flex-direction:column;gap:1px"><span style="font-size:15px;font-weight:600">Session timeline</span><span style="font-size:11px;color:var(--label2)">Graph and events share one clock. Hover a pin or a row.</span></div>
+                <div style="display:flex;align-items:center;gap:8px">
+                  <div style="display:flex;padding:2px;border-radius:8px;background:var(--fill)">
+                    <sc-for list="{{ rangeSeg }}" as="o" hint-placeholder-count="3"><div onClick="{{ o.click }}" style="padding:3px 11px;border-radius:6px;font-size:12px;font-weight:500;background:{{ o.bg }};box-shadow:{{ o.shadow }};color:{{ o.color }}">{{ o.label }}</div></sc-for>
+                  </div>
+                  <div onClick="{{ live.click }}" title="{{ live.tip }}" style="display:flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:10px;background:var(--fill);font-size:12px;font-weight:500"><span style="width:7px;height:7px;border-radius:50%;background:{{ live.dot }};animation:{{ live.anim }}"></span>{{ live.label }}</div>
+                </div>
+              </div>
+              <div style="padding:8px 18px 12px">
+                <sc-if value="{{ hasSession }}" hint-placeholder-val="{{ true }}">{{ chartMain }}</sc-if>
+                <sc-if value="{{ noSession }}" hint-placeholder-val="{{ false }}"><div style="height:190px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--label2)">{{ noSessionText }}</div></sc-if>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 18px;border-top:.5px solid var(--sep)">
+                <div style="display:flex;padding:2px;border-radius:7px;background:var(--fill)">
+                  <sc-for list="{{ logSeg }}" as="o" hint-placeholder-count="2"><div onClick="{{ o.click }}" style="padding:2px 11px;border-radius:5px;font-size:11.5px;font-weight:500;background:{{ o.bg }};box-shadow:{{ o.shadow }};color:{{ o.color }}">{{ o.label }}</div></sc-for>
+                </div>
+                <div onClick="{{ exportDiag }}" style="font-size:12px;font-weight:500;color:var(--blueT)">Export Diagnostics…</div>
+              </div>
+              <sc-if value="{{ isTimeline }}" hint-placeholder-val="{{ true }}">
+                <sc-for list="{{ events }}" as="e" hint-placeholder-count="5">
+                  <div onMouseEnter="{{ e.enter }}" onMouseLeave="{{ e.leave }}" style="display:grid;grid-template-columns:30px 64px minmax(0,1fr);align-items:center;padding:9px 18px;border-top:.5px solid var(--sep);background:{{ e.hi }}">
+                    <span style="width:18px;height:18px;border-radius:50%;background:{{ e.c }};color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;opacity:{{ e.numOp }}">{{ e.num }}</span>
+                    <span style="font-size:12px;color:var(--label2);font-variant-numeric:tabular-nums">{{ e.time }}</span>
+                    <div style="display:flex;align-items:baseline;gap:8px;min-width:0"><span style="font-size:13px;font-weight:500;white-space:nowrap">{{ e.title }}</span><span style="font-size:12px;color:var(--label2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ e.detail }}</span></div>
+                  </div>
+                </sc-for>
+                <sc-if value="{{ noEvents }}"><div style="padding:18px;font-size:13px;color:var(--label2);border-top:.5px solid var(--sep)">No activity for this tunnel since WGEX started.</div></sc-if>
+              </sc-if>
+              <sc-if value="{{ isRaw }}" hint-placeholder-val="{{ false }}">
+                <div style="background:var(--code);padding:10px 18px;font:11.5px/1.75 ui-monospace,SFMono-Regular,Menlo,monospace;max-height:280px;overflow:auto;border-top:.5px solid var(--sep)">
+                  <sc-for list="{{ rawLines }}" as="l" hint-placeholder-count="8"><div style="display:flex;gap:12px;white-space:nowrap"><span style="color:var(--label3)">{{ l.ts }}</span><span style="width:40px;color:{{ l.color }}">{{ l.lvl }}</span><span style="width:52px;color:var(--label2)">{{ l.src }}</span><span>{{ l.msg }}</span></div></sc-for>
+                </div>
+              </sc-if>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- Details disclosure (A, C) -->
+        <sc-if value="{{ showDisclosure }}" hint-placeholder-val="{{ true }}">
+          <div style="padding:0 32px 40px;margin-top:-14px">
+            <div onClick="{{ toggleDetails }}" style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--label);padding:4px 0;cursor:default">
+              <span style="{{ detailsChevron }}"></span>Details<span style="font-weight:400;color:var(--label2);font-size:12px">Interface, peer and protection</span>
+            </div>
+            <sc-if value="{{ details }}" hint-placeholder-val="{{ false }}">
+              <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:10px">
+                <sc-for list="{{ detailGroups }}" as="g" hint-placeholder-count="3">
+                  <div style="background:var(--card);border-radius:10px;box-shadow:0 0 0 .5px var(--cardEdge);padding:6px 14px">
+                    <div style="font-size:11px;font-weight:600;color:var(--label2);padding:6px 0 4px">{{ g.title }}</div>
+                    <sc-for list="{{ g.rows }}" as="r" hint-placeholder-count="4">
+                      <div style="display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-top:.5px solid var(--sep);font-size:12px"><span style="color:var(--label2)">{{ r.k }}</span><span style="font-variant-numeric:tabular-nums;text-align:right;user-select:text">{{ r.v }}</span></div>
+                    </sc-for>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+          </div>
+        </sc-if>
+      </div>
+
+      <!-- Inspector (B) -->
+      <sc-if value="{{ showInspector }}" hint-placeholder-val="{{ false }}">
+        <div style="width:272px;flex:none;margin:0 8px 8px 0;border-radius:16px;background:var(--sidebar);backdrop-filter:blur(30px);box-shadow:0 0 0 .5px var(--sep2),0 4px 18px var(--glassShadow);overflow:auto;padding:6px 0">
+          <sc-for list="{{ inspSections }}" as="g" hint-placeholder-count="4">
+            <div style="padding:10px 16px 6px">
+              <div style="font-size:11px;font-weight:600;color:var(--label2);margin-bottom:4px">{{ g.title }}</div>
+              <sc-for list="{{ g.rows }}" as="r" hint-placeholder-count="3">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 0;font-size:12px;border-top:.5px solid var(--sep)">
+                  <span style="color:var(--label2)">{{ r.k }}</span>
+                  <sc-if value="{{ r.isToggle }}"><div onClick="{{ r.tg.click }}" style="width:30px;height:17px;border-radius:9px;position:relative;flex:none;background:{{ r.tg.bg }};transition:background .2s"><div style="position:absolute;top:2px;left:{{ r.tg.x }};width:13px;height:13px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.3);transition:left .2s"></div></div></sc-if>
+                  <sc-if value="{{ r.isText }}"><span style="text-align:right;font-variant-numeric:tabular-nums;color:{{ r.color }}">{{ r.v }}</span></sc-if>
+                </div>
+              </sc-for>
+              <sc-if value="{{ g.note }}"><div style="font-size:11px;color:var(--label2);line-height:1.4;padding-top:4px">{{ g.note }}</div></sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+
+  <!-- Import sheet -->
+  <sc-if value="{{ sheetOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;inset:0;background:rgba(0,0,0,.14);z-index:5"></div>
+    <div style="position:absolute;left:50%;top:70px;transform:translateX(-50%);width:560px;border-radius:20px;background:var(--win);box-shadow:0 24px 70px rgba(0,0,0,.3),0 0 0 .5px var(--sep2);z-index:6;overflow:hidden">
+      <sc-if value="{{ sheetSource }}" hint-placeholder-val="{{ true }}">
+        <div style="padding:22px 24px 18px;display:flex;flex-direction:column;gap:16px">
+          <div style="display:flex;flex-direction:column;gap:3px"><span style="font-size:15px;font-weight:600">Import Tunnel</span><span style="font-size:12px;color:var(--label2)">Use a configuration made for this Mac. Each device needs its own keys.</span></div>
+          <div onClick="{{ sourceClick }}" style="height:170px;border-radius:10px;border:1.5px dashed var(--sep2);background:var(--fill);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--label2)">
+            <span style="width:34px;height:34px;background:currentColor;mask:url(https://unpkg.com/lucide-static@0.460.0/icons/file-down.svg) center/contain no-repeat"></span>
+            <span style="font-size:13px;font-weight:600;color:var(--label)">Drop a .conf or .zip file</span>
+            <span style="font-size:11.5px">ZIP archives can hold several tunnels. You review each one before it is saved.</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
+            <div onClick="{{ sourceClick }}" style="display:flex;align-items:center;justify-content:center;gap:7px;height:32px;border-radius:9px;background:var(--fill2);font-weight:500"><span style="width:14px;height:14px;background:currentColor;mask:url(https://unpkg.com/lucide-static@0.460.0/icons/folder-open.svg) center/contain no-repeat"></span>Choose File…</div>
+            <div onClick="{{ sourceClick }}" style="display:flex;align-items:center;justify-content:center;gap:7px;height:32px;border-radius:9px;background:var(--fill2);font-weight:500"><span style="width:14px;height:14px;background:currentColor;mask:url(https://unpkg.com/lucide-static@0.460.0/icons/clipboard-paste.svg) center/contain no-repeat"></span>Paste</div>
+            <div onClick="{{ sourceClick }}" style="display:flex;align-items:center;justify-content:center;gap:7px;height:32px;border-radius:9px;background:var(--fill2);font-weight:500"><span style="width:14px;height:14px;background:currentColor;mask:url(https://unpkg.com/lucide-static@0.460.0/icons/qr-code.svg) center/contain no-repeat"></span>QR from Image…</div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:flex-end;padding:12px 24px 18px">
+          <div onClick="{{ cancelSheet }}" style="height:28px;padding:0 16px;border-radius:10px;background:var(--fill2);display:flex;align-items:center;font-weight:500">Cancel</div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ sheetReview }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:22px 24px 6px;display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;flex-direction:column;gap:3px"><span style="font-size:15px;font-weight:600">Review Import</span><span style="font-size:12px;color:var(--label2)">cabin-mac.conf · nothing is saved until you choose Import</span></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--card);border-radius:10px;box-shadow:0 0 0 .5px var(--cardEdge);padding:8px 12px">
+            <span>Name</span>
+            <input value="{{ importName }}" onChange="{{ setImportName }}" style="width:260px;text-align:right;border:0;outline:none;background:transparent;font-size:13px"></input>
+          </div>
+          <div style="background:var(--card);border-radius:10px;box-shadow:0 0 0 .5px var(--cardEdge);padding:2px 12px">
+            <sc-for list="{{ reviewRows }}" as="r" hint-placeholder-count="5">
+              <div style="display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:{{ r.border }};font-size:12.5px"><span style="color:var(--label2)">{{ r.k }}</span><span style="display:flex;align-items:center;gap:6px;text-align:right"><span style="{{ r.icon }}"></span>{{ r.v }}</span></div>
+            </sc-for>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:10px;background:var(--fill)">
+              <span style="width:15px;height:15px;margin-top:1px;background:var(--orange);mask:url(https://unpkg.com/lucide-static@0.460.0/icons/triangle-alert.svg) center/contain no-repeat;flex:none"></span>
+              <div style="display:flex;flex-direction:column;gap:2px;font-size:12px"><span style="font-weight:600">PostUp hook removed</span><span style="color:var(--label2)">WGEX never runs scripts from a configuration. The rest of the file is unchanged.</span></div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center;padding:10px 12px;border-radius:10px;background:var(--fill)">
+              <span style="width:15px;height:15px;background:var(--blue);mask:url(https://unpkg.com/lucide-static@0.460.0/icons/info.svg) center/contain no-repeat;flex:none"></span>
+              <div style="display:flex;flex-direction:column;gap:2px;font-size:12px;flex:1"><span style="font-weight:600">A tunnel named “Cabin” already exists</span><span style="color:var(--label2)">Keeping both adds “Cabin 2”.</span></div>
+              <div style="display:flex;padding:2px;border-radius:7px;background:var(--fill2)">
+                <sc-for list="{{ dupSeg }}" as="o" hint-placeholder-count="2"><div onClick="{{ o.click }}" style="padding:2px 10px;border-radius:5px;font-size:11.5px;font-weight:500;background:{{ o.bg }};box-shadow:{{ o.shadow }};color:{{ o.color }}">{{ o.label }}</div></sc-for>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 24px 20px">
+          <div onClick="{{ cancelSheet }}" style="height:28px;padding:0 16px;border-radius:10px;background:var(--fill2);display:flex;align-items:center;font-weight:500">Cancel</div>
+          <div style="display:flex;gap:8px">
+            <div onClick="{{ doImport }}" style="height:28px;padding:0 16px;border-radius:10px;background:var(--fill2);display:flex;align-items:center;font-weight:500">Import</div>
+            <div onClick="{{ doImportConnect }}" style="height:28px;padding:0 16px;border-radius:10px;background:var(--blue);color:#fff;display:flex;align-items:center;font-weight:600">Import and Connect</div>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+  </sc-if>
+</div>
+
+<!-- SETTINGS WINDOW -->
+<sc-if value="{{ settingsOpen }}" hint-placeholder-val="{{ false }}">
+  <div onMouseDown="{{ focusSettings }}" style="position:absolute;left:360px;top:110px;width:720px;height:640px;border-radius:22px;background:var(--win);box-shadow:var(--shadow);overflow:hidden;z-index:{{ z.settings }};display:flex;flex-direction:column">
+    <div style="flex:none;position:relative;padding:12px 0 10px;border-bottom:.5px solid var(--sep);background:var(--glass);backdrop-filter:blur(30px)">
+      <div style="position:absolute;left:14px;top:14px;display:flex;gap:8px">
+        <span onClick="{{ closeSettings }}" style="width:12px;height:12px;border-radius:50%;background:#FF5F57"></span><span style="width:12px;height:12px;border-radius:50%;background:#FEBC2E"></span><span style="width:12px;height:12px;border-radius:50%;background:var(--fill2)"></span>
+      </div>
+      <div style="text-align:center;font-size:13px;font-weight:600">{{ sTitle }}</div>
+      <div style="display:flex;justify-content:center;gap:2px;margin-top:8px">
+        <sc-for list="{{ sTabs }}" as="t" hint-placeholder-count="8">
+          <div onClick="{{ t.click }}" style="width:76px;padding:6px 0 5px;border-radius:8px;display:flex;flex-direction:column;align-items:center;gap:4px;background:{{ t.bg }};color:{{ t.color }}"><span style="{{ t.icon }}"></span><span style="font-size:11px;font-weight:500">{{ t.label }}</span></div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="flex:1;overflow:auto;padding:22px 64px 32px;display:flex;flex-direction:column;gap:20px">
+      <sc-if value="{{ sIsAbout }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding-top:30px;text-align:center">
+          <img src="assets/wgex-icon-light.png" style="width:96px;height:96px;border-radius:22px;box-shadow:0 6px 20px rgba(0,0,0,.18)"></img>
+          <div style="font-size:20px;font-weight:700">WGEX</div>
+          <div style="font-size:12px;color:var(--label2)">Version 1.0 (design sample) · macOS 27</div>
+          <div style="font-size:12px;color:var(--label2);max-width:420px;line-height:1.5;text-wrap:pretty">A bring-your-own-configuration WireGuard client. No accounts, no provided servers, no analytics.</div>
+          <div style="display:flex;gap:8px;margin-top:6px"><div style="height:28px;padding:0 14px;border-radius:10px;background:var(--fill2);display:flex;align-items:center;font-weight:500">Acknowledgements</div><div style="height:28px;padding:0 14px;border-radius:10px;background:var(--fill2);display:flex;align-items:center;font-weight:500">Privacy Policy</div></div>
+          <div style="font-size:11px;color:var(--label3);margin-top:18px;max-width:440px;line-height:1.5">“WireGuard” is a registered trademark of Jason A. Donenfeld. WGEX is not affiliated with or endorsed by the WireGuard project.</div>
+        </div>
+      </sc-if>
+      <sc-for list="{{ sGroups }}" as="g" hint-placeholder-count="2">
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <sc-if value="{{ g.title }}"><div style="font-size:13px;font-weight:600;padding-left:2px">{{ g.title }}</div></sc-if>
+          <div style="background:var(--card);border-radius:10px;box-shadow:0 0 0 .5px var(--cardEdge)">
+            <sc-for list="{{ g.rows }}" as="r" hint-placeholder-count="3">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;padding:10px 14px;border-top:{{ r.border }}">
+                <div style="display:flex;align-items:flex-start;gap:9px;min-width:0">
+                  <sc-if value="{{ r.icon }}"><span style="{{ r.icon }}"></span></sc-if>
+                  <div style="display:flex;flex-direction:column;gap:2px;min-width:0"><span style="font-size:13px">{{ r.label }}</span><sc-if value="{{ r.desc }}"><span style="font-size:11px;color:var(--label2);line-height:1.4;text-wrap:pretty">{{ r.desc }}</span></sc-if></div>
+                </div>
+                <sc-if value="{{ r.isToggle }}"><div onClick="{{ r.tg.click }}" style="width:32px;height:18px;border-radius:9px;position:relative;flex:none;background:{{ r.tg.bg }};transition:background .2s"><div style="position:absolute;top:2px;left:{{ r.tg.x }};width:14px;height:14px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.3);transition:left .2s"></div></div></sc-if>
+                <sc-if value="{{ r.isValue }}"><span style="font-size:13px;color:{{ r.color }};display:flex;align-items:center;gap:6px;white-space:nowrap"><sc-if value="{{ r.dot }}"><span style="width:7px;height:7px;border-radius:50%;background:{{ r.dot }}"></span></sc-if>{{ r.value }}</span></sc-if>
+                <sc-if value="{{ r.isPopup }}"><div style="display:flex;align-items:center;gap:6px;height:22px;padding:0 6px 0 10px;border-radius:6px;background:var(--fill2);font-size:12.5px;white-space:nowrap">{{ r.value }}<span style="width:11px;height:11px;background:var(--label2);mask:url(https://unpkg.com/lucide-static@0.460.0/icons/chevrons-up-down.svg) center/contain no-repeat"></span></div></sc-if>
+                <sc-if value="{{ r.isButton }}"><div onClick="{{ r.click }}" style="height:24px;padding:0 12px;border-radius:10px;background:{{ r.btnBg }};color:{{ r.btnColor }};display:flex;align-items:center;font-size:12.5px;font-weight:500;white-space:nowrap">{{ r.value }}</div></sc-if>
+              </div>
+            </sc-for>
+          </div>
+          <sc-if value="{{ g.footer }}"><div style="font-size:11.5px;color:var(--label2);line-height:1.45;padding:0 2px;text-wrap:pretty">{{ g.footer }}</div></sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</sc-if>
+
+<!-- ONBOARDING WINDOW -->
+<sc-if value="{{ onbOpen }}" hint-placeholder-val="{{ false }}">
+  <div onMouseDown="{{ focusOnb }}" style="position:absolute;left:330px;top:120px;width:780px;height:580px;border-radius:22px;background:var(--win);box-shadow:var(--shadow);overflow:hidden;z-index:{{ z.onb }};display:flex">
+    <div style="position:absolute;left:14px;top:14px;display:flex;gap:8px;z-index:2">
+      <span onClick="{{ closeOnb }}" style="width:12px;height:12px;border-radius:50%;background:#FF5F57"></span><span style="width:12px;height:12px;border-radius:50%;background:var(--fill2)"></span><span style="width:12px;height:12px;border-radius:50%;background:var(--fill2)"></span>
+    </div>
+    <!-- B: step list -->
+    <sc-if value="{{ obB }}" hint-placeholder-val="{{ false }}">
+      <div style="width:230px;flex:none;margin:8px 0 8px 8px;border-radius:16px;background:var(--sidebar);box-shadow:0 0 0 .5px var(--sep2);padding:46px 10px 12px;display:flex;flex-direction:column;gap:2px">
+        <div style="font-size:11px;font-weight:600;color:var(--label2);padding:0 8px 6px">Set up WGEX</div>
+        <sc-for list="{{ obSteps }}" as="st" hint-placeholder-count="8">
+          <div onClick="{{ st.click }}" style="display:flex;align-items:center;gap:10px;padding:7px 8px;border-radius:8px;background:{{ st.bg }}">
+            <span style="width:20px;height:20px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:700;background:{{ st.circleBg }};color:{{ st.circleColor }}">{{ st.mark }}</span>
+            <span style="font-size:13px;color:{{ st.color }};font-weight:{{ st.weight }}">{{ st.label }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+    <div style="flex:1;display:flex;flex-direction:column;min-width:0">
+      <!-- C: top stepper -->
+      <sc-if value="{{ obC }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:44px 40px 0;display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;gap:4px">
+            <sc-for list="{{ obSteps }}" as="st" hint-placeholder-count="8"><div onClick="{{ st.click }}" style="flex:1;height:4px;border-radius:2px;background:{{ st.bar }}"></div></sc-for>
+          </div>
+          <div style="font-size:11px;color:var(--label2);font-weight:500">{{ obCounter }}</div>
+        </div>
+      </sc-if>
+      <div style="flex:1;overflow:auto;display:flex;justify-content:center;padding:{{ obPad }}">
+        <div style="width:100%;max-width:470px;display:flex;flex-direction:column;gap:16px;align-items:{{ obAlign }};text-align:{{ obText }}">
+          <sc-if value="{{ obShowIcon }}"><div style="width:64px;height:64px;border-radius:18px;background:{{ obIconBg }};display:flex;align-items:center;justify-content:center"><span style="{{ obIcon }}"></span></div></sc-if>
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:{{ obAlign }}">
+            <div style="font-size:24px;font-weight:700;letter-spacing:-.4px;line-height:1.15">{{ obTitle }}</div>
+            <div style="font-size:13px;color:var(--label2);line-height:1.5;text-wrap:pretty">{{ obBody }}</div>
+          </div>
+          <div style="width:100%;text-align:left;display:flex;flex-direction:column;gap:10px">
+            <sc-if value="{{ ob.welcome }}">
+              <div style="background:var(--card);border-radius:10px;box-shadow:0 0 0 .5px var(--cardEdge);padding:4px 14px">
+                <div style="font-size:11px;font-weight:600;color:var(--label2);padding:8px 0 4px">What leaves this Mac</div>
+                <div style="display:flex;gap:10px;padding:8px 0;border-top:.5px solid var(--sep);font-size:12.5px"><span style="width:15px;height:15px;background:var(--blue);mask:url(https://unpkg.com/lucide-static@0.460.0/icons/lock.svg) center/contain no-repeat;flex:none"></span>Your WireGuard traffic, to the server in your configuration</div>
+                <div style="display:flex;gap:10px;padding:8px 0;border-top:.5px solid var(--sep);font-size:12.5px"><span style="width:15px;height:15px;background:var(--blue);mask:url(https://unpkg.com/lucide-static@0.460.0/icons/download.svg) center/contain no-repeat;flex:none"></span>Update checks, which you can turn off</div>
+                <div style="display:flex;gap:10px;padding:8px 0;border-top:.5px solid var(--sep);font-size:12.5px"><span style="width:15px;height:15px;background:var(--blue);mask:url(https://unpkg.com/lucide-static@0.460.0/icons/tv.svg) center/contain no-repeat;flex:none"></span>Local pairing messages, only when you send a tunnel to Apple TV</div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ ob.service }}">
+              <div style="background:var(--card);border-radius:10px;box-shadow:0 0 0 .5px var(--cardEdge);padding:4px 14px">
+                <div style="display:flex;gap:10px;padding:9px 0;font-size:12.5px"><span style="width:15px;height:15px;background:var(--label2);mask:url(https://unpkg.com/lucide-static@0.460.0/icons/route.svg) center/contain no-repeat;flex:none"></span>Runs the tunnel and sets routes and DNS</div>
+                <div style="display:flex;gap:10px;padding:9px 0;border-top:.5px solid var(--sep);font-size:12.5px"><span style="width:15px;height:15px;background:var(--label2);mask:url(https://unpkg.com/lucide-static@0.460.0/icons/shield.svg) center/contain no-repeat;flex:none"></span>Enforces the kill switch with the system packet filter</div>
+                <div style="display:flex;gap:10px;padding:9px 0;border-top:.5px solid var(--sep);font-size:12.5px"><span style="width:15px;height:15px;background:var(--label2);mask:url(https://unpkg.com/lucide-static@0.460.0/icons/power.svg) center/contain no-repeat;flex:none"></span>Keeps running after you quit this app. Quitting never disconnects.</div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ ob.approve }}">
+              <div style="background:var(--card);border-radius:10px;box-shadow:0 0 0 .5px var(--cardEdge);padding:4px 14px">
+                <sc-for list="{{ approvalStages }}" as="a" hint-placeholder-count="4">
+                  <div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-top:{{ a.border }};font-size:12.5px"><span style="{{ a.icon }}"></span><span style="flex:1;color:{{ a.color }}">{{ a.label }}</span><span style="font-size:11.5px;color:var(--label2)">{{ a.note }}</span></div>
+                </sc-for>
+              </div>
+              <sc-if value="{{ approveNeeded }}"><div onClick="{{ approveClick }}" style="align-self:flex-start;height:28px;padding:0 14px;border-radius:10px;background:var(--fill2);display:flex;align-items:center;font-weight:500;gap:6px">Open System Settings<span style="width:12px;height:12px;background:currentColor;mask:url(https://unpkg.com/lucide-static@0.460.0/icons/arrow-up-right.svg) center/contain no-repeat"></span></div></sc-if>
+            </sc-if>
+            <sc-if value="{{ ob.secure }}">
+              <div style="background:var(--card);border-radius:10px;box-shadow:0 0 0 .5px var(--cardEdge);padding:4px 14px">
+                <div style="display:flex;align-items:center;gap:10px;padding:9px 0;font-size:12.5px"><span style="width:15px;height:15px;background:var(--green);mask:url(https://unpkg.com/lucide-static@0.460.0/icons/circle-check.svg) center/contain no-repeat;flex:none"></span><span style="flex:1">Location</span><span style="color:var(--label2);font-family:ui-monospace,Menlo,monospace;font-size:11.5px">/Applications/WGEX.app</span></div>
+                <div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-top:.5px solid var(--sep);font-size:12.5px"><span style="width:15px;height:15px;background:var(--green);mask:url(https://unpkg.com/lucide-static@0.460.0/icons/circle-check.svg) center/contain no-repeat;flex:none"></span><span style="flex:1">Service signature</span><span style="color:var(--label2)">Matches this app</span></div>
+                <div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-top:.5px solid var(--sep);font-size:12.5px"><span style="width:15px;height:15px;background:var(--green);mask:url(https://unpkg.com/lucide-static@0.460.0/icons/circle-check.svg) center/contain no-repeat;flex:none"></span><span style="flex:1">Launch constraints</span><span style="color:var(--label2)">Enforced</span></div>
+              </div>
+              <div style="font-size:12px;font-weight:600;color:var(--greenT)">Secure install verified</div>
+            </sc-if>
+            <sc-if value="{{ ob.import }}">
+              <sc-if value="{{ notImported }}">
+                <div onClick="{{ importClick }}" style="height:130px;border-radius:10px;border:1.5px dashed var(--sep2);background:var(--fill);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--label2)"><span style="width:28px;height:28px;background:currentColor;mask:url(https://unpkg.com/lucide-static@0.460.0/icons/file-down.svg) center/contain no-repeat"></span><span style="font-size:13px;font-weight:600;color:var(--label)">Drop a .conf or .zip file</span></div>
+                <div style="display:flex;gap:8px">
+                  <div onClick="{{ importClick }}" style="height:28px;padding:0 14px;border-radius:10px;background:var(--fill2);display:flex;align-items:center;font-weight:500">Choose File…</div>
+                  <div onClick="{{ importClick }}" style="height:28px;padding:0 14px;border-radius:10px;background:var(--fill2);display:flex;align-items:center;font-weight:500">Paste</div>
+                  <div onClick="{{ importClick }}" style="height:28px;padding:0 14px;border-radius:10px;background:var(--fill2);display:flex;align-items:center;font-weight:500">QR from Image…</div>
+                </div>
+              </sc-if>
+              <sc-if value="{{ imported }}">
+                <div style="display:flex;align-items:center;gap:12px;background:var(--card);border-radius:10px;box-shadow:0 0 0 .5px var(--cardEdge);padding:12px 14px"><span style="width:18px;height:18px;background:var(--green);mask:url(https://unpkg.com/lucide-static@0.460.0/icons/circle-check.svg) center/contain no-repeat"></span><div style="display:flex;flex-direction:column;gap:1px;flex:1"><span style="font-weight:600">Home</span><span style="font-size:11.5px;color:var(--label2)">vpn.home.example:51820 · all traffic · key stored in the system keychain</span></div></div>
+              </sc-if>
+            </sc-if>
+            <sc-if value="{{ ob.startup }}">
+              <div style="background:var(--card);border-radius:10px;box-shadow:0 0 0 .5px var(--cardEdge);padding:2px 14px">
+                <sc-for list="{{ startupOpts }}" as="o" hint-placeholder-count="3">
+                  <div onClick="{{ o.click }}" style="display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-top:{{ o.border }}">
+                    <span style="width:16px;height:16px;border-radius:50%;flex:none;margin-top:1px;box-sizing:border-box;border:{{ o.ring }};background:{{ o.fill }}"></span>
+                    <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:13px">{{ o.label }}</span><span style="font-size:11.5px;color:var(--label2);line-height:1.4">{{ o.desc }}</span></div>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;background:var(--card);border-radius:10px;box-shadow:0 0 0 .5px var(--cardEdge);padding:10px 14px">
+                <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:13px">Lockdown</span><span style="font-size:11.5px;color:var(--label2);line-height:1.4">If the tunnel is unavailable, internet traffic stays blocked, including before you sign in.</span></div>
+                <div onClick="{{ tg.onbLockdown.click }}" style="width:32px;height:18px;border-radius:9px;position:relative;flex:none;background:{{ tg.onbLockdown.bg }};transition:background .2s"><div style="position:absolute;top:2px;left:{{ tg.onbLockdown.x }};width:14px;height:14px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.3);transition:left .2s"></div></div>
+              </div>
+              <sc-if value="{{ lockdownBootWarn }}"><div style="display:flex;gap:8px;font-size:11.5px;color:var(--orangeT);line-height:1.4"><span style="width:14px;height:14px;background:currentColor;mask:url(https://unpkg.com/lucide-static@0.460.0/icons/triangle-alert.svg) center/contain no-repeat;flex:none"></span>With boot connection and Lockdown together, this Mac has no internet from power-on until the tunnel is verified.</div></sc-if>
+            </sc-if>
+            <sc-if value="{{ ob.failover }}">
+              <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;background:var(--card);border-radius:10px;box-shadow:0 0 0 .5px var(--cardEdge);padding:10px 14px">
+                <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:13px">Switch automatically</span><span style="font-size:11.5px;color:var(--label2);line-height:1.4">When you add a relay, switch automatically if direct WireGuard is blocked. WGEX never switches back on its own.</span></div>
+                <div onClick="{{ tg.onbFailover.click }}" style="width:32px;height:18px;border-radius:9px;position:relative;flex:none;background:{{ tg.onbFailover.bg }};transition:background .2s"><div style="position:absolute;top:2px;left:{{ tg.onbFailover.x }};width:14px;height:14px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.3);transition:left .2s"></div></div>
+              </div>
+              <div style="font-size:11.5px;color:var(--label2)">No relay is configured yet. You’ll be asked again when you add the first one.</div>
+            </sc-if>
+          </div>
+        </div>
+      </div>
+      <div style="flex:none;display:flex;align-items:center;justify-content:space-between;padding:14px 22px 18px">
+        <div style="display:flex;gap:6px;min-width:120px">
+          <sc-if value="{{ obA }}"><sc-for list="{{ obSteps }}" as="st" hint-placeholder-count="8"><span onClick="{{ st.click }}" style="width:7px;height:7px;border-radius:50%;background:{{ st.dot }}"></span></sc-for></sc-if>
+        </div>
+        <div style="display:flex;gap:8px">
+          <sc-if value="{{ obCanBack }}"><div onClick="{{ obBack }}" style="height:28px;padding:0 16px;border-radius:10px;background:var(--fill2);display:flex;align-items:center;font-weight:500">Back</div></sc-if>
+          <div onClick="{{ obNext }}" style="height:28px;min-width:90px;padding:0 18px;border-radius:10px;background:{{ obNextBg }};color:{{ obNextColor }};display:flex;align-items:center;justify-content:center;font-weight:600">{{ obNextLabel }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<!-- click-catcher for menus -->
+<sc-if value="{{ anyMenu }}" hint-placeholder-val="{{ false }}"><div onClick="{{ closeMenus }}" style="position:absolute;inset:0;z-index:55"></div></sc-if>
+
+<!-- App menu -->
+<sc-if value="{{ appMenuOpen }}" hint-placeholder-val="{{ false }}">
+  <div style="position:absolute;left:12px;top:30px;width:250px;padding:5px;border-radius:10px;background:var(--popover);backdrop-filter:blur(40px) saturate(1.8);box-shadow:0 12px 40px rgba(0,0,0,.25),0 0 0 .5px var(--sep2);z-index:61">
+    <sc-for list="{{ appMenuItems }}" as="m" hint-placeholder-count="6">
+      <sc-if value="{{ m.sep }}"><div style="height:1px;background:var(--sep);margin:4px 8px"></div></sc-if>
+      <sc-if value="{{ m.label }}"><div onClick="{{ m.click }}" title="{{ m.tip }}" style="display:flex;justify-content:space-between;padding:4px 10px;border-radius:6px;font-size:13px;color:{{ m.color }}"><span>{{ m.label }}</span><span style="color:var(--label3)">{{ m.key }}</span></div></sc-if>
+    </sc-for>
+  </div>
+</sc-if>
+
+<!-- MENU BAR EXTRA -->
+<sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+  <div style="position:absolute;right:128px;top:32px;width:320px;border-radius:18px;background:var(--popover);backdrop-filter:blur(40px) saturate(1.8);box-shadow:0 16px 50px rgba(0,0,0,.28),0 0 0 .5px var(--sep2);z-index:61;overflow:hidden">
+    <!-- A -->
+    <sc-if value="{{ menuA }}" hint-placeholder-val="{{ true }}">
+      <div style="padding:14px 14px 10px;display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px;font-weight:700">WGEX</span><span style="font-size:11.5px;color:var(--label2)">{{ activeName }}</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:4px 0 2px">
+          <div onClick="{{ orbClick }}" style="cursor:pointer">{{ orbMenu }}</div>
+          <div style="font-size:17px;font-weight:700;margin-top:4px;color:{{ mv.titleColor }}">{{ mv.title }}</div>
+          <div style="font-size:12px;color:var(--label2);text-align:center;max-width:260px;line-height:1.35;text-wrap:pretty">{{ mv.sub }}</div>
+        </div>
+        <div onClick="{{ primaryMenu }}" style="height:32px;border-radius:10px;background:var(--blue);color:#fff;font-weight:600;display:flex;align-items:center;justify-content:center">{{ mv.action }}</div>
+        <sc-if value="{{ menuSecondary }}"><div onClick="{{ secondaryClick }}" title="Temporarily allow unprotected web traffic for network sign-in" style="height:28px;border-radius:10px;background:var(--fill2);font-weight:500;display:flex;align-items:center;justify-content:center">Open Captive Window…</div><div style="font-size:11px;color:var(--label2);text-align:center;margin-top:-6px">Allows unprotected web traffic for five minutes.</div></sc-if>
+        <sc-if value="{{ menuLive }}">
+          <div style="background:var(--fill);border-radius:10px;padding:9px 11px 6px;display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;justify-content:space-between;font-size:11.5px;font-variant-numeric:tabular-nums"><span style="color:var(--blueT);font-weight:600">↓ {{ nowDown }}</span><span style="color:var(--indigo);font-weight:600">↑ {{ nowUp }}</span><span style="color:var(--label2)">Handshake {{ hsAge }}</span></div>
+            {{ sparkMenu }}
+          </div>
+        </sc-if>
+        <div style="display:flex;flex-direction:column;gap:1px">
+          <div style="font-size:11px;font-weight:600;color:var(--label2);padding:0 4px 3px">Tunnels</div>
+          <sc-for list="{{ menuProfiles }}" as="p" hint-placeholder-count="4">
+            <div onClick="{{ p.pick }}" style="display:flex;align-items:center;gap:8px;padding:5px 6px;border-radius:7px"><span style="{{ p.check }}"></span><span style="flex:1;font-size:13px">{{ p.name }}</span><span style="width:7px;height:7px;border-radius:50%;background:{{ p.dot }}"></span></div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+    <!-- B -->
+    <sc-if value="{{ menuB }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:12px 12px 6px;display:flex;align-items:center;gap:12px">
+        <div style="width:38px;height:38px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;background:{{ mv.tint }}"><span style="{{ mv.glyph20 }}"></span></div>
+        <div style="display:flex;flex-direction:column;gap:1px;min-width:0"><span style="font-size:14px;font-weight:700;color:{{ mv.titleColor }}">{{ mv.title }}</span><span style="font-size:11.5px;color:var(--label2);line-height:1.3">{{ mv.health }}</span></div>
+      </div>
+      <div style="height:1px;background:var(--sep);margin:6px 12px"></div>
+      <div style="padding:0 6px;display:flex;flex-direction:column;gap:1px">
+        <sc-for list="{{ menuProfiles }}" as="p" hint-placeholder-count="4">
+          <div style="display:flex;flex-direction:column;padding:6px 8px;border-radius:8px;background:{{ p.rowBg }}">
+            <div style="display:flex;align-items:center;gap:10px">
+              <span style="width:8px;height:8px;border-radius:50%;background:{{ p.dot }}"></span>
+              <div style="display:flex;flex-direction:column;flex:1;min-width:0"><span style="font-size:13px;font-weight:500">{{ p.name }}</span><span style="font-size:11px;color:var(--label2)">{{ p.sub }}</span></div>
+              <div onClick="{{ p.tg.click }}" style="width:32px;height:18px;border-radius:9px;position:relative;flex:none;background:{{ p.tg.bg }};transition:background .2s"><div style="position:absolute;top:2px;left:{{ p.tg.x }};width:14px;height:14px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.3);transition:left .2s"></div></div>
+            </div>
+            <sc-if value="{{ p.expanded }}">
+              <div style="display:flex;flex-direction:column;gap:5px;margin:8px 0 2px 18px">
+                <div style="display:flex;gap:14px;font-size:11px;font-variant-numeric:tabular-nums;color:var(--label2)"><span style="color:var(--blueT)">↓ {{ nowDown }}</span><span style="color:var(--indigo)">↑ {{ nowUp }}</span><span>{{ hsAge }}</span></div>
+                {{ sparkMenuB }}
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+      <sc-if value="{{ menuSecondary }}"><div style="padding:6px 12px 0"><div onClick="{{ secondaryClick }}" style="height:28px;border-radius:10px;background:var(--fill2);font-weight:500;display:flex;align-items:center;justify-content:center">Open Captive Window…</div></div></sc-if>
+      <div style="height:1px;background:var(--sep);margin:8px 12px 4px"></div>
+      <div style="padding:0 6px 6px;display:flex;flex-direction:column">
+        <div onClick="{{ openImport }}" style="padding:5px 10px;border-radius:6px;font-size:13px">Import Tunnel…</div>
+        <div onClick="{{ openMain }}" style="padding:5px 10px;border-radius:6px;font-size:13px">Open WGEX</div>
+        <div onClick="{{ openSettings }}" style="padding:5px 10px;border-radius:6px;font-size:13px;display:flex;justify-content:space-between">Settings…<span style="color:var(--label3)">⌘,</span></div>
+        <div onClick="{{ quit }}" title="Quitting WGEX does not disconnect the VPN." style="padding:5px 10px;border-radius:6px;font-size:13px;display:flex;justify-content:space-between">Quit WGEX<span style="color:var(--label3)">⌘Q</span></div>
+        <div style="padding:2px 10px 4px;font-size:11px;color:var(--label2)">Quitting does not disconnect the VPN.</div>
+      </div>
+    </sc-if>
+    <!-- C -->
+    <sc-if value="{{ menuC }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:14px;display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;align-items:center;gap:14px">
+          <div onClick="{{ orbClick }}" style="cursor:pointer">{{ orbMenu }}</div>
+          <div style="display:flex;flex-direction:column;gap:3px;min-width:0">
+            <span style="font-size:11px;font-weight:600;color:var(--label2)">{{ activeName }}</span>
+            <span style="font-size:17px;font-weight:700;line-height:1.15;color:{{ mv.titleColor }}">{{ mv.title }}</span>
+            <span style="font-size:11.5px;color:var(--label2);line-height:1.35;text-wrap:pretty">{{ mv.sub }}</span>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px">
+          <div style="display:flex;flex-direction:column;gap:1px;padding:7px 9px;border-radius:10px;background:var(--fill)"><span style="font-size:10.5px;color:var(--label2)">Handshake</span><span style="font-size:14px;font-weight:600;font-variant-numeric:tabular-nums">{{ hsAge }}</span></div>
+          <div style="display:flex;flex-direction:column;gap:1px;padding:7px 9px;border-radius:10px;background:var(--fill)"><span style="font-size:10.5px;color:var(--label2)">Download</span><span style="font-size:14px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--blueT)">{{ nowDown }}</span></div>
+          <div style="display:flex;flex-direction:column;gap:1px;padding:7px 9px;border-radius:10px;background:var(--fill)"><span style="font-size:10.5px;color:var(--label2)">Upload</span><span style="font-size:14px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--indigo)">{{ nowUp }}</span></div>
+        </div>
+        <sc-if value="{{ menuLive }}"><div style="padding:0 2px">{{ sparkMenu }}</div></sc-if>
+        <div style="display:flex;gap:8px">
+          <div onClick="{{ cycleProfile }}" title="Switch tunnel" style="flex:1;height:30px;border-radius:10px;background:var(--fill2);display:flex;align-items:center;justify-content:space-between;padding:0 10px;font-weight:500">{{ activeName }}<span style="width:12px;height:12px;background:var(--label2);mask:url(https://unpkg.com/lucide-static@0.460.0/icons/chevrons-up-down.svg) center/contain no-repeat"></span></div>
+          <div onClick="{{ primaryMenu }}" style="flex:1;height:30px;border-radius:10px;background:var(--blue);color:#fff;font-weight:600;display:flex;align-items:center;justify-content:center">{{ mv.action }}</div>
+        </div>
+        <sc-if value="{{ menuSecondary }}"><div onClick="{{ secondaryClick }}" style="height:28px;border-radius:10px;background:var(--fill2);font-weight:500;display:flex;align-items:center;justify-content:center">Open Captive Window…</div></sc-if>
+      </div>
+    </sc-if>
+    <sc-if value="{{ menuFooterLinks }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 16px 12px;border-top:.5px solid var(--sep)">
+        <div onClick="{{ openMain }}" style="font-size:12.5px;font-weight:600;color:var(--blueT)">Open WGEX</div>
+        <div onClick="{{ openSettings }}" style="font-size:12.5px;color:var(--blueT)">Settings…</div>
+        <div onClick="{{ quit }}" title="Quitting WGEX does not disconnect the VPN." style="font-size:12.5px;color:var(--blueT)">Quit</div>
+      </div>
+    </sc-if>
+  </div>
+</sc-if>
+
+<!-- Toast -->
+<sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+  <div style="position:absolute;left:50%;bottom:70px;transform:translateX(-50%);padding:10px 16px;border-radius:10px;background:var(--popover);backdrop-filter:blur(30px);box-shadow:0 10px 30px rgba(0,0,0,.25),0 0 0 .5px var(--sep2);font-size:12.5px;z-index:70">{{ toast }}</div>
+</sc-if>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;direction&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;A&quot;,&quot;B&quot;,&quot;C&quot;],&quot;default&quot;:&quot;A&quot;,&quot;tsType&quot;:&quot;'A'|'B'|'C'&quot;,&quot;section&quot;:&quot;Direction&quot;},&quot;appearance&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;default&quot;:&quot;light&quot;,&quot;tsType&quot;:&quot;'light'|'dark'&quot;,&quot;section&quot;:&quot;Direction&quot;},&quot;state&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;protected&quot;,&quot;connecting&quot;,&quot;reasserting&quot;,&quot;blocked&quot;,&quot;captive&quot;,&quot;unprotected&quot;,&quot;unknown&quot;,&quot;stale&quot;,&quot;empty&quot;],&quot;default&quot;:&quot;protected&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;State&quot;},&quot;openOn&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;none&quot;,&quot;menu&quot;,&quot;settings&quot;,&quot;onboarding&quot;,&quot;import&quot;],&quot;default&quot;:&quot;none&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;State&quot;}}">
+const h = React.createElement;
+const LU = 'https://unpkg.com/lucide-static@0.460.0/icons/';
+const url = n => n === 'wgex' ? 'assets/wgex-menubar-18pt.svg' : LU + n + '.svg';
+const ic = (n, s, c, x) => Object.assign({ width: s + 'px', height: s + 'px', flex: 'none', display: 'inline-block', background: c || 'currentColor', WebkitMask: `url(${url(n)}) center/contain no-repeat`, mask: `url(${url(n)}) center/contain no-repeat` }, x || {});
+const TONE = { green: ['var(--green)', 'var(--greenT)'], orange: ['var(--orange)', 'var(--orangeT)'], red: ['var(--red)', 'var(--redT)'], gray: ['var(--gray)', 'var(--label2)'] };
+const mmss = s => Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+const V = {
+  protected: { title: 'Protected', sub: 'Traffic is going through the tunnel. Kill switch armed.', tone: 'green', glyph: 'shield-check', ring: 'solid', action: 'Disconnect', prot: 'Verified', protNote: 'Kill switch armed · DNS 10.8.0.1', healthV: 'Peer responding', menu: 'wgex' },
+  connecting: { title: 'Connecting', sub: 'Checking the tunnel and protection', tone: 'gray', glyph: 'hourglass', ring: 'spin', action: 'Cancel', prot: 'Pending', protNote: 'Not claimed until verified', healthV: 'Waiting for handshake', menu: 'wgex', pulse: true },
+  reasserting: { title: 'Reconnecting', sub: 'Network changed. Checking protection again.', tone: 'gray', glyph: 'refresh-cw', ring: 'dashed', action: 'Disconnect', prot: 'Re-verifying', protNote: 'Kill switch holding traffic', healthV: 'Network changed', menu: 'wgex', pulse: true },
+  blocked: { title: 'Traffic blocked', sub: 'The kill switch is holding traffic until the tunnel is back.', tone: 'orange', glyph: 'lock', ring: 'solid', action: 'Reconnect', prot: 'Blocking', protNote: 'Kill switch holding all traffic', healthV: 'Peer not responding', menu: 'shield-alert', secondary: true },
+  captive: { title: 'Sign in to this network', sub: '', tone: 'red', glyph: 'timer', ring: 'countdown', action: 'End Captive Window', prot: 'Suspended', protNote: 'Web traffic allowed for sign-in', healthV: 'Tunnel paused', menu: 'timer' },
+  unprotected: { title: 'Unprotected', sub: 'Traffic can leave outside the tunnel', tone: 'red', glyph: 'shield-off', ring: 'none', action: 'Connect', prot: 'Off', protNote: 'Traffic leaves outside the tunnel', healthV: 'Not connected', menu: 'shield-off' },
+  unknown: { title: 'Protection cannot be verified', sub: 'The background service has not reported for 12 s', tone: 'gray', glyph: 'circle-help', ring: 'none', action: 'Check Again', prot: 'Unknown', protNote: 'Not proof that traffic is blocked', healthV: 'Unavailable', menu: 'shield-question' },
+  stale: { title: 'Service not responding', sub: 'Last report 2 min ago. Values shown are stale and may be wrong.', tone: 'gray', glyph: 'cloud-off', ring: 'none', action: 'Reconnect to Service', prot: 'Unknown', protNote: 'Last report 2 min ago', healthV: 'Stale', menu: 'shield-question' },
+  inactive: { title: 'Inactive', sub: '', tone: 'gray', glyph: 'shield', ring: 'none', action: 'Activate', prot: 'Not active', protNote: 'Another tunnel is selected', healthV: 'Not connected', menu: 'wgex' }
+};
+const LIVE = ['protected', 'reasserting', 'blocked', 'captive', 'stale'];
+const ON = ['protected', 'connecting', 'reasserting', 'blocked', 'captive'];
+const rnd = (i, s) => { const x = Math.sin(i * 12.9898 + s * 78.233) * 43758.5453; return x - Math.floor(x); };
+const sample = i => { const w = 0.5 + 0.5 * Math.sin(i / 11) + 0.3 * Math.sin(i / 3.7); const d = Math.max(0.4, 3 + 15 * Math.max(0, w) * (0.55 + 0.9 * rnd(i, 1)) + (rnd(i, 7) > 0.95 ? 26 * rnd(i, 3) : 0)); return [d, Math.max(0.15, d * 0.09 + 1.1 * rnd(i, 2))]; };
+const RANGES = {
+  '5m': { n: 150, shift: 2, ticks: 60, axis: ['5 min ago', '2.5 min ago', 'Now'], bands: [], seed: 1000, label: '5 min' },
+  '1h': { n: 120, shift: 30, ticks: 4, axis: ['1 h ago', '30 min ago', 'Now'], bands: [[54, 'blocked'], [82, 'reasserting']], seed: 500, label: '1 hour', map: k => (k - 74) * 2 },
+  session: { n: 134, shift: 60, ticks: 2, axis: ['12:07 connected', '13:14', 'Now'], bands: [[100, 'blocked'], [115, 'reasserting']], seed: 0, label: 'Session', map: k => k }
+};
+function series(range, t, vk) {
+  const R = RANGES[range]; const off = Math.floor(t / R.shift); const down = [], up = [];
+  for (let k = 0; k < R.n; k++) { const [d, u] = sample(k + off + R.seed); down.push(d); up.push(u); }
+  R.bands.forEach(([k, kind]) => { down[k] = kind === 'blocked' ? 0 : down[k] * 0.15; up[k] = kind === 'blocked' ? 0 : up[k] * 0.15; });
+  if (vk === 'blocked' || vk === 'captive') for (let k = R.n - 4; k < R.n; k++) { down[k] = 0; up[k] = 0; }
+  if (vk === 'reasserting') { down[R.n - 1] *= 0.15; up[R.n - 1] *= 0.15; }
+  return { down, up, R };
+}
+const fmtRate = v => (v >= 10 ? v.toFixed(0) : v.toFixed(1)) + ' Mbit/s';
+function Chart(p) {
+  const { w, hh, data, dim, compact, pins, hiPin, onPin, hover, onHover, gid } = p;
+  const { down, up, R } = data; const n = down.length;
+  const max = Math.max(4, ...down) * 1.2;
+  const pt = compact ? 2 : (pins ? 30 : 22), pb = compact ? 2 : 22, ih = hh - pt - pb, base = pt + ih;
+  const X = k => (k / (n - 1)) * w, Y = v => base - (v / max) * ih;
+  const path = a => a.map((v, k) => (k ? 'L' : 'M') + X(k).toFixed(1) + ' ' + Y(v).toFixed(1)).join(' ');
+  const K = [];
+  if (!compact) {
+    [0.33, 0.66, 1].forEach(f => K.push(h('line', { key: 'g' + f, x1: 0, x2: w, y1: base - ih * f, y2: base - ih * f, style: { stroke: 'var(--sep)', strokeDasharray: '2 4' } })));
+    K.push(h('text', { key: 'ym', x: 0, y: base - ih - 5, style: { fill: 'var(--label3)', fontSize: 10 } }, fmtRate(max)));
+    K.push(h('line', { key: 'bl', x1: 0, x2: w, y1: base, y2: base, style: { stroke: 'var(--sep2)' } }));
+    R.bands.forEach(([k, kind], i) => K.push(h('rect', { key: 'b' + i, x: X(k) - 4, y: pt, width: 8, height: ih, rx: 2, style: { fill: kind === 'blocked' ? 'var(--orange)' : 'var(--gray)', opacity: 0.22 } })));
+  }
+  K.push(h('path', { key: 'a', d: path(down) + ` L${w} ${base} L0 ${base} Z`, style: { fill: `url(#${gid})` } }));
+  K.push(h('path', { key: 'd', d: path(down), style: { fill: 'none', stroke: 'var(--blue)', strokeWidth: compact ? 1.25 : 1.5, strokeLinejoin: 'round' } }));
+  if (!compact) {
+    K.push(h('path', { key: 'u', d: path(up), style: { fill: 'none', stroke: 'var(--indigo)', strokeWidth: 1.25, strokeLinejoin: 'round' } }));
+    for (let k = 0; k < n; k += R.ticks) K.push(h('line', { key: 't' + k, x1: X(k), x2: X(k), y1: base + 3, y2: base + 7, style: { stroke: 'var(--label3)' } }));
+    let pk = 0, lo = -1; down.forEach((v, k) => { if (v > down[pk]) pk = k; if (v > 0.3 && (lo < 0 || v < down[lo])) lo = k; });
+    const mark = (k, label, key) => { const x = X(k), y = Y(down[k]); const anchor = x > w - 80 ? 'end' : x < 60 ? 'start' : 'middle'; return [h('circle', { key: key + 'c', cx: x, cy: y, r: 3.5, style: { fill: 'var(--card)', stroke: 'var(--blue)', strokeWidth: 1.5 } }), h('text', { key: key + 't', x, y: y - 8, textAnchor: anchor, style: { fill: 'var(--label2)', fontSize: 10.5, fontWeight: 600, fontVariantNumeric: 'tabular-nums' } }, label)]; };
+    K.push(...mark(pk, 'Peak ' + fmtRate(down[pk]), 'pk'));
+    if (lo >= 0) K.push(...mark(lo, 'Low ' + fmtRate(down[lo]), 'lo'));
+    R.axis.forEach((a, i) => K.push(h('text', { key: 'x' + i, x: i === 0 ? 0 : i === 1 ? w / 2 : w, y: hh - 4, textAnchor: i === 0 ? 'start' : i === 1 ? 'middle' : 'end', style: { fill: 'var(--label3)', fontSize: 10 } }, a)));
+  }
+  if (pins) pins.forEach(pn => { const x = X(Math.max(0, Math.min(n - 1, pn.k))) + pn.dx; const on = hiPin === pn.id; K.push(h('g', { key: 'p' + pn.id, onMouseEnter: () => onPin(pn.id), onMouseLeave: () => onPin(null), style: { cursor: 'pointer' } }, h('line', { x1: x, x2: x, y1: 20, y2: base, style: { stroke: pn.color, strokeWidth: 1, strokeDasharray: '2 3', opacity: on ? 0.9 : 0.35 } }), h('circle', { cx: x, cy: 11, r: on ? 9.5 : 8, style: { fill: pn.color } }), h('text', { x, y: 14.5, textAnchor: 'middle', style: { fill: '#fff', fontSize: 10, fontWeight: 700, pointerEvents: 'none' } }, pn.num))); });
+  if (!compact && hover != null && hover < n) {
+    const x = X(hover), bw = 168, bx = Math.min(Math.max(x - bw / 2, 0), w - bw);
+    K.push(h('line', { key: 'hl', x1: x, x2: x, y1: pt, y2: base, style: { stroke: 'var(--label3)' } }), h('circle', { key: 'hd', cx: x, cy: Y(down[hover]), r: 3.5, style: { fill: 'var(--blue)' } }), h('circle', { key: 'hu', cx: x, cy: Y(up[hover]), r: 3, style: { fill: 'var(--indigo)' } }),
+      h('g', { key: 'tip', style: { pointerEvents: 'none' } }, h('rect', { x: bx, y: pt, width: bw, height: 24, rx: 6, style: { fill: 'var(--popover)', stroke: 'var(--sep2)' } }), h('text', { x: bx + 10, y: pt + 16, style: { fill: 'var(--label)', fontSize: 11, fontWeight: 600, fontVariantNumeric: 'tabular-nums' } }, '↓ ' + fmtRate(down[hover]) + '    ↑ ' + fmtRate(up[hover]))));
+  }
+  const move = e => { const r = e.currentTarget.getBoundingClientRect(); const k = Math.round(((e.clientX - r.left) / r.width) * (n - 1)); onHover(Math.max(0, Math.min(n - 1, k))); };
+  return h('svg', { width: w, height: hh, style: { display: 'block', overflow: 'visible', opacity: dim ? 0.45 : 1, filter: dim ? 'grayscale(1)' : 'none' }, onMouseMove: compact ? undefined : move, onMouseLeave: compact ? undefined : () => onHover(null) },
+    h('defs', null, h('linearGradient', { id: gid, x1: 0, y1: 0, x2: 0, y2: 1 }, h('stop', { offset: '0%', style: { stopColor: 'var(--blue)', stopOpacity: 0.26 } }), h('stop', { offset: '100%', style: { stopColor: 'var(--blue)', stopOpacity: 0.02 } }))), K);
+}
+function Orb({ v, size, variant, remaining, levels }) {
+  const [c] = TONE[v.tone];
+  const rw = Math.max(3, Math.round(size * 0.035)), r = size / 2 - rw / 2 - 1, C = 2 * Math.PI * r;
+  const gs = Math.round(size * (variant === 'B' ? 0.36 : variant === 'C' ? 0.27 : 0.32));
+  const kids = [];
+  if (variant === 'B') {
+    if (v.ring === 'spin' || v.ring === 'dashed') [0, 1].forEach(i => kids.push(h('div', { key: 'p' + i, style: { position: 'absolute', inset: 0, borderRadius: '50%', border: `2px solid ${c}`, opacity: 0, animation: `wgexPulse 2.4s ease-out ${i * 1.2}s infinite` } })));
+    const none = v.ring === 'none';
+    kids.push(h('div', { key: 'disc', style: { position: 'absolute', inset: 0, borderRadius: '50%', transition: 'background .4s, box-shadow .4s', background: none ? 'var(--fill)' : `color-mix(in oklab, ${c} 16%, var(--card))`, boxShadow: `inset 0 0 0 1.5px color-mix(in oklab, ${c} ${none ? 18 : 42}%, transparent), 0 0 0 ${v.key === 'protected' ? 10 : 0}px color-mix(in oklab, ${c} 10%, transparent), 0 8px 24px var(--orbDrop)` } }));
+  } else {
+    const inset = variant === 'C' ? Math.round(size * 0.12) : 0;
+    kids.push(h('div', { key: 'disc', style: { position: 'absolute', inset, borderRadius: '50%', background: 'var(--orbFill)', boxShadow: 'inset 0 1px 1px var(--orbHi), inset 0 -12px 28px var(--orbShade), 0 10px 30px var(--orbDrop), 0 0 0 .5px var(--sep2)' } }));
+    if (variant === 'A' && v.ring !== 'none') {
+      const st = { fill: 'none', stroke: c, strokeWidth: rw, strokeLinecap: 'round', transition: 'stroke .3s' };
+      let anim = 'none';
+      if (v.ring === 'spin') { st.strokeDasharray = `${C * 0.28} ${C}`; anim = 'wgexSpin 1.6s linear infinite'; }
+      if (v.ring === 'dashed') { st.strokeDasharray = `${C / 28 * 0.55} ${C / 28 * 0.45}`; st.strokeLinecap = 'butt'; anim = 'wgexSpin 14s linear infinite'; }
+      if (v.ring === 'countdown') { st.strokeDasharray = `${C * remaining / 300} ${C}`; st.transition = 'stroke-dasharray 1s linear'; }
+      kids.push(h('div', { key: 'ring', style: { position: 'absolute', inset: 0, animation: anim } }, h('svg', { width: size, height: size, style: { display: 'block', transform: 'rotate(-90deg)' } }, h('circle', { cx: size / 2, cy: size / 2, r, style: st }))));
+    }
+    if (variant === 'C') {
+      const N = 30, R1 = size / 2 - 2, R0 = size / 2 - size * 0.085, L = [];
+      for (let i = 0; i < N; i++) {
+        const a = (i / N) * Math.PI * 2 - Math.PI / 2; let col = 'var(--sep2)', op = 1, anim;
+        if (v.ring === 'solid') { col = c; op = v.tone === 'green' ? 0.2 + 0.8 * (levels ? levels[i] : 1) : 0.6; }
+        if (v.ring === 'countdown') col = i < Math.round(N * remaining / 300) ? c : 'var(--sep2)';
+        if (v.ring === 'spin') { col = 'var(--gray)'; op = 0.15; anim = `wgexTick 1.5s linear ${(i / N) * 1.5}s infinite`; }
+        if (v.ring === 'dashed') { col = 'var(--gray)'; op = i % 3 ? 0.15 : 1; anim = i % 3 ? undefined : `wgexBlink 2s ease-in-out ${(i / N) * 2}s infinite`; }
+        L.push(h('line', { key: i, x1: size / 2 + Math.cos(a) * R0, y1: size / 2 + Math.sin(a) * R0, x2: size / 2 + Math.cos(a) * R1, y2: size / 2 + Math.sin(a) * R1, style: { stroke: col, strokeWidth: Math.max(2.5, size * 0.024), strokeLinecap: 'round', opacity: op, animation: anim, transition: 'opacity .5s, stroke .3s' } }));
+      }
+      kids.push(h('svg', { key: 'ticks', width: size, height: size, style: { position: 'absolute', inset: 0 } }, L));
+    }
+  }
+  kids.push(h('div', { key: 'g', style: { position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: Math.round(size * 0.03) } },
+    h('span', { style: ic(v.glyph, gs, c, { transition: 'background .3s' }) }),
+    v.ring === 'countdown' ? h('span', { style: { fontSize: Math.round(size * 0.1), fontWeight: 700, color: 'var(--redT)', fontVariantNumeric: 'tabular-nums' } }, mmss(remaining)) : null));
+  return h('div', { style: { position: 'relative', width: size, height: size, flex: 'none', animation: v.key === 'protected' ? 'wgexBreath 12s ease-in-out infinite' : 'none' } }, kids);
+}
+const PROFILES = [
+  { id: 'home', name: 'Home', host: 'vpn.home.example:51820' },
+  { id: 'cabin', name: 'Cabin', host: 'cabin.example.net:51820' },
+  { id: 'office', name: 'Office', host: 'gw.office.example:443' },
+  { id: 'lab', name: 'Lab', host: '10.20.0.1:51820' }
+];
+const BASE_EVENTS = [
+  { id: 'e1', k: 0, time: '12:07:52', icon: 'power', tone: 'gray', title: 'Connection started', short: 'Started', detail: 'Home · vpn.home.example:51820' },
+  { id: 'e2', k: 0, time: '12:07:55', icon: 'shield-check', tone: 'green', title: 'Protected', short: 'Protected', detail: 'Kill switch armed · DNS 10.8.0.1 verified in 3.1 s' },
+  { id: 'e3', k: 100, time: '13:48:10', icon: 'lock', tone: 'orange', title: 'Traffic blocked for 6 s', short: 'Blocked 6 s', detail: 'Peer stopped responding. The kill switch held traffic.' },
+  { id: 'e4', k: 115, time: '14:02:39', icon: 'wifi', tone: 'gray', title: 'Network changed', short: 'Network changed', detail: 'Wi-Fi “WGEX Demo Wi-Fi” → Ethernet' },
+  { id: 'e5', k: 115, time: '14:02:41', icon: 'shield-check', tone: 'green', title: 'Protection verified again', short: 'Re-verified', detail: 'Reconnected 2.1 s after the network changed' },
+  { id: 'e6', k: 133, time: '14:21:07', icon: 'handshake', tone: 'gray', title: 'Handshake completed', short: 'Handshake', detail: 'Peer responded in 24 ms' }
+];
+const RAW = [
+  ['12:07:52.104', 'info', 'daemon', 'start requested profile=Home gen=41'],
+  ['12:07:52.311', 'info', 'pf', 'anchor com.wgex loaded rules=12 token=0x3f2a'],
+  ['12:07:52.902', 'debug', 'engine', 'resolve vpn.home.example → 203.0.113.24'],
+  ['12:07:53.488', 'info', 'engine', 'handshake ok peer=R9v…pQ= rtt=31ms'],
+  ['12:07:55.016', 'info', 'verify', 'protection verified dns=10.8.0.1 route=default'],
+  ['13:48:04.552', 'warn', 'health', 'no handshake reply for 15 s peer=R9v…pQ='],
+  ['13:48:10.021', 'warn', 'pf', 'blocking non-tunnel egress (kill switch)'],
+  ['13:48:16.338', 'info', 'engine', 'handshake ok peer=R9v…pQ= rtt=27ms'],
+  ['14:02:39.774', 'info', 'path', 'primary interface en0 → en7'],
+  ['14:02:41.890', 'info', 'verify', 'protection verified again in 2.1 s'],
+  ['14:21:07.201', 'info', 'engine', 'handshake ok peer=R9v…pQ= rtt=24ms']
+];
+const TAIL = [['debug', 'engine', 'keepalive sent peer=R9v…pQ='], ['debug', 'stats', 'rx=+1.2 MB tx=+96 kB window=2s'], ['info', 'verify', 'pf anchor intact rules=12'], ['debug', 'engine', 'rx packet batch n=48']];
+const LVLC = { info: 'var(--blueT)', debug: 'var(--label3)', warn: 'var(--orangeT)', error: 'var(--redT)' };
+const STEPS = [
+  { id: 'welcome', label: 'Welcome', icon: 'lock', title: 'Your connection. Your server.', body: 'WGEX connects this Mac to a WireGuard server you run or trust. No accounts. No provided servers. No analytics.' },
+  { id: 'service', label: 'Background service', icon: 'server', title: 'A background service', body: 'WGEX needs a background service to run the tunnel and enforce protection when this app is closed.' },
+  { id: 'approve', label: 'Approve', icon: 'circle-check', title: 'Approve the service', body: 'macOS asks you to allow WGEX in System Settings → General → Login Items & Extensions.' },
+  { id: 'secure', label: 'Secure install', icon: 'badge-check', title: 'Secure install', body: 'WGEX must run from Applications so macOS can verify the privileged service before it starts.' },
+  { id: 'import', label: 'Add a tunnel', icon: 'file-down', title: 'Add your first tunnel', body: 'Use a configuration made for this Mac. Each device needs its own keys.' },
+  { id: 'startup', label: 'Startup', icon: 'power', title: 'Connection at startup', body: 'Choose when WGEX connects. You can change this later in Settings → Service.' },
+  { id: 'failover', label: 'Failover', icon: 'route', title: 'Automatic failover', body: 'Relays are optional. WGEX always prefers direct WireGuard.' },
+  { id: 'done', label: 'Done', icon: 'shield-check', title: 'Ready to connect', body: 'Your tunnel is saved. Protection starts only after the connection is verified.' }
+];
+const CAPTION = {
+  A: ['1a', 'Instrument', 'Centred glass orb, session graph and a friendly log. Everything else sits behind one Details disclosure.'],
+  B: ['1b', 'Ledger', 'Protection and tunnel health read side by side. Wide graph, log as a table, configuration in the inspector.'],
+  C: ['1c', 'Evidence', 'The ring is the last 30 s of measured traffic. Log events are pinned on the graph and linked both ways.']
+};
+const TABS = [['general', 'General', 'settings'], ['protection', 'Protection', 'shield'], ['network', 'Network', 'globe'], ['service', 'Service', 'server'], ['transports', 'Transports', 'route'], ['updates', 'Updates', 'download'], ['diagnostics', 'Diagnostics', 'stethoscope'], ['about', 'About', 'info']];
+
+class Component extends DCLogic {
+  state = {
+    verdict: (!this.props.state || this.props.state === 'empty') ? 'protected' : this.props.state,
+    empty: this.props.state === 'empty',
+    profiles: PROFILES, activeId: 'home', selId: 'home',
+    menu: false, appMenu: false, settings: false, onb: false, sheet: null, front: 'main',
+    sTab: 'general', onbStep: 0, approval: 1, imported: false,
+    range: 'session', logMode: 'timeline', paused: false, pausedT: 0, details: false, inspector: true, hover: null, hiPin: null,
+    t: 0, captive: 272, sc: 0.6, offX: 0, live: [], extra: [], toast: null,
+    sw: { killSwitch: true, lockdown: false, allowLAN: false, openAtLogin: true, showMenu: true, hideDock: false, notify: true, relay: false, failover: true, autoUpdate: true, onbLockdown: false, onbFailover: true },
+    startup: 'login', importName: 'Cabin', dup: 'keep'
+  };
+  componentDidMount() {
+    this.fit = () => { const vw = window.innerWidth || document.documentElement.clientWidth, vh = window.innerHeight || document.documentElement.clientHeight; if (!vw || !vh) return; const sc = Math.min(vw / 1440, vh / 960); if (Math.abs(sc - this.state.sc) > 0.0005 || this.state.offX !== Math.max(0, (vw - 1440 * sc) / 2)) this.setState({ sc, offX: Math.max(0, (vw - 1440 * sc) / 2) }); };
+    this.fit(); window.addEventListener('resize', this.fit);
+    requestAnimationFrame(this.fit); setTimeout(this.fit, 300);
+    if (window.ResizeObserver) { this.ro = new ResizeObserver(this.fit); this.ro.observe(document.documentElement); }
+    this.key = e => { if (e.key === 'Escape') this.setState({ menu: false, appMenu: false, sheet: null }); if (e.metaKey && e.key === ',') { e.preventDefault(); this.openSettings(); } };
+    window.addEventListener('keydown', this.key);
+    this.iv = setInterval(() => { this.fit(); this.setState(s => {
+      const live = (!s.paused && LIVE.includes(s.verdict) && s.verdict !== 'stale' && s.t % 2 === 0) ? [...s.live, s.t].slice(-24) : s.live;
+      return { t: s.t + 1, captive: s.verdict === 'captive' ? Math.max(0, s.captive - 1) : s.captive, live };
+    }); }, 1000);
+    this.theme(); this.applyOpen();
+  }
+  componentWillUnmount() { clearInterval(this.iv); clearTimeout(this.tm); window.removeEventListener('resize', this.fit); this.ro && this.ro.disconnect(); window.removeEventListener('keydown', this.key); }
+  componentDidUpdate(pp) {
+    this.theme();
+    if (pp.state !== this.props.state) { const st = this.props.state || 'protected'; this.setState({ empty: st === 'empty', verdict: st === 'empty' ? 'protected' : st, captive: 272, selId: this.state.activeId }); }
+    if (pp.openOn !== this.props.openOn) this.applyOpen();
+  }
+  theme() { document.body.dataset.theme = this.props.appearance === 'dark' ? 'dark' : 'light'; }
+  applyOpen() {
+    const o = this.props.openOn || 'none';
+    this.setState({ menu: o === 'menu', settings: o === 'settings' || this.state.settings, onb: o === 'onboarding' || this.state.onb, sheet: o === 'import' ? 'source' : this.state.sheet, front: o === 'settings' ? 'settings' : o === 'onboarding' ? 'onb' : 'main' });
+  }
+  now(t) { const b = 14 * 3600 + 21 * 60 + 7 + t; return [Math.floor(b / 3600) % 24, Math.floor(b / 60) % 60, b % 60].map(x => String(x).padStart(2, '0')).join(':'); }
+  log(title, detail, icon, tone) { this.setState(s => ({ extra: [{ id: 'x' + s.t + Math.random(), k: 133, time: this.now(s.t), icon, tone, title, short: title, detail }, ...s.extra].slice(0, 8) })); }
+  showToast(msg) { clearTimeout(this.tt); this.setState({ toast: msg }); this.tt = setTimeout(() => this.setState({ toast: null }), 2600); }
+  connect(id) {
+    clearTimeout(this.tm);
+    const name = (this.state.profiles.find(p => p.id === (id || this.state.activeId)) || {}).name;
+    this.setState({ verdict: 'connecting', activeId: id || this.state.activeId, captive: 272 });
+    this.log('Connection started', name, 'power', 'gray');
+    this.tm = setTimeout(() => { this.setState({ verdict: 'protected' }); this.log('Protected', 'Kill switch armed · DNS verified', 'shield-check', 'green'); }, 2200);
+  }
+  disconnect() { clearTimeout(this.tm); this.setState({ verdict: 'unprotected' }); this.log('Disconnected', 'You disconnected. Traffic now leaves outside the tunnel.', 'shield-off', 'red'); }
+  act(vk) {
+    if (vk === 'inactive') return this.connect(this.state.selId);
+    if (vk === 'protected' || vk === 'reasserting' || vk === 'connecting') return this.disconnect();
+    if (vk === 'captive') { this.setState({ verdict: 'blocked' }); return this.log('Captive window ended', 'Blocking resumed', 'lock', 'orange'); }
+    return this.connect();
+  }
+  openSettings = () => this.setState({ settings: true, front: 'settings', menu: false, appMenu: false });
+  openImport = () => this.setState({ sheet: 'source', menu: false, appMenu: false, front: 'main' });
+  doImport(connect) {
+    const s = this.state; const base = s.importName.trim() || 'Cabin';
+    const name = s.dup === 'keep' && s.profiles.some(p => p.name === base) ? base + ' 2' : base;
+    const id = 'imp' + s.t;
+    const profiles = s.dup === 'replace' ? s.profiles.map(p => p.name === base ? { ...p, host: 'cabin.example.net:51820' } : p) : [...s.profiles, { id, name, host: 'cabin.example.net:51820' }];
+    const sel = s.dup === 'replace' ? (profiles.find(p => p.name === base) || {}).id || id : id;
+    this.setState({ profiles: s.empty ? [{ id, name: base, host: 'cabin.example.net:51820' }] : profiles, empty: false, sheet: null, selId: s.empty ? id : sel, activeId: s.empty ? id : s.activeId, verdict: s.empty ? 'unprotected' : s.verdict });
+    if (connect) setTimeout(() => this.connect(s.empty ? id : sel), 50);
+  }
+  toggleSw(k) { this.setState(s => ({ sw: { ...s.sw, [k]: !s.sw[k] } })); }
+  tg(k, small) { const on = this.state.sw[k]; return { bg: on ? 'var(--blue)' : 'var(--fill2)', x: on ? (small ? '15px' : '16px') : '2px', click: e => { e && e.stopPropagation && e.stopPropagation(); this.toggleSw(k); } }; }
+  seg(opts, cur, set) { return opts.map(([id, label]) => { const on = id === cur; return { label, bg: on ? 'var(--segOn)' : 'transparent', shadow: on ? '0 1px 2px rgba(0,0,0,.12), 0 0 0 .5px var(--sep)' : 'none', color: on ? 'var(--label)' : 'var(--label2)', click: () => set(id) }; }); }
+
+  renderVals() {
+    const s = this.state, P = this.props;
+    const dir = ['A', 'B', 'C'].includes(P.direction) ? P.direction : 'A';
+    const dark = P.appearance === 'dark';
+    const empty = s.empty;
+    const active = s.profiles.find(p => p.id === s.activeId) || s.profiles[0];
+    const sel = s.profiles.find(p => p.id === s.selId) || active;
+    const vk = sel.id === active.id ? s.verdict : 'inactive';
+    const hs = (18 + s.t) % 120;
+    const hsAgeRaw = hs < 60 ? hs + ' s' : '1 min ' + (hs - 60) + ' s';
+    const mk = (key, prof) => {
+      const v = { ...V[key], key }; const [c, ct] = TONE[v.tone]; v.c = c;
+      if (key === 'captive') v.sub = `Unprotected for ${mmss(s.captive)} so you can sign in. Blocking resumes when the window ends.`;
+      if (key === 'inactive') v.sub = `Activating ${prof.name} disconnects ${active.name} first.`;
+      v.titleColor = key === 'captive' || key === 'unprotected' ? ct : 'var(--label)';
+      v.healthNote = key === 'protected' || key === 'reasserting' ? 'Last handshake ' + hsAgeRaw + ' ago' : key === 'blocked' ? 'Last handshake 3 min ago' : key === 'stale' ? 'Last known · 2 min ago' : 'Handshake unavailable';
+      v.healthLine = key === 'protected' ? 'Peer responding · handshake ' + hsAgeRaw + ' ago' : v.healthV;
+      v.health = v.healthLine;
+      v.tint = v.ring === 'none' ? 'var(--fill)' : `color-mix(in oklab, ${c} 16%, transparent)`;
+      v.glyph20 = ic(v.glyph, 19, c);
+      return v;
+    };
+    const v = mk(vk, sel), mv = mk(s.verdict, active);
+    const chartT = s.paused ? s.pausedT : s.t;
+    const data = series(s.range, chartT, vk);
+    const hasSession = !empty && LIVE.includes(vk);
+    const n = data.down.length, nowD = data.down[n - 1], nowU = data.up[n - 1];
+    const liveOK = hasSession && vk !== 'stale';
+    const nowDown = liveOK ? fmtRate(nowD) : 'Unavailable', nowUp = liveOK ? fmtRate(nowU) : 'Unavailable';
+    const hsAge = vk === 'protected' || vk === 'reasserting' ? hsAgeRaw : vk === 'blocked' ? '3 min' : vk === 'stale' ? 'Stale' : '—';
+    const mHs = s.verdict === 'protected' || s.verdict === 'reasserting' ? hsAgeRaw : s.verdict === 'blocked' ? '3 min' : '—';
+    const secs = 2 * 3600 + 14 * 60 + s.t; const upFor = Math.floor(secs / 3600) + ' h ' + Math.floor(secs / 60) % 60 + ' min';
+    const dl = (1.84 + s.t * 0.0016).toFixed(2) + ' GB', ul = Math.round(212 + s.t * 0.15) + ' MB';
+    let pk = 0, lo = -1; data.down.forEach((x, k) => { if (x > data.down[pk]) pk = k; if (x > 0.3 && (lo < 0 || x < data.down[lo])) lo = k; });
+    const R = RANGES[s.range];
+    // events
+    const evAll = empty || vk === 'inactive' ? [] : [...s.extra, ...BASE_EVENTS.slice().reverse()];
+    const chron = evAll.slice().reverse();
+    const numOf = {}; chron.forEach((e, i) => numOf[e.id] = i + 1);
+    const events = evAll.map((e, i) => {
+      const [c] = TONE[e.tone]; const hi = s.hiPin === e.id;
+      return { ...e, num: numOf[e.id], c, numOp: 1, border: i ? '.5px solid var(--sep)' : 'none', zebra: i % 2 ? 'var(--fill)' : 'transparent', hi: hi ? 'var(--selBg)' : 'transparent',
+        icon: ic(e.icon, 15, c, { marginTop: '1px' }), iconSm: ic(e.icon, 12, c),
+        enter: () => this.setState({ hiPin: e.id }), leave: () => this.setState({ hiPin: null }) };
+    });
+    let pins = null;
+    if (dir === 'C' && R.map) {
+      const seen = {};
+      pins = chron.map(e => { const k = R.map(e.k); if (k < 0) return null; const key = Math.round(k); seen[key] = (seen[key] || 0) + 1; return { id: e.id, k, num: numOf[e.id], color: TONE[e.tone][0], dx: (seen[key] - 1) * 18 * (k > n / 2 ? -1 : 1) }; }).filter(Boolean);
+    }
+    const levels = data.down.slice(-30).map(x => Math.min(1, x / (Math.max(...data.down) * 0.6)));
+    const cw = dir === 'B' ? (s.inspector ? 476 : 756) : 740;
+    const chartMain = hasSession ? h(Chart, { w: cw, hh: dir === 'B' ? 200 : dir === 'C' ? 200 : 180, data, dim: vk === 'stale', gid: 'gMain' + dir, hover: s.hover, onHover: k => this.setState({ hover: k }), pins, hiPin: s.hiPin, onPin: id => this.setState({ hiPin: id }) }) : null;
+    const mdata = series('5m', chartT, s.verdict);
+    const sparkMenu = h(Chart, { w: 290, hh: 34, data: mdata, compact: true, gid: 'gSpark' });
+    const sparkMenuB = h(Chart, { w: 250, hh: 26, data: mdata, compact: true, gid: 'gSparkB' });
+    const orbMain = empty ? null : h(Orb, { v, size: dir === 'B' ? 160 : 220, variant: dir, remaining: s.captive, levels });
+    const orbMenu = h(Orb, { v: mv, size: 96, variant: dir === 'B' ? 'A' : dir, remaining: s.captive, levels: mdata.down.slice(-30).map(x => Math.min(1, x / 14)) });
+    const raw = [...RAW, ...s.live.map(t => { const [lvl, src, msg] = TAIL[(t / 2) % TAIL.length]; return [this.now(t) + '.' + String((t * 137) % 1000).padStart(3, '0'), lvl, src, msg]; })].slice(-14);
+    const killText = { protected: 'Armed', connecting: 'Not verified', reasserting: 'Holding', blocked: 'Blocking', captive: 'Suspended · ' + mmss(s.captive), unprotected: s.sw.killSwitch ? 'Off (not connected)' : 'Off', unknown: 'Unknown', stale: 'Unknown', inactive: '—' }[vk];
+    const ifRows = [{ k: 'Addresses', v: '10.8.0.2/32, fd00:8::2/128' }, { k: 'DNS', v: '10.8.0.1' }, { k: 'MTU', v: '1420' }, { k: 'Interface', v: hasSession ? 'utun7' : 'Unavailable' }, { k: 'Listen port', v: '51820' }];
+    const peerRows = [{ k: 'Endpoint', v: sel.host }, { k: 'Allowed IPs', v: '0.0.0.0/0, ::/0' }, { k: 'Keepalive', v: '25 s' }, { k: 'Public key', v: 'R9v…pQ=' }];
+    const protRows = [{ k: 'Kill switch', v: killText }, { k: 'Lockdown', v: s.sw.lockdown ? 'On' : 'Off' }, { k: 'Allow local network', v: s.sw.allowLAN ? 'On' : 'Off' }, { k: 'Secure install', v: 'Verified' }];
+    const txt = rows => rows.map(r => ({ ...r, isText: true, color: 'var(--label)' }));
+    const inspSections = [
+      { title: 'Protection', rows: [{ k: 'Kill switch', v: killText, isText: true, color: v.c === 'var(--gray)' ? 'var(--label)' : TONE[v.tone][1] }, { k: 'Lockdown', isToggle: true, tg: this.tg('lockdown', true) }, { k: 'Allow local network', isToggle: true, tg: this.tg('allowLAN', true) }, { k: 'Secure install', v: 'Verified', isText: true, color: 'var(--label)' }], note: s.sw.allowLAN ? 'Local subnet, link-local and multicast bypass the tunnel.' : null },
+      { title: 'Interface', rows: txt(ifRows) },
+      { title: 'Peer', rows: txt(peerRows) },
+      { title: 'Transport', rows: txt([{ k: 'Route', v: 'Direct WireGuard' }, { k: 'Automatic failover', v: s.sw.failover ? 'On · no relay' : 'Off' }]) }
+    ];
+    // settings
+    const row = (label, o) => Object.assign({ label }, o);
+    const T = k => ({ isToggle: true, tg: this.tg(k) });
+    const groups = {
+      general: [{ rows: [row('Open at login', T('openAtLogin')), row('Show in menu bar', T('showMenu')), row('Hide Dock icon', { desc: 'WGEX stays reachable from the menu bar.', ...T('hideDock') }), row('Default tunnel', { isPopup: true, value: active.name })], footer: 'Quitting WGEX does not disconnect the VPN.' },
+        { title: 'Notifications', rows: [row('Notify about problems', { desc: 'When traffic is blocked, a connection fails or the status becomes unknown and you didn’t cause it. At most once per state every 10 minutes.', ...T('notify') })] }],
+      protection: [{ rows: [row('Kill switch', { desc: 'Blocks traffic outside the tunnel while connected or reconnecting.', ...T('killSwitch') }), row('Lockdown', { desc: 'If the tunnel is unavailable, internet traffic stays blocked, including before you sign in.', ...T('lockdown') }), row('Allow local network', { desc: 'Lets the local subnet, link-local and multicast bypass the tunnel.', ...T('allowLAN') }), row('Captive window', { isPopup: true, value: '5 minutes' })] },
+        { title: 'Known gaps', rows: [['Captive windows deliberately allow unprotected traffic.'], ['Local-network exclusions bypass the tunnel.'], ['Unknown service state is not proof that traffic is blocked.'], ['Before FileVault unlock, WGEX cannot start from the encrypted disk.']].map(([l]) => row(l, { icon: ic('triangle-alert', 15, 'var(--orange)', { marginTop: '1px' }) })) }],
+      network: [{ rows: [row('DNS', { isPopup: true, value: 'Use tunnel DNS' }), row('IPv6', { isPopup: true, value: 'Use tunnel routes' }), row('Trusted Wi-Fi', { isPopup: true, value: 'None' }), row('MTU', { isValue: true, value: 'From tunnel', color: 'var(--label2)' })], footer: 'Trusted Wi-Fi names pause automatic connection. A matching network name is not proof of a safe network.' }],
+      service: [{ rows: [row('Background service', { isValue: true, value: 'Running', color: 'var(--label)', dot: 'var(--green)' }), row('Registration', { isValue: true, value: 'Enabled', color: 'var(--label2)' }), row('Secure install', { isValue: true, value: 'Verified', color: 'var(--label2)' }), row('Connect at startup', { isPopup: true, value: s.startup === 'off' ? 'Off' : s.startup === 'boot' ? 'At boot, before login' : 'At login' }), row('Service version', { isValue: true, value: '1.0 (design sample)', color: 'var(--label2)' })], footer: 'The connection continues when you close this window or quit WGEX.' },
+        { rows: [row('Login Items & Extensions', { isButton: true, value: 'Open System Settings', btnBg: 'var(--fill2)', btnColor: 'var(--label)' }), row('Setup assistant', { desc: 'Revisit any onboarding step.', isButton: true, value: 'Set Up Again…', btnBg: 'var(--fill2)', btnColor: 'var(--label)', click: () => this.setState({ onb: true, front: 'onb', onbStep: 0 }) }), row('Remove the background service', { desc: 'Disconnects, removes the packet-filter anchor and unregisters the service.', isButton: true, value: 'Uninstall…', btnBg: 'var(--fill2)', btnColor: 'var(--redT)' })] }],
+      transports: [{ rows: [row('Experimental: relay transports', T('relay')), row('Default transport', { isPopup: true, value: 'Direct WireGuard' }), row('Automatic failover', T('failover')), row('Relay', { isValue: true, value: 'None configured', color: 'var(--label2)' })], footer: 'Relays are secondary. Protection is always verified separately and never inferred from the transport.' }],
+      updates: [{ rows: [row('Check automatically', T('autoUpdate')), row('Channel', { isPopup: true, value: 'Stable' }), row('Last check', { isValue: true, value: 'Today, 14:00', color: 'var(--label2)' }), row('', { isButton: true, value: 'Check Now', btnBg: 'var(--blue)', btnColor: '#fff', click: () => this.showToast('WGEX is up to date.') })], footer: 'Update checks contact the release service. No usage analytics are sent.' }],
+      diagnostics: [{ rows: [row('Log detail', { isPopup: true, value: 'Standard' }), row('Event history', { isValue: true, value: 'Last 32 events, in memory', color: 'var(--label2)' }), row('Diagnostics bundle', { desc: 'Keys, endpoints and addresses are redacted before anything is written.', isButton: true, value: 'Export…', btnBg: 'var(--fill2)', btnColor: 'var(--label)', click: () => this.showToast('Diagnostics bundle saved to Downloads. Keys and endpoints redacted.') })] }],
+      about: []
+    };
+    const sGroups = (groups[s.sTab] || []).map(g => ({ ...g, rows: g.rows.map((r, i) => ({ ...r, border: i ? '.5px solid var(--sep)' : 'none' })) }));
+    // onboarding
+    const step = STEPS[s.onbStep];
+    const canNext = step.id === 'approve' ? s.approval >= 3 : step.id === 'import' ? s.imported : true;
+    const ob = {}; STEPS.forEach(x => ob[x.id] = x.id === step.id);
+    const obSteps = STEPS.map((x, i) => {
+      const done = i < s.onbStep, cur = i === s.onbStep;
+      return { label: x.label, mark: done ? '✓' : String(i + 1), bg: cur ? 'var(--selBg)' : 'transparent', circleBg: done ? 'var(--blue)' : cur ? 'var(--label)' : 'var(--fill2)', circleColor: done || cur ? (cur && !done ? 'var(--win)' : '#fff') : 'var(--label2)', color: cur || done ? 'var(--label)' : 'var(--label2)', weight: cur ? 600 : 400, bar: i <= s.onbStep ? 'var(--blue)' : 'var(--fill2)', dot: cur ? 'var(--label)' : 'var(--label3)', click: () => { if (i <= s.onbStep) this.setState({ onbStep: i }); } };
+    });
+    const stageNames = ['Registered', 'Needs approval', 'Enabled', 'Running'];
+    const approvalStages = stageNames.map((l, i) => {
+      const done = i < s.approval || s.approval === 3, cur = i === s.approval && s.approval < 3;
+      return { label: l, border: i ? '.5px solid var(--sep)' : 'none', color: done || cur ? 'var(--label)' : 'var(--label3)', note: cur ? 'Waiting for you' : done ? '' : '', icon: done ? ic('circle-check', 15, 'var(--green)') : cur ? ic('circle-dot', 15, 'var(--orange)') : ic('circle', 15, 'var(--label3)') };
+    });
+    const startupOpts = [['off', 'Off', 'Connect only when you choose to.'], ['login', 'Connect at login', 'Connects when you sign in to this Mac.'], ['boot', 'Connect at boot, before login', 'The Mac must be unlocked before the encrypted startup disk is available (FileVault).']].map(([id, label, desc], i) => {
+      const on = s.startup === id; return { label, desc, border: i ? '.5px solid var(--sep)' : 'none', ring: on ? '5px solid var(--blue)' : '1.5px solid var(--sep2)', fill: on ? '#fff' : 'var(--card)', click: () => this.setState({ startup: id }) };
+    });
+    const last = s.onbStep === STEPS.length - 1;
+    // menu
+    const menuProfiles = s.profiles.map(p => {
+      const isA = p.id === active.id, on = isA && ON.includes(s.verdict);
+      return { name: p.name, sub: isA ? mv.title : p.host, dot: isA ? TONE[mv.tone][0] : 'var(--label3)', check: ic('check', 14, isA ? 'var(--blueT)' : 'transparent'), rowBg: isA ? 'var(--fill)' : 'transparent', expanded: isA && LIVE.includes(s.verdict) && s.verdict !== 'stale',
+        tg: { bg: on ? 'var(--blue)' : 'var(--fill2)', x: on ? '16px' : '2px', click: () => on ? this.disconnect() : this.connect(p.id) },
+        pick: () => { if (!isA) this.connect(p.id); } };
+    });
+    const z = { main: s.front === 'main' ? 30 : 10, settings: s.front === 'settings' ? 30 : 20, onb: s.front === 'onb' ? 30 : 20 };
+    const glyphSz = mv.menu === 'wgex' ? 18 : 16;
+    return {
+      stageStyle: { position: 'absolute', left: s.offX + 'px', top: 0, width: '1440px', height: '960px', transformOrigin: '0 0', transform: `scale(${s.sc})` },
+      clock: this.now(s.t).slice(0, 5),
+      caption: { id: CAPTION[dir][0], name: CAPTION[dir][1], text: CAPTION[dir][2] },
+      statusGlyph: ic(empty ? 'wgex' : mv.menu, glyphSz, 'var(--label)', { animation: !empty && mv.pulse ? 'wgexBlink 1.4s ease-in-out infinite' : 'none', opacity: empty ? 0.5 : 1 }),
+      statusTip: 'WGEX: ' + mv.title,
+      toggleMenu: () => this.setState(x => ({ menu: !x.menu, appMenu: false })),
+      toggleAppMenu: () => this.setState(x => ({ appMenu: !x.appMenu, menu: false })),
+      menuBtnBg: s.menu ? 'var(--fill2)' : 'transparent', appMenuBg: s.appMenu ? 'var(--fill2)' : 'transparent',
+      anyMenu: s.menu || s.appMenu, closeMenus: () => this.setState({ menu: false, appMenu: false }),
+      appMenuOpen: s.appMenu, menuOpen: s.menu,
+      appMenuItems: [
+        { label: 'About WGEX', click: () => this.setState({ settings: true, sTab: 'about', front: 'settings', appMenu: false }) },
+        { sep: true },
+        { label: 'Settings…', key: '⌘,', click: this.openSettings },
+        { label: 'Set Up WGEX…', click: () => this.setState({ onb: true, front: 'onb', appMenu: false }) },
+        { label: 'Import Tunnel…', key: '⌘I', click: this.openImport },
+        { sep: true },
+        { label: 'Hide WGEX', key: '⌘H', color: 'var(--label3)' },
+        { label: 'Quit WGEX', key: '⌘Q', tip: 'Quitting WGEX does not disconnect the VPN.', click: () => this.showToast('WGEX quit. The tunnel keeps running in the background service.') }
+      ].map(m => ({ color: 'var(--label)', ...m })),
+      z, focusMain: () => s.front !== 'main' && this.setState({ front: 'main' }),
+      focusSettings: () => s.front !== 'settings' && this.setState({ front: 'settings' }),
+      focusOnb: () => s.front !== 'onb' && this.setState({ front: 'onb' }),
+      isEmpty: empty,
+      profiles: empty ? [] : s.profiles.map(p => {
+        const isA = p.id === active.id;
+        return { name: p.name, sub: isA ? (s.verdict === 'protected' ? 'Protected · ' + upFor : mv.title) : p.host, dot: isA ? TONE[mv.tone][0] : 'var(--label3)', bg: p.id === sel.id ? 'var(--selBg)' : 'transparent', select: () => this.setState({ selId: p.id, hover: null, hiPin: null }) };
+      }),
+      openImport: this.openImport, openSettings: this.openSettings,
+      openMain: () => this.setState({ menu: false, front: 'main' }),
+      quit: () => { this.setState({ menu: false }); this.showToast('WGEX quit. The tunnel keeps running in the background service.'); },
+      winTitle: empty ? 'WGEX' : sel.name, winSub: empty ? 'No tunnels' : vk === 'inactive' ? 'Inactive · ' + sel.host : v.title + ' · ' + sel.host,
+      dirA: dir === 'A' && !empty, dirB: dir === 'B' && !empty, dirC: dir === 'C' && !empty,
+      showDisclosure: (dir === 'A' || dir === 'C') && !empty,
+      showInspector: dir === 'B' && !empty && s.inspector, toggleInspector: () => this.setState(x => ({ inspector: !x.inspector })), inspBtnBg: s.inspector ? 'var(--fill2)' : 'var(--glass)',
+      v, mv, orbMain, orbMenu, sparkMenu, sparkMenuB, activeName: active.name,
+      orbClick: () => this.act(vk), primary: () => this.act(vk), primaryMenu: () => this.act(s.verdict),
+      hasSecondary: vk === 'blocked', menuSecondary: s.verdict === 'blocked',
+      secondaryClick: () => { this.setState({ verdict: 'captive', captive: 300, menu: false }); this.log('Captive window opened', 'Unprotected web traffic allowed for 5 minutes', 'timer', 'red'); },
+      showTransport: s.sw.relay,
+      rangeSeg: this.seg([['5m', '5 min'], ['1h', '1 hour'], ['session', 'Session']], s.range, id => this.setState({ range: id, hover: null })),
+      logSeg: this.seg([['timeline', 'Timeline'], ['raw', 'Raw log']], s.logMode, id => this.setState({ logMode: id })),
+      dupSeg: this.seg([['keep', 'Keep both'], ['replace', 'Replace']], s.dup, id => this.setState({ dup: id })),
+      hasSession, noSession: !hasSession,
+      noSessionText: vk === 'connecting' ? 'The graph starts once the first handshake is measured.' : vk === 'inactive' ? 'This tunnel is not active.' : 'No active session. Usage is not stored after a tunnel disconnects.',
+      totals: [{ label: 'Connected for', value: upFor }, { label: 'Downloaded', value: dl }, { label: 'Uploaded', value: ul }, { label: 'Peak ↓ (' + R.label + ')', value: fmtRate(data.down[pk]) }, { label: 'Low ↓ (' + R.label + ')', value: lo >= 0 ? fmtRate(data.down[lo]) : '—' }],
+      totalsLine1: 'Connected ' + upFor + ' · ↓ ' + dl + ' · ↑ ' + ul, totalsLine2: 'Peak ' + fmtRate(data.down[pk]) + ' · Low ' + (lo >= 0 ? fmtRate(data.down[lo]) : '—'),
+      nowDown, nowUp, hsAge, menuLive: LIVE.includes(s.verdict) && s.verdict !== 'stale',
+      readouts: [{ label: 'Handshake', value: hsAge }, { label: 'Download', value: liveOK ? fmtRate(nowD) : '—', color: 'var(--blueT)' }, { label: 'Upload', value: liveOK ? fmtRate(nowU) : '—', color: 'var(--indigo)' }, { label: 'Connected', value: hasSession ? upFor : '—' }].map((r, i) => ({ color: 'var(--label)', ...r, border: i ? '.5px solid var(--sep)' : 'none' })),
+      chartMain,
+      live: { label: s.paused ? 'Paused' : 'Live', dot: s.paused ? 'var(--label3)' : 'var(--blue)', anim: s.paused ? 'none' : 'wgexBlink 1.6s ease-in-out infinite', tip: s.paused ? 'Resume live updates' : 'Pause live updates', click: () => this.setState(x => ({ paused: !x.paused, pausedT: x.t })) },
+      exportDiag: () => this.showToast('Diagnostics bundle saved to Downloads. Keys and endpoints redacted.'),
+      isTimeline: s.logMode === 'timeline', isRaw: s.logMode === 'raw',
+      events, noEvents: events.length === 0,
+      rawLines: (empty || vk === 'inactive') ? [] : raw.map(([ts, lvl, src, msg]) => ({ ts, lvl, src, msg, color: LVLC[lvl] })),
+      details: s.details, toggleDetails: () => this.setState(x => ({ details: !x.details })),
+      detailsChevron: ic('chevron-right', 13, 'var(--label2)', { transform: s.details ? 'rotate(90deg)' : 'none', transition: 'transform .2s' }),
+      detailGroups: [{ title: 'Interface', rows: ifRows }, { title: 'Peer', rows: peerRows }, { title: 'Protection', rows: protRows }],
+      inspSections,
+      sheetOpen: !!s.sheet, sheetSource: s.sheet === 'source', sheetReview: s.sheet === 'review',
+      sourceClick: () => this.setState({ sheet: 'review' }), cancelSheet: () => this.setState({ sheet: null }),
+      importName: s.importName, setImportName: e => this.setState({ importName: e.target.value }),
+      reviewRows: [['Addresses', '10.8.1.2/32', null], ['DNS', '10.8.1.1', null], ['Endpoint', 'cabin.example.net:51820', null], ['Routes', 'All traffic (0.0.0.0/0, ::/0)', null], ['Private key', 'Moves to the system keychain', 'lock']].map(([k, val, icn], i) => ({ k, v: val, border: i ? '.5px solid var(--sep)' : 'none', icon: icn ? ic(icn, 12, 'var(--label2)') : { display: 'none' } })),
+      doImport: () => this.doImport(false), doImportConnect: () => this.doImport(true),
+      settingsOpen: s.settings, closeSettings: e => { e.stopPropagation(); this.setState({ settings: false, front: 'main' }); },
+      sTitle: (TABS.find(t => t[0] === s.sTab) || TABS[0])[1],
+      sTabs: TABS.map(([id, label, icn]) => { const on = id === s.sTab; return { label, icon: ic(icn, 19, on ? 'var(--blue)' : 'var(--label2)'), bg: on ? 'var(--fill2)' : 'transparent', color: on ? 'var(--blueT)' : 'var(--label2)', click: () => this.setState({ sTab: id }) }; }),
+      sIsAbout: s.sTab === 'about', sGroups, appIcon: dark ? 'assets/wgex-icon-dark.png' : 'assets/wgex-icon-light.png',
+      tg: { onbLockdown: this.tg('onbLockdown'), onbFailover: this.tg('onbFailover') },
+      onbOpen: s.onb, closeOnb: e => { e.stopPropagation(); this.setState({ onb: false, front: 'main' }); },
+      obA: dir === 'A', obB: dir === 'B', obC: dir === 'C', obSteps, ob,
+      obCounter: 'Step ' + Math.min(s.onbStep + 1, 7) + ' of 7 · ' + step.label,
+      obPad: dir === 'A' ? '64px 40px 10px' : dir === 'B' ? '52px 40px 10px' : '26px 40px 10px',
+      obAlign: dir === 'A' ? 'center' : 'flex-start', obText: dir === 'A' ? 'center' : 'left',
+      obShowIcon: true, obIconBg: step.id === 'done' ? 'color-mix(in oklab, var(--green) 16%, transparent)' : 'color-mix(in oklab, var(--blue) 14%, transparent)', obIcon: ic(step.icon, 30, step.id === 'done' ? 'var(--green)' : 'var(--blue)'),
+      obTitle: step.title, obBody: step.body,
+      approvalStages, approveNeeded: s.approval < 3, approveClick: () => { this.setState({ approval: 2 }); setTimeout(() => this.setState({ approval: 3 }), 900); },
+      imported: s.imported, notImported: !s.imported, importClick: () => this.setState({ imported: true }),
+      startupOpts, lockdownBootWarn: s.startup === 'boot' && s.sw.onbLockdown,
+      obCanBack: s.onbStep > 0 && !last,
+      obBack: () => this.setState(x => ({ onbStep: Math.max(0, x.onbStep - 1) })),
+      obNext: () => { if (!canNext) return; if (last) return this.setState({ onb: false, front: 'main', onbStep: 0 }); this.setState(x => ({ onbStep: x.onbStep + 1 })); },
+      obNextLabel: last ? 'Open WGEX' : step.id === 'import' && !s.imported ? 'Continue' : 'Continue',
+      obNextBg: canNext ? 'var(--blue)' : 'var(--fill2)', obNextColor: canNext ? '#fff' : 'var(--label3)',
+      menuA: dir === 'A', menuB: dir === 'B', menuC: dir === 'C', menuFooterLinks: dir !== 'B',
+      menuProfiles, mHs,
+      cycleProfile: () => { const i = s.profiles.findIndex(p => p.id === active.id); this.connect(s.profiles[(i + 1) % s.profiles.length].id); },
+      toast: s.toast
+    };
+  }
+}
+</script>
+</body>
+</html>

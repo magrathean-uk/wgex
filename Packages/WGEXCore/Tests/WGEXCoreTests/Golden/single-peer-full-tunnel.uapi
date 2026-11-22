@@ -1,0 +1,9 @@
+private_key=583763d123aea38cf8415038667d8ee3251acbd7674ecd087d0db53187fc5073
+listen_port=0
+replace_peers=true
+public_key=08e06c7db77808d6e21abd464aca63c408cdc20c04094c8b68b44b680c3e3821
+preshared_key=9d6661cb15dffd1adfe6914900c2420ee9a06af4765f1f119b674ddbae952abe
+endpoint=192.0.2.1:51820
+persistent_keepalive_interval=25
+replace_allowed_ips=true
+allowed_ip=0.0.0.0/0

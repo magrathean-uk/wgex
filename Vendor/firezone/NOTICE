@@ -1,0 +1,17 @@
+firezone (vendored subset of swift/apple)
+
+Origin:      https://github.com/firezone/firezone.git, path swift/apple/
+Commit:      229ac31b37b5fbde2961e7f87df8181abd7fd46f
+Licence:     Apache-2.0, see LICENSE in this directory (swift/apple/LICENSE)
+Copyright:   2024 Firezone, Inc.
+
+The files in this directory are verbatim copies from the origin commit. The
+origin ships no NOTICE file for swift/apple. Apache-2.0 section 4 applies to
+any file changed here: a changed file must carry a prominent notice of the
+change, and Vendor/PATCHES.md records it.
+
+Scope: only the files listed in Vendor/PATCHES.md. The grant covers the
+swift/apple subtree only. The elixir/ subtree of the origin repository is
+licensed under a source-available grant (Elastic-2.0), not Apache, and is excluded; nothing from it, from
+the portal or control plane, telemetry, authentication or the Rust engine is
+copied.

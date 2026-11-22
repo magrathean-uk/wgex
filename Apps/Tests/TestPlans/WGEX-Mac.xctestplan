@@ -1,0 +1,36 @@
+{
+  "configurations": [
+    {
+      "id": "11DC82BD-3F02-589D-A59F-4727771FE46B",
+      "name": "Default",
+      "options": {}
+    }
+  ],
+  "defaultOptions": {
+    "codeCoverage": false,
+    "testTimeoutsEnabled": true,
+    "commandLineArgumentEntries": [
+      {
+        "argument": "-WGEXFakeBackend",
+        "isEnabled": true
+      }
+    ]
+  },
+  "testTargets": [
+    {
+      "target": {
+        "containerPath": "container:WGEX.xcodeproj",
+        "identifier": "407D8F3DE1F9E0BD73C814F2",
+        "name": "WGEXMacUnitTests"
+      }
+    },
+    {
+      "target": {
+        "containerPath": "container:WGEX.xcodeproj",
+        "identifier": "BE568DE3C24F3E983A48B2F2",
+        "name": "WGEXMacUITests"
+      }
+    }
+  ],
+  "version": 1
+}

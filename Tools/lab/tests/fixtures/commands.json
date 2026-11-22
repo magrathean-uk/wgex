@@ -1,0 +1,104 @@
+{
+  "source": "Recorded command shapes and sanitised M1-01 observations; no executable payloads",
+  "clock": {
+    "rtt": 0.04,
+    "offset": 0.1
+  },
+  "active": {
+    "phase": "active",
+    "protection": "protected"
+  },
+  "blocked": {
+    "phase": "failed",
+    "protection": "blocked"
+  },
+  "idle": {
+    "phase": "idle",
+    "protection": "unprotected"
+  },
+  "ifconfig": "en0: flags=8863\n\tinet 192.168.64.5 netmask 0xffffff00\nutun4: flags=8051\n\tinet 10.77.0.2 --> 10.77.0.2 netmask 0xffffff00\n",
+  "routes": "Destination Gateway Flags Netif\n10.77/24 link#12 UCS utun4\n",
+  "dns": "resolver #1\n  nameserver[0] : 192.168.64.1\n",
+  "controls": [
+    [
+      "Choose File\u2026",
+      "wgex.importReview.chooseFile",
+      10,
+      10
+    ],
+    [
+      "Import",
+      "wgex.importReview.importLabel",
+      20,
+      10
+    ],
+    [
+      "Import and Connect",
+      "wgex.importReview.importAndConnect",
+      25,
+      10
+    ],
+    [
+      "Connect",
+      "wgex.main.action",
+      30,
+      10
+    ],
+    [
+      "Protection cannot be verified",
+      "wgex.main.tunnel.00000000-0000-4000-8000-000000000001",
+      100,
+      100
+    ],
+    [
+      "Inactive",
+      "wgex.main.tunnel.00000000-0000-4000-8000-000000000002",
+      130,
+      100
+    ],
+    [
+      "Inactive",
+      "wgex.main.tunnel.00000000-0000-4000-8000-000000000003",
+      160,
+      100
+    ],
+    [
+      "Inactive",
+      "wgex.main.tunnel.00000000-0000-4000-8000-000000000004",
+      190,
+      100
+    ],
+    [
+      "Import Profile\u2026",
+      "wgex.main.sidebarImport",
+      50,
+      10
+    ]
+  ],
+  "profiles": [
+    {
+      "name": "wgex-lab-default",
+      "id": "00000000-0000-4000-8000-000000000001"
+    },
+    {
+      "name": "wgex-lab-dns",
+      "id": "00000000-0000-4000-8000-000000000002"
+    },
+    {
+      "name": "wgex-lab-wrong-key",
+      "id": "00000000-0000-4000-8000-000000000003"
+    },
+    {
+      "name": "wgex-lab-lockdown",
+      "id": "00000000-0000-4000-8000-000000000004"
+    },
+    {
+      "name": "wgex-lab-full4",
+      "id": "00000000-0000-4000-8000-000000000001"
+    },
+    {
+      "name": "wgex-lab-dual",
+      "id": "00000000-0000-4000-8000-000000000001"
+    }
+  ]
+}

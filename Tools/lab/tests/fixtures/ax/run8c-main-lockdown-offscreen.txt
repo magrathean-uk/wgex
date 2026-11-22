@@ -1,0 +1,52 @@
+AXWindow | name=wgex-lab-full4 – Connected, last handshake 1 min ago | value= | desc= | id= | pos=0,30 size=1024x752
+AXGroup | name=missing value | value=missing value | desc=group | id= | pos=0,30 size=1024x752 en=missing value
+AXGroup | name=missing value | value=missing value | desc=group | id=wgex.main.surface | pos=0,30 size=1024x752 en=true
+AXGroup | name=missing value | value=missing value | desc=group | id= | pos=8,38 size=240x736 en=missing value
+AXRow | name=missing value | value=missing value | desc=outline row | id= | pos=8,82 size=240x19 en=missing value
+AXCell | name=missing value | value=missing value | desc=cell | id= | pos=18,82 size=220x19 en=true
+AXGroup | name=missing value | value=missing value | desc=group | id= | pos=22,82 size=224x19 en=missing value
+AXRow | name=missing value | value=missing value | desc=outline row | id= | pos=8,101 size=240x44 en=missing value
+AXCell | name=missing value | value=missing value | desc=cell | id= | pos=18,101 size=220x44 en=true
+AXStaticText | name=wgex-lab-full4 | value=wgex-lab-full4 | desc=text | id=wgex.main.tunnel.00000000-0000-4000-8000-000000000111 | pos=24,108 size=111x30 en=true
+AXButton | name=missing value | value=missing value | desc=button | id=wgex.main.sidebarImport | pos=72,644 size=113x16 en=true
+AXButton | name=missing value | value=missing value | desc=button | id=wgex.main.sidebarDelete | pos=25,672 size=112x16 en=true
+AXButton | name=missing value | value=missing value | desc=button | id=wgex.main.settings | pos=25,713 size=73x16 en=true
+AXButton | name=missing value | value=missing value | desc=button | id=wgex.main.diagnostics | pos=25,741 size=97x16 en=true
+AXGroup | name=missing value | value=missing value | desc=group | id= | pos=0,30 size=1024x752 en=missing value
+AXButton | name=missing value | value=missing value | desc=button | id=wgex.connection.orb | pos=290,110 size=223x223 en=true
+AXStaticText | name=Protected | value=Protected | desc=text | id=wgex.protection.verdict | pos=536,147 size=101x26 en=true
+AXStaticText | name=Connected, last handshake 1 min ago | value=Connected, last handshake 1 min ago | desc=text | id=wgex.protection.evidence | pos=536,187 size=226x16 en=true
+AXStaticText | name=Background service is responding | value=Background service is responding | desc=text | id= | pos=536,217 size=163x13 en=true
+AXButton | name=missing value | value=missing value | desc=button | id=wgex.protection.action | pos=536,280 size=96x28 en=true
+AXStaticText | name=Details | value=Details | desc=text | id= | pos=272,456 size=44x16 en=true
+AXStaticText | name=Protection | value=Protection | desc=text | id= | pos=286,771 size=66x16 en=true
+AXStaticText | name=Kill switch | value=Kill switch | desc=text | id= | pos=286,797 size=61x16 en=true
+AXStaticText | name=Armed | value=Armed | desc=text | id=wgex.protection.killSwitch | pos=355,797 size=40x16 en=true
+AXStaticText | name=Secure install | value=Secure install | desc=text | id= | pos=584,797 size=81x16 en=true
+AXStaticText | name=Secure install verified | value=Secure install verified | desc=text | id=wgex.protection.secureInstall | pos=673,797 size=130x16 en=true
+AXCheckBox | name=missing value | value=0 | desc=checkbox | id=wgex.protection.lockdown | pos=286,834 size=82x16 en=true
+AXCheckBox | name=missing value | value=1 | desc=checkbox | id=wgex.protection.allowLocalNetwork | pos=584,834 size=138x16 en=true
+AXStaticText | name=If the tunnel is unavailable, internet traffic stays blocked, including before you sign in. With boot connection and Lockdown enabled, a failed connection can prevent internet access at the login screen. | value=If the tunnel is unavailable, internet traffic stays blocked, including before you sign in. With boot connection and Lockdown enabled, a failed connection can prevent internet access at the login screen. | desc=text | id= | pos=286,860 size=677x26 en=true
+AXStaticText | name=Local-network exclusions bypass the tunnel. This traffic is not protected. | value=Local-network exclusions bypass the tunnel. This traffic is not protected. | desc=text | id= | pos=286,896 size=352x13 en=true
+AXGroup | name=missing value | value=missing value | desc=group | id=wgex.session.chart | pos=288,953 size=679x185 en=true
+AXStaticText | name=Session | value=Session | desc=text | id= | pos=288,957 size=49x16 en=true
+AXStaticText | name=Not stored. Resets when the tunnel disconnects. | value=Not stored. Resets when the tunnel disconnects. | desc=text | id= | pos=345,958 size=234x13 en=true
+AXRadioGroup | name=missing value | value= | desc=Chart range, Chart range | id=wgex.session.chartRange | pos=759,953 size=205x24 en=true
+AXRadioButton | name=missing value | value=1 | desc=5 min | id=missing value | pos=759,953 size=68x24 en=true
+AXRadioButton | name=missing value | value=0 | desc=1 hour | id=missing value | pos=829,953 size=67x24 en=true
+AXRadioButton | name=missing value | value=0 | desc=Session | id=missing value | pos=897,953 size=67x24 en=true
+AXGroup | name=missing value | value=missing value | desc=group | id= | pos=288,985 size=679x154 en=true
+AXStaticText | name=Bucket 1. No measurement. | value=Bucket 1. No measurement. | desc=text | id=wgex.session.bucket.0 | pos=326,985 size=166x16 en=true
+AXStaticText | name=Bucket 2. No measurement. | value=Bucket 2. No measurement. | desc=text | id=wgex.session.bucket.1 | pos=325,1001 size=168x16 en=true
+AXStaticText | name=Bucket 3. No measurement. | value=Bucket 3. No measurement. | desc=text | id=wgex.session.bucket.2 | pos=325,1017 size=168x16 en=true
+AXStaticText | name=Bucket 4. No measurement. | value=Bucket 4. No measurement. | desc=text | id=wgex.session.bucket.3 | pos=325,1033 size=168x16 en=true
+AXStaticText | name=Bucket 5. No measurement. | value=Bucket 5. No measurement. | desc=text | id=wgex.session.bucket.4 | pos=325,1049 size=168x16 en=true
+AXStaticText | name=Bucket 6. No measurement. | value=Bucket 6. No measurement. | desc=text | id=wgex.session.bucket.5 | pos=326,1065 size=168x16 en=true
+AXStaticText | name=Bucket 7. No measurement. | value=Bucket 7. No measurement. | desc=text | id=wgex.session.bucket.6 | pos=327,1081 size=166x16 en=true
+AXStaticText | name=Bucket 8. No measurement. | value=Bucket 8. No measurement. | desc=text | id=wgex.session.bucket.7 | pos=326,1097 size=168x16 en=true
+AXStaticText | name=Bucket 9. No measurement. | value=Bucket 9. No measurement. | desc=text | id=wgex.session.bucket.8 | pos=325,1113 size=168x16 en=true
+AXStaticText | name=Bucket 10. No measurement. | value=Bucket 10. No measurement. | desc=text | id=wgex.session.bucket.9 | pos=322,1129 size=174x16 en=true
+AXStaticText | name=Bucket 11. No measurement. | value=Bucket 11. No measurement. | desc=text | id=wgex.session.bucket.10 | pos=323,1145 size=172x16 en=true
+AXStaticText | name=Bucket 12. No measurement. | value=Bucket 12. No measurement. | desc=text | id=wgex.session.bucket.11 | pos=322,1161 size=174x16 en=true
+AXStaticText | name=Bucket 26. Sent 0 B. Received 0 B. | value=Bucket 26. Sent 0 B. Received 0 B. | desc=text | id=wgex.session.bucket.25 | pos=304,1385 size=210x16 en=true
+AXStaticText | name=Bucket 28. Sent 0 B. Received 0 B. | value=Bucket 28. Sent 0 B. Received 0 B. | desc=text | id=wgex.session.bucket.27 | pos=304,1417 size=210x16 en=

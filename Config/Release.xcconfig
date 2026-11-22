@@ -1,0 +1,11 @@
+// Release configuration. WGEX_LAB_BUILD is never defined here (plan 03 §5).
+#include "Base.xcconfig"
+#include "Signing-AdHoc.xcconfig"
+
+ENABLE_TESTABILITY = NO
+STRIP_INSTALLED_PRODUCT = YES
+// No get-task-allow in Release (plan 03 §3); Xcode injects it into plain
+// `xcodebuild build` products unless told not to.
+CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO
+SWIFT_COMPILATION_MODE = wholemodule
+SWIFT_OPTIMIZATION_LEVEL = -O

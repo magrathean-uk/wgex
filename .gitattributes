@@ -1,0 +1,11 @@
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.pdf binary
+*.xz binary
+*.zip binary
+# Binary fixtures are never newline-normalised.
+Tests/Fixtures/fuzz/reproducers/*.bin binary
+*.bin binary
+# Fixtures keep their exact bytes (CRLF and BOM vectors).
+Tests/Fixtures/** -text

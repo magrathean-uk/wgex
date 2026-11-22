@@ -1,0 +1,15 @@
+{
+  "interface_name": "utun7",
+  "listen_port": 51820,
+  "sampled_at": "2025-10-25T05:26:41.125Z",
+  "peers": [
+    {
+      "public_key": "COBsfbd4CNbiGr1GSspjxAjNwgwECUyLaLRLaAw+OCE=",
+      "endpoint": "192.0.2.1:51820",
+      "last_handshake_time": "2025-10-25T05:26:40.000000005Z",
+      "rx_bytes": 2000,
+      "tx_bytes": 1000,
+      "persistent_keepalive_interval": 25
+    }
+  ]
+}

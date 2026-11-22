@@ -1,0 +1,5 @@
+AXWindow | name=wgex-lab-full4 – Connected, last handshake 48 s ago | value= | desc= | id= | pos=0,30 size=1024x752
+AXGroup | name=missing value | value=missing value | desc=group | id= | pos=0,30 size=1024x752 en=missing value
+AXGroup | name=missing value | value=missing value | desc=group | id=wgex.main.surface | pos=0,30 size=1024x752 en=true
+AXGroup | name=missing value | value=missing value | desc=group | id= | pos=8,38 size=240x736 en=missing value
+AXRow | name=missing value | value=missing value | desc=outline row | id= | pos=8,82 size=240x19 en=missing value

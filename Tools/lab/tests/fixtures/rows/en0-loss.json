@@ -1,0 +1,918 @@
+{
+ "source": "Synthetic guest samples at 1 s (the live sampler runs at 0.25 s) shaped on the run 6 manual block B1 (R6m 6a split: en0 down 20.03 s, failed/blocked 1.0 s after down, protected 1.88 s after up; 6c full4: 2.02 s); no guest bytes",
+ "pass": {
+  "profiles": [
+   {
+    "variant": "default",
+    "lossSeconds": 20,
+    "down": 1793300761.49,
+    "up": 1793300781.52,
+    "samples": [
+     [1793300758.49, "active", "protected", 1],
+     [1793300759.49, "active", "protected", 1],
+     [1793300760.49, "active", "protected", 1],
+     [1793300761.49, "active", "protected", 1],
+     [1793300762.49, "failed", "blocked", 1],
+     [1793300763.49, "failed", "blocked", 1],
+     [1793300764.49, "failed", "blocked", 1],
+     [1793300765.49, "failed", "blocked", 1],
+     [1793300766.49, "failed", "blocked", 1],
+     [1793300767.49, "failed", "blocked", 1],
+     [1793300768.49, "failed", "blocked", 1],
+     [1793300769.49, "failed", "blocked", 1],
+     [1793300770.49, "failed", "blocked", 1],
+     [1793300771.49, "failed", "blocked", 1],
+     [1793300772.49, "failed", "blocked", 1],
+     [1793300773.49, "failed", "blocked", 1],
+     [1793300774.49, "failed", "blocked", 1],
+     [1793300775.49, "failed", "blocked", 1],
+     [1793300776.49, "failed", "blocked", 1],
+     [1793300777.49, "failed", "blocked", 1],
+     [1793300778.49, "failed", "blocked", 1],
+     [1793300779.49, "failed", "blocked", 1],
+     [1793300780.49, "failed", "blocked", 1],
+     [1793300781.49, "failed", "blocked", 1],
+     [1793300782.49, "failed", "blocked", 1],
+     [1793300783.49, "active", "protected", 1],
+     [1793300784.49, "active", "protected", 1],
+     [1793300785.49, "active", "protected", 1],
+     [1793300786.49, "active", "protected", 1],
+     [1793300787.49, "active", "protected", 1],
+     [1793300788.49, "active", "protected", 1],
+     [1793300789.49, "active", "protected", 1],
+     [1793300790.49, "active", "protected", 1],
+     [1793300791.49, "active", "protected", 1],
+     [1793300792.49, "active", "protected", 1],
+     [1793300793.49, "active", "protected", 1],
+     [1793300794.49, "active", "protected", 1],
+     [1793300795.49, "active", "protected", 1],
+     [1793300796.49, "active", "protected", 1],
+     [1793300797.49, "active", "protected", 1],
+     [1793300798.49, "active", "protected", 1],
+     [1793300799.49, "active", "protected", 1],
+     [1793300800.49, "active", "protected", 1],
+     [1793300801.49, "active", "protected", 1],
+     [1793300802.49, "active", "protected", 1],
+     [1793300803.49, "active", "protected", 1],
+     [1793300804.49, "active", "protected", 1],
+     [1793300805.49, "active", "protected", 1],
+     [1793300806.49, "active", "protected", 1]
+    ]
+   },
+   {
+    "variant": "full4",
+    "lossSeconds": 20,
+    "down": 1793300952.24,
+    "up": 1793300972.27,
+    "samples": [
+     [1793300949.24, "active", "protected", 1],
+     [1793300950.24, "active", "protected", 1],
+     [1793300951.24, "active", "protected", 1],
+     [1793300952.24, "active", "protected", 1],
+     [1793300953.24, "failed", "blocked", 1],
+     [1793300954.24, "failed", "blocked", 1],
+     [1793300955.24, "failed", "blocked", 1],
+     [1793300956.24, "failed", "blocked", 1],
+     [1793300957.24, "failed", "blocked", 1],
+     [1793300958.24, "failed", "blocked", 1],
+     [1793300959.24, "failed", "blocked", 1],
+     [1793300960.24, "failed", "blocked", 1],
+     [1793300961.24, "failed", "blocked", 1],
+     [1793300962.24, "failed", "blocked", 1],
+     [1793300963.24, "failed", "blocked", 1],
+     [1793300964.24, "failed", "blocked", 1],
+     [1793300965.24, "failed", "blocked", 1],
+     [1793300966.24, "failed", "blocked", 1],
+     [1793300967.24, "failed", "blocked", 1],
+     [1793300968.24, "failed", "blocked", 1],
+     [1793300969.24, "failed", "blocked", 1],
+     [1793300970.24, "failed", "blocked", 1],
+     [1793300971.24, "failed", "blocked", 1],
+     [1793300972.24, "failed", "blocked", 1],
+     [1793300973.24, "failed", "blocked", 1],
+     [1793300974.24, "failed", "blocked", 1],
+     [1793300975.24, "active", "protected", 1],
+     [1793300976.24, "active", "protected", 1],
+     [1793300977.24, "active", "protected", 1],
+     [1793300978.24, "active", "protected", 1],
+     [1793300979.24, "active", "protected", 1],
+     [1793300980.24, "active", "protected", 1],
+     [1793300981.24, "active", "protected", 1],
+     [1793300982.24, "active", "protected", 1],
+     [1793300983.24, "active", "protected", 1],
+     [1793300984.24, "active", "protected", 1],
+     [1793300985.24, "active", "protected", 1],
+     [1793300986.24, "active", "protected", 1],
+     [1793300987.24, "active", "protected", 1],
+     [1793300988.24, "active", "protected", 1],
+     [1793300989.24, "active", "protected", 1],
+     [1793300990.24, "active", "protected", 1],
+     [1793300991.24, "active", "protected", 1],
+     [1793300992.24, "active", "protected", 1],
+     [1793300993.24, "active", "protected", 1],
+     [1793300994.24, "active", "protected", 1],
+     [1793300995.24, "active", "protected", 1],
+     [1793300996.24, "active", "protected", 1],
+     [1793300997.24, "active", "protected", 1]
+    ],
+    "lossNonce": "lab-fixture-w3",
+    "lossOutsideReceipts": 0,
+    "lossProbeAttempts": 80
+   }
+  ]
+ },
+ "failing": [
+  {
+   "expectation": "linkCycled:default",
+   "set": [
+    [
+     [
+      "profiles",
+      0,
+      "up"
+     ],
+     1793300766.49
+    ]
+   ]
+  },
+  {
+   "expectation": "linkCycled:default",
+   "set": [
+    [
+     [
+      "profiles",
+      0,
+      "up"
+     ],
+     null
+    ]
+   ]
+  },
+  {
+   "expectation": "lossDetected:default",
+   "set": [
+    [
+     [
+      "profiles",
+      0,
+      "samples"
+     ],
+     [
+      [1793300758.49, "active", "protected", 1],
+      [1793300759.49, "active", "protected", 1],
+      [1793300760.49, "active", "protected", 1],
+      [1793300761.49, "active", "protected", 1],
+      [1793300762.49, "active", "protected", 1],
+      [1793300763.49, "active", "protected", 1],
+      [1793300764.49, "active", "protected", 1],
+      [1793300765.49, "active", "protected", 1],
+      [1793300766.49, "active", "protected", 1],
+      [1793300767.49, "active", "protected", 1],
+      [1793300768.49, "active", "protected", 1],
+      [1793300769.49, "active", "protected", 1],
+      [1793300770.49, "active", "protected", 1],
+      [1793300771.49, "active", "protected", 1],
+      [1793300772.49, "active", "protected", 1],
+      [1793300773.49, "active", "protected", 1],
+      [1793300774.49, "active", "protected", 1],
+      [1793300775.49, "active", "protected", 1],
+      [1793300776.49, "active", "protected", 1],
+      [1793300777.49, "active", "protected", 1],
+      [1793300778.49, "active", "protected", 1],
+      [1793300779.49, "active", "protected", 1],
+      [1793300780.49, "active", "protected", 1],
+      [1793300781.49, "active", "protected", 1],
+      [1793300782.49, "active", "protected", 1],
+      [1793300783.49, "active", "protected", 1],
+      [1793300784.49, "active", "protected", 1],
+      [1793300785.49, "active", "protected", 1],
+      [1793300786.49, "active", "protected", 1],
+      [1793300787.49, "active", "protected", 1],
+      [1793300788.49, "active", "protected", 1],
+      [1793300789.49, "active", "protected", 1],
+      [1793300790.49, "active", "protected", 1],
+      [1793300791.49, "active", "protected", 1],
+      [1793300792.49, "active", "protected", 1],
+      [1793300793.49, "active", "protected", 1],
+      [1793300794.49, "active", "protected", 1],
+      [1793300795.49, "active", "protected", 1],
+      [1793300796.49, "active", "protected", 1],
+      [1793300797.49, "active", "protected", 1],
+      [1793300798.49, "active", "protected", 1],
+      [1793300799.49, "active", "protected", 1],
+      [1793300800.49, "active", "protected", 1],
+      [1793300801.49, "active", "protected", 1],
+      [1793300802.49, "active", "protected", 1],
+      [1793300803.49, "active", "protected", 1],
+      [1793300804.49, "active", "protected", 1],
+      [1793300805.49, "active", "protected", 1],
+      [1793300806.49, "active", "protected", 1]
+     ]
+    ]
+   ]
+  },
+  {
+   "expectation": "protectedWithin10sOfLinkUp:default",
+   "set": [
+    [
+     [
+      "profiles",
+      0,
+      "samples"
+     ],
+     [
+      [1793300758.49, "active", "protected", 1],
+      [1793300759.49, "active", "protected", 1],
+      [1793300760.49, "active", "protected", 1],
+      [1793300761.49, "active", "protected", 1],
+      [1793300762.49, "failed", "blocked", 1],
+      [1793300763.49, "failed", "blocked", 1],
+      [1793300764.49, "failed", "blocked", 1],
+      [1793300765.49, "failed", "blocked", 1],
+      [1793300766.49, "failed", "blocked", 1],
+      [1793300767.49, "failed", "blocked", 1],
+      [1793300768.49, "failed", "blocked", 1],
+      [1793300769.49, "failed", "blocked", 1],
+      [1793300770.49, "failed", "blocked", 1],
+      [1793300771.49, "failed", "blocked", 1],
+      [1793300772.49, "failed", "blocked", 1],
+      [1793300773.49, "failed", "blocked", 1],
+      [1793300774.49, "failed", "blocked", 1],
+      [1793300775.49, "failed", "blocked", 1],
+      [1793300776.49, "failed", "blocked", 1],
+      [1793300777.49, "failed", "blocked", 1],
+      [1793300778.49, "failed", "blocked", 1],
+      [1793300779.49, "failed", "blocked", 1],
+      [1793300780.49, "failed", "blocked", 1],
+      [1793300781.49, "failed", "blocked", 1],
+      [1793300782.49, "active", "protected", 1],
+      [1793300783.49, "failed", "blocked", 1],
+      [1793300784.49, "failed", "blocked", 1],
+      [1793300785.49, "failed", "blocked", 1],
+      [1793300786.49, "failed", "blocked", 1],
+      [1793300787.49, "failed", "blocked", 1],
+      [1793300788.49, "failed", "blocked", 1],
+      [1793300789.49, "failed", "blocked", 1],
+      [1793300790.49, "failed", "blocked", 1],
+      [1793300791.49, "failed", "blocked", 1],
+      [1793300792.49, "failed", "blocked", 1],
+      [1793300793.49, "failed", "blocked", 1],
+      [1793300794.49, "active", "protected", 1],
+      [1793300795.49, "active", "protected", 1],
+      [1793300796.49, "active", "protected", 1],
+      [1793300797.49, "active", "protected", 1],
+      [1793300798.49, "active", "protected", 1],
+      [1793300799.49, "active", "protected", 1],
+      [1793300800.49, "active", "protected", 1],
+      [1793300801.49, "active", "protected", 1],
+      [1793300802.49, "active", "protected", 1],
+      [1793300803.49, "active", "protected", 1],
+      [1793300804.49, "active", "protected", 1],
+      [1793300805.49, "active", "protected", 1],
+      [1793300806.49, "active", "protected", 1]
+     ]
+    ]
+   ]
+  },
+  {
+   "expectation": "protectedWithin10sOfLinkUp:default",
+   "set": [
+    [
+     [
+      "profiles",
+      0,
+      "samples"
+     ],
+     [
+      [1793300758.49, "active", "protected", 1],
+      [1793300759.49, "active", "protected", 1],
+      [1793300760.49, "active", "protected", 1],
+      [1793300761.49, "active", "protected", 1],
+      [1793300762.49, "failed", "blocked", 1],
+      [1793300763.49, "failed", "blocked", 1],
+      [1793300764.49, "failed", "blocked", 1],
+      [1793300765.49, "failed", "blocked", 1],
+      [1793300766.49, "failed", "blocked", 1],
+      [1793300767.49, "failed", "blocked", 1],
+      [1793300768.49, "failed", "blocked", 1],
+      [1793300769.49, "failed", "blocked", 1],
+      [1793300770.49, "failed", "blocked", 1],
+      [1793300771.49, "failed", "blocked", 1],
+      [1793300772.49, "failed", "blocked", 1],
+      [1793300773.49, "failed", "blocked", 1],
+      [1793300774.49, "failed", "blocked", 1],
+      [1793300775.49, "failed", "blocked", 1],
+      [1793300776.49, "failed", "blocked", 1],
+      [1793300777.49, "failed", "blocked", 1],
+      [1793300778.49, "failed", "blocked", 1],
+      [1793300779.49, "failed", "blocked", 1],
+      [1793300780.49, "failed", "blocked", 1],
+      [1793300781.49, "failed", "blocked", 1],
+      [1793300782.49, "failed", "blocked", 1],
+      [1793300783.49, "failed", "blocked", 1],
+      [1793300784.49, "failed", "blocked", 1],
+      [1793300785.49, "failed", "blocked", 1],
+      [1793300786.49, "failed", "blocked", 1],
+      [1793300787.49, "failed", "blocked", 1],
+      [1793300788.49, "failed", "blocked", 1],
+      [1793300789.49, "failed", "blocked", 1],
+      [1793300790.49, "failed", "blocked", 1],
+      [1793300791.49, "failed", "blocked", 1],
+      [1793300792.49, "failed", "blocked", 1],
+      [1793300793.49, "failed", "blocked", 1],
+      [1793300794.49, "failed", "blocked", 1],
+      [1793300795.49, "failed", "blocked", 1],
+      [1793300796.49, "failed", "blocked", 1],
+      [1793300797.49, "active", "protected", 1],
+      [1793300798.49, "active", "protected", 1],
+      [1793300799.49, "active", "protected", 1],
+      [1793300800.49, "active", "protected", 1],
+      [1793300801.49, "active", "protected", 1],
+      [1793300802.49, "active", "protected", 1],
+      [1793300803.49, "active", "protected", 1],
+      [1793300804.49, "active", "protected", 1],
+      [1793300805.49, "active", "protected", 1],
+      [1793300806.49, "active", "protected", 1]
+     ]
+    ]
+   ]
+  },
+  {
+   "expectation": "neverUnprotectedDuringLoss:default",
+   "set": [
+    [
+     [
+      "profiles",
+      0,
+      "samples"
+     ],
+     [
+      [1793300758.49, "active", "protected", 1],
+      [1793300759.49, "active", "protected", 1],
+      [1793300760.49, "active", "protected", 1],
+      [1793300761.49, "active", "protected", 1],
+      [1793300762.49, "failed", "blocked", 1],
+      [1793300763.49, "failed", "blocked", 1],
+      [1793300764.49, "failed", "blocked", 1],
+      [1793300765.49, "failed", "blocked", 1],
+      [1793300766.49, "failed", "blocked", 1],
+      [1793300767.49, "failed", "blocked", 1],
+      [1793300768.49, "failed", "blocked", 1],
+      [1793300769.49, "idle", "unprotected", 1],
+      [1793300770.49, "failed", "blocked", 1],
+      [1793300771.49, "failed", "blocked", 1],
+      [1793300772.49, "failed", "blocked", 1],
+      [1793300773.49, "failed", "blocked", 1],
+      [1793300774.49, "failed", "blocked", 1],
+      [1793300775.49, "failed", "blocked", 1],
+      [1793300776.49, "failed", "blocked", 1],
+      [1793300777.49, "failed", "blocked", 1],
+      [1793300778.49, "failed", "blocked", 1],
+      [1793300779.49, "failed", "blocked", 1],
+      [1793300780.49, "failed", "blocked", 1],
+      [1793300781.49, "failed", "blocked", 1],
+      [1793300782.49, "failed", "blocked", 1],
+      [1793300783.49, "active", "protected", 1],
+      [1793300784.49, "active", "protected", 1],
+      [1793300785.49, "active", "protected", 1],
+      [1793300786.49, "active", "protected", 1],
+      [1793300787.49, "active", "protected", 1],
+      [1793300788.49, "active", "protected", 1],
+      [1793300789.49, "active", "protected", 1],
+      [1793300790.49, "active", "protected", 1],
+      [1793300791.49, "active", "protected", 1],
+      [1793300792.49, "active", "protected", 1],
+      [1793300793.49, "active", "protected", 1],
+      [1793300794.49, "active", "protected", 1],
+      [1793300795.49, "active", "protected", 1],
+      [1793300796.49, "active", "protected", 1],
+      [1793300797.49, "active", "protected", 1],
+      [1793300798.49, "active", "protected", 1],
+      [1793300799.49, "active", "protected", 1],
+      [1793300800.49, "active", "protected", 1],
+      [1793300801.49, "active", "protected", 1],
+      [1793300802.49, "active", "protected", 1],
+      [1793300803.49, "active", "protected", 1],
+      [1793300804.49, "active", "protected", 1],
+      [1793300805.49, "active", "protected", 1],
+      [1793300806.49, "active", "protected", 1]
+     ]
+    ]
+   ]
+  },
+  {
+   "expectation": "neverUnprotectedDuringLoss:default",
+   "set": [
+    [
+     [
+      "profiles",
+      0,
+      "samples"
+     ],
+     [
+      [1793300758.49, "active", "protected", 1],
+      [1793300759.49, "active", "protected", 1],
+      [1793300760.49, "active", "protected", 1],
+      [1793300781.99, "failed", "blocked", 1],
+      [1793300782.99, "failed", "blocked", 1],
+      [1793300783.99, "active", "protected", 1],
+      [1793300784.99, "active", "protected", 1],
+      [1793300785.99, "active", "protected", 1],
+      [1793300786.99, "active", "protected", 1],
+      [1793300787.99, "active", "protected", 1],
+      [1793300788.99, "active", "protected", 1],
+      [1793300789.99, "active", "protected", 1],
+      [1793300790.99, "active", "protected", 1],
+      [1793300791.99, "active", "protected", 1],
+      [1793300792.99, "active", "protected", 1],
+      [1793300793.99, "active", "protected", 1],
+      [1793300794.99, "active", "protected", 1],
+      [1793300795.99, "active", "protected", 1],
+      [1793300796.99, "active", "protected", 1],
+      [1793300797.99, "active", "protected", 1],
+      [1793300798.99, "active", "protected", 1],
+      [1793300799.99, "active", "protected", 1],
+      [1793300800.99, "active", "protected", 1],
+      [1793300801.99, "active", "protected", 1],
+      [1793300802.99, "active", "protected", 1],
+      [1793300803.99, "active", "protected", 1],
+      [1793300804.99, "active", "protected", 1],
+      [1793300805.99, "active", "protected", 1]
+     ]
+    ]
+   ]
+  },
+  {
+   "expectation": "onePfReferenceThroughout:default",
+   "set": [
+    [
+     [
+      "profiles",
+      0,
+      "samples"
+     ],
+     [
+      [1793300758.49, "active", "protected", 1],
+      [1793300759.49, "active", "protected", 1],
+      [1793300760.49, "active", "protected", 1],
+      [1793300761.49, "active", "protected", 1],
+      [1793300762.49, "failed", "blocked", 1],
+      [1793300763.49, "failed", "blocked", 1],
+      [1793300764.49, "failed", "blocked", 1],
+      [1793300765.49, "failed", "blocked", 1],
+      [1793300766.49, "failed", "blocked", 1],
+      [1793300767.49, "failed", "blocked", 1],
+      [1793300768.49, "failed", "blocked", 1],
+      [1793300769.49, "failed", "blocked", 1],
+      [1793300770.49, "failed", "blocked", 1],
+      [1793300771.49, "failed", "blocked", 1],
+      [1793300772.49, "failed", "blocked", 1],
+      [1793300773.49, "failed", "blocked", 1],
+      [1793300774.49, "failed", "blocked", 1],
+      [1793300775.49, "failed", "blocked", 1],
+      [1793300776.49, "failed", "blocked", 1],
+      [1793300777.49, "failed", "blocked", 1],
+      [1793300778.49, "failed", "blocked", 1],
+      [1793300779.49, "failed", "blocked", 1],
+      [1793300780.49, "failed", "blocked", 1],
+      [1793300781.49, "failed", "blocked", 1],
+      [1793300781.99, "failed", "blocked", 2],
+      [1793300782.99, "failed", "blocked", 1],
+      [1793300783.99, "active", "protected", 1],
+      [1793300784.99, "active", "protected", 1],
+      [1793300785.99, "active", "protected", 1],
+      [1793300786.99, "active", "protected", 1],
+      [1793300787.99, "active", "protected", 1],
+      [1793300788.99, "active", "protected", 1],
+      [1793300789.99, "active", "protected", 1],
+      [1793300790.99, "active", "protected", 1],
+      [1793300791.99, "active", "protected", 1],
+      [1793300792.99, "active", "protected", 1],
+      [1793300793.99, "active", "protected", 1],
+      [1793300794.99, "active", "protected", 1],
+      [1793300795.99, "active", "protected", 1],
+      [1793300796.99, "active", "protected", 1],
+      [1793300797.99, "active", "protected", 1],
+      [1793300798.99, "active", "protected", 1],
+      [1793300799.99, "active", "protected", 1],
+      [1793300800.99, "active", "protected", 1],
+      [1793300801.99, "active", "protected", 1],
+      [1793300802.99, "active", "protected", 1],
+      [1793300803.99, "active", "protected", 1],
+      [1793300804.99, "active", "protected", 1],
+      [1793300805.99, "active", "protected", 1]
+     ]
+    ]
+   ]
+  },
+  {
+   "expectation": "linkCycled:full4",
+   "set": [
+    [
+     [
+      "profiles",
+      1,
+      "up"
+     ],
+     1793300957.24
+    ]
+   ]
+  },
+  {
+   "expectation": "linkCycled:full4",
+   "set": [
+    [
+     [
+      "profiles",
+      1,
+      "up"
+     ],
+     null
+    ]
+   ]
+  },
+  {
+   "expectation": "lossDetected:full4",
+   "set": [
+    [
+     [
+      "profiles",
+      1,
+      "samples"
+     ],
+     [
+      [1793300949.24, "active", "protected", 1],
+      [1793300950.24, "active", "protected", 1],
+      [1793300951.24, "active", "protected", 1],
+      [1793300952.24, "active", "protected", 1],
+      [1793300953.24, "active", "protected", 1],
+      [1793300954.24, "active", "protected", 1],
+      [1793300955.24, "active", "protected", 1],
+      [1793300956.24, "active", "protected", 1],
+      [1793300957.24, "active", "protected", 1],
+      [1793300958.24, "active", "protected", 1],
+      [1793300959.24, "active", "protected", 1],
+      [1793300960.24, "active", "protected", 1],
+      [1793300961.24, "active", "protected", 1],
+      [1793300962.24, "active", "protected", 1],
+      [1793300963.24, "active", "protected", 1],
+      [1793300964.24, "active", "protected", 1],
+      [1793300965.24, "active", "protected", 1],
+      [1793300966.24, "active", "protected", 1],
+      [1793300967.24, "active", "protected", 1],
+      [1793300968.24, "active", "protected", 1],
+      [1793300969.24, "active", "protected", 1],
+      [1793300970.24, "active", "protected", 1],
+      [1793300971.24, "active", "protected", 1],
+      [1793300972.24, "active", "protected", 1],
+      [1793300973.24, "active", "protected", 1],
+      [1793300974.24, "active", "protected", 1],
+      [1793300975.24, "active", "protected", 1],
+      [1793300976.24, "active", "protected", 1],
+      [1793300977.24, "active", "protected", 1],
+      [1793300978.24, "active", "protected", 1],
+      [1793300979.24, "active", "protected", 1],
+      [1793300980.24, "active", "protected", 1],
+      [1793300981.24, "active", "protected", 1],
+      [1793300982.24, "active", "protected", 1],
+      [1793300983.24, "active", "protected", 1],
+      [1793300984.24, "active", "protected", 1],
+      [1793300985.24, "active", "protected", 1],
+      [1793300986.24, "active", "protected", 1],
+      [1793300987.24, "active", "protected", 1],
+      [1793300988.24, "active", "protected", 1],
+      [1793300989.24, "active", "protected", 1],
+      [1793300990.24, "active", "protected", 1],
+      [1793300991.24, "active", "protected", 1],
+      [1793300992.24, "active", "protected", 1],
+      [1793300993.24, "active", "protected", 1],
+      [1793300994.24, "active", "protected", 1],
+      [1793300995.24, "active", "protected", 1],
+      [1793300996.24, "active", "protected", 1],
+      [1793300997.24, "active", "protected", 1]
+     ]
+    ]
+   ]
+  },
+  {
+   "expectation": "protectedWithin10sOfLinkUp:full4",
+   "set": [
+    [
+     [
+      "profiles",
+      1,
+      "samples"
+     ],
+     [
+      [1793300949.24, "active", "protected", 1],
+      [1793300950.24, "active", "protected", 1],
+      [1793300951.24, "active", "protected", 1],
+      [1793300952.24, "active", "protected", 1],
+      [1793300953.24, "failed", "blocked", 1],
+      [1793300954.24, "failed", "blocked", 1],
+      [1793300955.24, "failed", "blocked", 1],
+      [1793300956.24, "failed", "blocked", 1],
+      [1793300957.24, "failed", "blocked", 1],
+      [1793300958.24, "failed", "blocked", 1],
+      [1793300959.24, "failed", "blocked", 1],
+      [1793300960.24, "failed", "blocked", 1],
+      [1793300961.24, "failed", "blocked", 1],
+      [1793300962.24, "failed", "blocked", 1],
+      [1793300963.24, "failed", "blocked", 1],
+      [1793300964.24, "failed", "blocked", 1],
+      [1793300965.24, "failed", "blocked", 1],
+      [1793300966.24, "failed", "blocked", 1],
+      [1793300967.24, "failed", "blocked", 1],
+      [1793300968.24, "failed", "blocked", 1],
+      [1793300969.24, "failed", "blocked", 1],
+      [1793300970.24, "failed", "blocked", 1],
+      [1793300971.24, "failed", "blocked", 1],
+      [1793300972.24, "failed", "blocked", 1],
+      [1793300973.24, "active", "protected", 1],
+      [1793300974.24, "failed", "blocked", 1],
+      [1793300975.24, "failed", "blocked", 1],
+      [1793300976.24, "failed", "blocked", 1],
+      [1793300977.24, "failed", "blocked", 1],
+      [1793300978.24, "failed", "blocked", 1],
+      [1793300979.24, "failed", "blocked", 1],
+      [1793300980.24, "failed", "blocked", 1],
+      [1793300981.24, "failed", "blocked", 1],
+      [1793300982.24, "failed", "blocked", 1],
+      [1793300983.24, "failed", "blocked", 1],
+      [1793300984.24, "failed", "blocked", 1],
+      [1793300985.24, "active", "protected", 1],
+      [1793300986.24, "active", "protected", 1],
+      [1793300987.24, "active", "protected", 1],
+      [1793300988.24, "active", "protected", 1],
+      [1793300989.24, "active", "protected", 1],
+      [1793300990.24, "active", "protected", 1],
+      [1793300991.24, "active", "protected", 1],
+      [1793300992.24, "active", "protected", 1],
+      [1793300993.24, "active", "protected", 1],
+      [1793300994.24, "active", "protected", 1],
+      [1793300995.24, "active", "protected", 1],
+      [1793300996.24, "active", "protected", 1],
+      [1793300997.24, "active", "protected", 1]
+     ]
+    ]
+   ]
+  },
+  {
+   "expectation": "protectedWithin10sOfLinkUp:full4",
+   "set": [
+    [
+     [
+      "profiles",
+      1,
+      "samples"
+     ],
+     [
+      [1793300949.24, "active", "protected", 1],
+      [1793300950.24, "active", "protected", 1],
+      [1793300951.24, "active", "protected", 1],
+      [1793300952.24, "active", "protected", 1],
+      [1793300953.24, "failed", "blocked", 1],
+      [1793300954.24, "failed", "blocked", 1],
+      [1793300955.24, "failed", "blocked", 1],
+      [1793300956.24, "failed", "blocked", 1],
+      [1793300957.24, "failed", "blocked", 1],
+      [1793300958.24, "failed", "blocked", 1],
+      [1793300959.24, "failed", "blocked", 1],
+      [1793300960.24, "failed", "blocked", 1],
+      [1793300961.24, "failed", "blocked", 1],
+      [1793300962.24, "failed", "blocked", 1],
+      [1793300963.24, "failed", "blocked", 1],
+      [1793300964.24, "failed", "blocked", 1],
+      [1793300965.24, "failed", "blocked", 1],
+      [1793300966.24, "failed", "blocked", 1],
+      [1793300967.24, "failed", "blocked", 1],
+      [1793300968.24, "failed", "blocked", 1],
+      [1793300969.24, "failed", "blocked", 1],
+      [1793300970.24, "failed", "blocked", 1],
+      [1793300971.24, "failed", "blocked", 1],
+      [1793300972.24, "failed", "blocked", 1],
+      [1793300973.24, "failed", "blocked", 1],
+      [1793300974.24, "failed", "blocked", 1],
+      [1793300975.24, "failed", "blocked", 1],
+      [1793300976.24, "failed", "blocked", 1],
+      [1793300977.24, "failed", "blocked", 1],
+      [1793300978.24, "failed", "blocked", 1],
+      [1793300979.24, "failed", "blocked", 1],
+      [1793300980.24, "failed", "blocked", 1],
+      [1793300981.24, "failed", "blocked", 1],
+      [1793300982.24, "failed", "blocked", 1],
+      [1793300983.24, "failed", "blocked", 1],
+      [1793300984.24, "failed", "blocked", 1],
+      [1793300985.24, "failed", "blocked", 1],
+      [1793300986.24, "failed", "blocked", 1],
+      [1793300987.24, "failed", "blocked", 1],
+      [1793300988.24, "active", "protected", 1],
+      [1793300989.24, "active", "protected", 1],
+      [1793300990.24, "active", "protected", 1],
+      [1793300991.24, "active", "protected", 1],
+      [1793300992.24, "active", "protected", 1],
+      [1793300993.24, "active", "protected", 1],
+      [1793300994.24, "active", "protected", 1],
+      [1793300995.24, "active", "protected", 1],
+      [1793300996.24, "active", "protected", 1],
+      [1793300997.24, "active", "protected", 1]
+     ]
+    ]
+   ]
+  },
+  {
+   "expectation": "neverUnprotectedDuringLoss:full4",
+   "set": [
+    [
+     [
+      "profiles",
+      1,
+      "samples"
+     ],
+     [
+      [1793300949.24, "active", "protected", 1],
+      [1793300950.24, "active", "protected", 1],
+      [1793300951.24, "active", "protected", 1],
+      [1793300952.24, "active", "protected", 1],
+      [1793300953.24, "failed", "blocked", 1],
+      [1793300954.24, "failed", "blocked", 1],
+      [1793300955.24, "failed", "blocked", 1],
+      [1793300956.24, "failed", "blocked", 1],
+      [1793300957.24, "failed", "blocked", 1],
+      [1793300958.24, "failed", "blocked", 1],
+      [1793300959.24, "failed", "blocked", 1],
+      [1793300960.24, "idle", "unprotected", 1],
+      [1793300961.24, "failed", "blocked", 1],
+      [1793300962.24, "failed", "blocked", 1],
+      [1793300963.24, "failed", "blocked", 1],
+      [1793300964.24, "failed", "blocked", 1],
+      [1793300965.24, "failed", "blocked", 1],
+      [1793300966.24, "failed", "blocked", 1],
+      [1793300967.24, "failed", "blocked", 1],
+      [1793300968.24, "failed", "blocked", 1],
+      [1793300969.24, "failed", "blocked", 1],
+      [1793300970.24, "failed", "blocked", 1],
+      [1793300971.24, "failed", "blocked", 1],
+      [1793300972.24, "failed", "blocked", 1],
+      [1793300973.24, "failed", "blocked", 1],
+      [1793300974.24, "failed", "blocked", 1],
+      [1793300975.24, "active", "protected", 1],
+      [1793300976.24, "active", "protected", 1],
+      [1793300977.24, "active", "protected", 1],
+      [1793300978.24, "active", "protected", 1],
+      [1793300979.24, "active", "protected", 1],
+      [1793300980.24, "active", "protected", 1],
+      [1793300981.24, "active", "protected", 1],
+      [1793300982.24, "active", "protected", 1],
+      [1793300983.24, "active", "protected", 1],
+      [1793300984.24, "active", "protected", 1],
+      [1793300985.24, "active", "protected", 1],
+      [1793300986.24, "active", "protected", 1],
+      [1793300987.24, "active", "protected", 1],
+      [1793300988.24, "active", "protected", 1],
+      [1793300989.24, "active", "protected", 1],
+      [1793300990.24, "active", "protected", 1],
+      [1793300991.24, "active", "protected", 1],
+      [1793300992.24, "active", "protected", 1],
+      [1793300993.24, "active", "protected", 1],
+      [1793300994.24, "active", "protected", 1],
+      [1793300995.24, "active", "protected", 1],
+      [1793300996.24, "active", "protected", 1],
+      [1793300997.24, "active", "protected", 1]
+     ]
+    ]
+   ]
+  },
+  {
+   "expectation": "neverUnprotectedDuringLoss:full4",
+   "set": [
+    [
+     [
+      "profiles",
+      1,
+      "samples"
+     ],
+     [
+      [1793300949.24, "active", "protected", 1],
+      [1793300950.24, "active", "protected", 1],
+      [1793300951.24, "active", "protected", 1],
+      [1793300972.74, "failed", "blocked", 1],
+      [1793300973.74, "failed", "blocked", 1],
+      [1793300974.74, "active", "protected", 1],
+      [1793300975.74, "active", "protected", 1],
+      [1793300976.74, "active", "protected", 1],
+      [1793300977.74, "active", "protected", 1],
+      [1793300978.74, "active", "protected", 1],
+      [1793300979.74, "active", "protected", 1],
+      [1793300980.74, "active", "protected", 1],
+      [1793300981.74, "active", "protected", 1],
+      [1793300982.74, "active", "protected", 1],
+      [1793300983.74, "active", "protected", 1],
+      [1793300984.74, "active", "protected", 1],
+      [1793300985.74, "active", "protected", 1],
+      [1793300986.74, "active", "protected", 1],
+      [1793300987.74, "active", "protected", 1],
+      [1793300988.74, "active", "protected", 1],
+      [1793300989.74, "active", "protected", 1],
+      [1793300990.74, "active", "protected", 1],
+      [1793300991.74, "active", "protected", 1],
+      [1793300992.74, "active", "protected", 1],
+      [1793300993.74, "active", "protected", 1],
+      [1793300994.74, "active", "protected", 1],
+      [1793300995.74, "active", "protected", 1],
+      [1793300996.74, "active", "protected", 1]
+     ]
+    ]
+   ]
+  },
+  {
+   "expectation": "onePfReferenceThroughout:full4",
+   "set": [
+    [
+     [
+      "profiles",
+      1,
+      "samples"
+     ],
+     [
+      [1793300949.24, "active", "protected", 1],
+      [1793300950.24, "active", "protected", 1],
+      [1793300951.24, "active", "protected", 1],
+      [1793300952.24, "active", "protected", 1],
+      [1793300953.24, "failed", "blocked", 1],
+      [1793300954.24, "failed", "blocked", 1],
+      [1793300955.24, "failed", "blocked", 1],
+      [1793300956.24, "failed", "blocked", 1],
+      [1793300957.24, "failed", "blocked", 1],
+      [1793300958.24, "failed", "blocked", 1],
+      [1793300959.24, "failed", "blocked", 1],
+      [1793300960.24, "failed", "blocked", 1],
+      [1793300961.24, "failed", "blocked", 1],
+      [1793300962.24, "failed", "blocked", 1],
+      [1793300963.24, "failed", "blocked", 1],
+      [1793300964.24, "failed", "blocked", 1],
+      [1793300965.24, "failed", "blocked", 1],
+      [1793300966.24, "failed", "blocked", 1],
+      [1793300967.24, "failed", "blocked", 1],
+      [1793300968.24, "failed", "blocked", 1],
+      [1793300969.24, "failed", "blocked", 1],
+      [1793300970.24, "failed", "blocked", 1],
+      [1793300971.24, "failed", "blocked", 1],
+      [1793300972.24, "failed", "blocked", 1],
+      [1793300972.74, "failed", "blocked", 2],
+      [1793300973.74, "failed", "blocked", 1],
+      [1793300974.74, "active", "protected", 1],
+      [1793300975.74, "active", "protected", 1],
+      [1793300976.74, "active", "protected", 1],
+      [1793300977.74, "active", "protected", 1],
+      [1793300978.74, "active", "protected", 1],
+      [1793300979.74, "active", "protected", 1],
+      [1793300980.74, "active", "protected", 1],
+      [1793300981.74, "active", "protected", 1],
+      [1793300982.74, "active", "protected", 1],
+      [1793300983.74, "active", "protected", 1],
+      [1793300984.74, "active", "protected", 1],
+      [1793300985.74, "active", "protected", 1],
+      [1793300986.74, "active", "protected", 1],
+      [1793300987.74, "active", "protected", 1],
+      [1793300988.74, "active", "protected", 1],
+      [1793300989.74, "active", "protected", 1],
+      [1793300990.74, "active", "protected", 1],
+      [1793300991.74, "active", "protected", 1],
+      [1793300992.74, "active", "protected", 1],
+      [1793300993.74, "active", "protected", 1],
+      [1793300994.74, "active", "protected", 1],
+      [1793300995.74, "active", "protected", 1],
+      [1793300996.74, "active", "protected", 1]
+     ]
+    ]
+   ]
+  },
+  {
+   "expectation": "zeroLanReceiptsDuringLoss:full4",
+   "set": [
+    [
+     [
+      "profiles",
+      1,
+      "lossOutsideReceipts"
+     ],
+     3
+    ]
+   ]
+  },
+  {
+   "expectation": "zeroLanReceiptsDuringLoss:full4",
+   "set": [
+    [
+     [
+      "profiles",
+      1,
+      "lossProbeAttempts"
+     ],
+     0
+    ]
+   ]
+  }
+ ]
+}

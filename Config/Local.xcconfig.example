@@ -1,0 +1,11 @@
+// Copy to Config/Local.xcconfig (git-ignored) and replace the placeholders.
+// Nothing here is committed with real values.
+
+// Apple Developer team identifier: ten upper-case letters or digits.
+WGEX_TEAM = ABCDE12345
+
+// Own-Mac Release build only (`just build-own-mac`): the exact common name of
+// your Apple Development certificate and the UUID of the installed
+// provisioning profile for it.
+WGEX_OWN_MAC_LEAF = Apple Development: Example Developer (A1B2C3D4E5)
+WGEX_OWN_MAC_PROFILE = 00000000-0000-4000-8000-000000000000

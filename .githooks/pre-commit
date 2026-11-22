@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# SPDX-License-Identifier: MIT
+# Opt-in repo hook (see CONTRIBUTING.md). A repo-level core.hooksPath
+# replaces the global one, so run the global pre-commit hook (gitleaks) first,
+# then the repo's pre-commit framework hooks on the staged files.
+set -euo pipefail
+global="$(git config --global --get core.hooksPath || true)"
+global="${global/#\~/$HOME}"
+if [[ -n "$global" && -x "$global/pre-commit" ]]; then
+  "$global/pre-commit" "$@"
+fi
+if command -v pre-commit >/dev/null 2>&1; then
+  exec pre-commit run --hook-stage pre-commit
+fi
+echo "pre-commit: pre-commit framework not found; refusing commit" >&2
+exit 1

@@ -1,0 +1,508 @@
+{
+  "source": "M03-T15 UNINSTALL (DEC-037, DEC-040): reduced observations in the driver's shape, values from the exploration run on ready11; never a guest run",
+  "thresholdsNote": "finishDidNotHang uses uninstall.FINISH_BOUND_SECONDS; the reducers are tested on recorded guest text in test_uninstall.py",
+  "pass": {
+    "uninstall": {
+      "baseline": {
+        "routes": [
+          "127 127.0.0.1 UCS lo0",
+          "127.0.0.1 127.0.0.1 UH lo0",
+          "169.254 link#7 UCS en0",
+          "192.168.64 link#7 UCS en0",
+          "192.168.64.1/32 link#7 UCS en0",
+          "192.168.64.232/32 link#7 UCS en0",
+          "224.0.0/4 link#7 UmCS en0",
+          "255.255.255.255/32 link#7 UCS en0",
+          "default 192.168.64.1 UGScg en0"
+        ],
+        "resolvers": [
+          "domain=254.169.in-addr.arpa;options=mdns",
+          "domain=8.e.f.ip6.arpa;options=mdns",
+          "domain=9.e.f.ip6.arpa;options=mdns",
+          "domain=a.e.f.ip6.arpa;options=mdns",
+          "domain=b.e.f.ip6.arpa;options=mdns",
+          "domain=local;options=mdns",
+          "if=en0;nameserver=192.168.64.1;search domain=localdomain",
+          "scoped:if=en0;nameserver=192.168.64.1;search domain=localdomain"
+        ]
+      },
+      "variants": {
+        "keep": {
+          "before": {
+            "observation": {
+              "status": {
+                "phase": "active",
+                "protection": "protected"
+              },
+              "referenceCount": 1,
+              "ruleLines": 46,
+              "routes": [
+                "0/1 link#12 US2cg utun4",
+                "10.77.0.2 10.77.0.2 UH utun4",
+                "127 127.0.0.1 UCS lo0",
+                "127.0.0.1 127.0.0.1 UH lo0",
+                "128.0/1 link#12 US2c utun4",
+                "169.254 link#7 UCS en0",
+                "192.0.2.1 192.168.64.1 UGHS2I en0",
+                "192.168.64 link#7 UCS en0",
+                "192.168.64.1/32 link#7 UCS en0",
+                "192.168.64.232/32 link#7 UCS en0",
+                "224.0.0/4 link#7 UmCS en0",
+                "255.255.255.255/32 link#7 UCS en0",
+                "default 192.168.64.1 UGScg en0"
+              ],
+              "resolvers": [
+                "domain=254.169.in-addr.arpa;options=mdns",
+                "domain=8.e.f.ip6.arpa;options=mdns",
+                "domain=9.e.f.ip6.arpa;options=mdns",
+                "domain=a.e.f.ip6.arpa;options=mdns",
+                "domain=b.e.f.ip6.arpa;options=mdns",
+                "domain=local;options=mdns",
+                "if=en0;nameserver=192.168.64.1",
+                "nameserver=10.77.0.1;search domain=localdomain",
+                "scoped:if=en0;nameserver=192.168.64.1;search domain=localdomain"
+              ],
+              "tunnelInterfaces": [
+                "utun4"
+              ]
+            },
+            "pf": {
+              "anchorListed": true,
+              "anchorRules": 46,
+              "anchorTables": 1,
+              "anchorNested": 0,
+              "references": 1
+            },
+            "services": {
+              "launchdJob": "present",
+              "daemonPid": 1118,
+              "btmDaemon": "[enabled, allowed, not notified]",
+              "btmApp": "[enabled, allowed, not notified]"
+            },
+            "profiles": {
+              "appProfiles": 1,
+              "profilePresent": true
+            }
+          },
+          "cli": {
+            "rc": 0,
+            "reply": {
+              "purge": false,
+              "replyReadable": true,
+              "result": "uninstalled"
+            },
+            "approval": {
+              "result": "typed",
+              "startedAt": "2026-11-12T01:11:37Z"
+            },
+            "startedAt": "1794445891.512"
+          },
+          "after": {
+            "observation": {
+              "status": {
+                "phase": "idle",
+                "protection": "unprotected"
+              },
+              "referenceCount": 0,
+              "ruleLines": 0,
+              "routes": [
+                "127 127.0.0.1 UCS lo0",
+                "127.0.0.1 127.0.0.1 UH lo0",
+                "169.254 link#7 UCS en0",
+                "192.168.64 link#7 UCS en0",
+                "192.168.64.1/32 link#7 UCS en0",
+                "192.168.64.232/32 link#7 UCS en0",
+                "224.0.0/4 link#7 UmCS en0",
+                "255.255.255.255/32 link#7 UCS en0",
+                "default 192.168.64.1 UGScg en0"
+              ],
+              "resolvers": [
+                "domain=254.169.in-addr.arpa;options=mdns",
+                "domain=8.e.f.ip6.arpa;options=mdns",
+                "domain=9.e.f.ip6.arpa;options=mdns",
+                "domain=a.e.f.ip6.arpa;options=mdns",
+                "domain=b.e.f.ip6.arpa;options=mdns",
+                "domain=local;options=mdns",
+                "if=en0;nameserver=192.168.64.1;search domain=localdomain",
+                "scoped:if=en0;nameserver=192.168.64.1;search domain=localdomain"
+              ],
+              "tunnelInterfaces": []
+            },
+            "pf": {
+              "anchorListed": true,
+              "anchorRules": 0,
+              "anchorTables": 0,
+              "anchorNested": 0,
+              "references": 0
+            },
+            "services": {
+              "launchdJob": "present",
+              "daemonPid": 1118,
+              "btmDaemon": "[enabled, allowed, not notified]",
+              "btmApp": "[enabled, allowed, not notified]"
+            },
+            "profiles": {
+              "appProfiles": 1,
+              "profilePresent": true
+            },
+            "status": {
+              "rc": 0,
+              "status": {
+                "phase": "idle",
+                "protection": "unprotected",
+                "uninstall": {
+                  "completed": true,
+                  "purgeState": false,
+                  "pendingStep": null
+                }
+              },
+              "uninstallLine": "uninstall: completed; the service is uninstalled; open WGEX to finish removing the background service and login item"
+            },
+            "refused": {
+              "up": [
+                19,
+                "uninstallFailed"
+              ],
+              "onDemand": [
+                19,
+                "uninstallFailed"
+              ],
+              "down": [
+                0,
+                "none"
+              ]
+            }
+          },
+          "finish": {
+            "offered": true,
+            "finalScreen": true,
+            "seconds": 28.4,
+            "services": {
+              "launchdJob": "absent",
+              "daemonPid": "none",
+              "btmDaemon": "[disabled, allowed, not notified]",
+              "btmApp": "[disabled, allowed, not notified]"
+            },
+            "profiles": {
+              "appProfiles": 1,
+              "profilePresent": true
+            },
+            "quit": {
+              "pressed": true,
+              "exited": true
+            }
+          },
+          "freshInstall": {
+            "services": {
+              "launchdJob": "present",
+              "daemonPid": 7869,
+              "btmDaemon": "[enabled, allowed, not notified]",
+              "btmApp": "[disabled, allowed, not notified]"
+            },
+            "secureInstall": "verified",
+            "approval": "typed",
+            "tunnel": {
+              "protected": true
+            }
+          }
+        },
+        "purge": {
+          "before": {
+            "observation": {
+              "status": {
+                "phase": "active",
+                "protection": "protected"
+              },
+              "referenceCount": 1,
+              "ruleLines": 46,
+              "routes": [
+                "0/1 link#12 US2cg utun4",
+                "10.77.0.2 10.77.0.2 UH utun4",
+                "127 127.0.0.1 UCS lo0",
+                "127.0.0.1 127.0.0.1 UH lo0",
+                "128.0/1 link#12 US2c utun4",
+                "169.254 link#7 UCS en0",
+                "192.0.2.1 192.168.64.1 UGHS2I en0",
+                "192.168.64 link#7 UCS en0",
+                "192.168.64.1/32 link#7 UCS en0",
+                "192.168.64.232/32 link#7 UCS en0",
+                "224.0.0/4 link#7 UmCS en0",
+                "255.255.255.255/32 link#7 UCS en0",
+                "default 192.168.64.1 UGScg en0"
+              ],
+              "resolvers": [
+                "domain=254.169.in-addr.arpa;options=mdns",
+                "domain=8.e.f.ip6.arpa;options=mdns",
+                "domain=9.e.f.ip6.arpa;options=mdns",
+                "domain=a.e.f.ip6.arpa;options=mdns",
+                "domain=b.e.f.ip6.arpa;options=mdns",
+                "domain=local;options=mdns",
+                "if=en0;nameserver=192.168.64.1",
+                "nameserver=10.77.0.1;search domain=localdomain",
+                "scoped:if=en0;nameserver=192.168.64.1;search domain=localdomain"
+              ],
+              "tunnelInterfaces": [
+                "utun4"
+              ]
+            },
+            "pf": {
+              "anchorListed": true,
+              "anchorRules": 46,
+              "anchorTables": 1,
+              "anchorNested": 0,
+              "references": 1
+            },
+            "services": {
+              "launchdJob": "present",
+              "daemonPid": 1118,
+              "btmDaemon": "[enabled, allowed, not notified]",
+              "btmApp": "[disabled, allowed, not notified]"
+            },
+            "profiles": {
+              "appProfiles": 1,
+              "profilePresent": true
+            },
+            "stateRoot": {
+              "root": "present",
+              "files": [
+                "journal.json",
+                "journal.log"
+              ],
+              "journal": {
+                "generation": "integer",
+                "generation.value": 4,
+                "intent": "object:3",
+                "pfPolicy": "object:1",
+                "pfPolicy.disconnected": "false",
+                "schemaVersion": "integer",
+                "schemaVersion.value": 2,
+                "settings": "object:4",
+                "settings.default": "true"
+              }
+            }
+          },
+          "cli": {
+            "rc": 0,
+            "reply": {
+              "purge": true,
+              "replyReadable": true,
+              "result": "uninstalled"
+            },
+            "approval": {
+              "result": "typed",
+              "startedAt": "2026-11-12T01:11:37Z"
+            },
+            "startedAt": "1794445891.512"
+          },
+          "after": {
+            "observation": {
+              "status": {
+                "phase": "idle",
+                "protection": "unprotected"
+              },
+              "referenceCount": 0,
+              "ruleLines": 0,
+              "routes": [
+                "127 127.0.0.1 UCS lo0",
+                "127.0.0.1 127.0.0.1 UH lo0",
+                "169.254 link#7 UCS en0",
+                "192.168.64 link#7 UCS en0",
+                "192.168.64.1/32 link#7 UCS en0",
+                "192.168.64.232/32 link#7 UCS en0",
+                "224.0.0/4 link#7 UmCS en0",
+                "255.255.255.255/32 link#7 UCS en0",
+                "default 192.168.64.1 UGScg en0"
+              ],
+              "resolvers": [
+                "domain=254.169.in-addr.arpa;options=mdns",
+                "domain=8.e.f.ip6.arpa;options=mdns",
+                "domain=9.e.f.ip6.arpa;options=mdns",
+                "domain=a.e.f.ip6.arpa;options=mdns",
+                "domain=b.e.f.ip6.arpa;options=mdns",
+                "domain=local;options=mdns",
+                "if=en0;nameserver=192.168.64.1;search domain=localdomain",
+                "scoped:if=en0;nameserver=192.168.64.1;search domain=localdomain"
+              ],
+              "tunnelInterfaces": []
+            },
+            "pf": {
+              "anchorListed": true,
+              "anchorRules": 0,
+              "anchorTables": 0,
+              "anchorNested": 0,
+              "references": 0
+            },
+            "services": {
+              "launchdJob": "present",
+              "daemonPid": 1118,
+              "btmDaemon": "[enabled, allowed, not notified]",
+              "btmApp": "[disabled, allowed, not notified]"
+            },
+            "profiles": {
+              "appProfiles": 1,
+              "profilePresent": true
+            },
+            "status": {
+              "rc": 0,
+              "status": {
+                "phase": "idle",
+                "protection": "unprotected",
+                "uninstall": {
+                  "completed": true,
+                  "purgeState": true,
+                  "pendingStep": null
+                }
+              },
+              "uninstallLine": "uninstall: completed (purge); the service is uninstalled; open WGEX to finish removing the background service and login item"
+            },
+            "refused": {
+              "up": [
+                19,
+                "uninstallFailed"
+              ],
+              "onDemand": [
+                19,
+                "uninstallFailed"
+              ],
+              "down": [
+                0,
+                "none"
+              ]
+            },
+            "stateRoot": {
+              "root": "present",
+              "files": [
+                "journal.json",
+                "journal.log"
+              ],
+              "journal": {
+                "entries": "array:0",
+                "generation": "integer",
+                "generation.value": 5,
+                "journalSequence": "integer",
+                "lastGoodAddresses": "object:0",
+                "pendingSecretDeletions": "array:0",
+                "pfPolicy": "object:1",
+                "pfPolicy.disconnected": "true",
+                "resources": "array:0",
+                "schemaVersion": "integer",
+                "schemaVersion.value": 2,
+                "settings": "object:4",
+                "settings.default": "true",
+                "uninstall": "object:3",
+                "uninstall.completed": "true",
+                "uninstall.purgeState": "true"
+              }
+            }
+          },
+          "finish": {
+            "offered": true,
+            "finalScreen": true,
+            "seconds": 28.4,
+            "services": {
+              "launchdJob": "absent",
+              "daemonPid": "none",
+              "btmDaemon": "[disabled, allowed, not notified]",
+              "btmApp": "[disabled, allowed, not notified]"
+            },
+            "profiles": {
+              "appProfiles": 1,
+              "profilePresent": true
+            },
+            "quit": {
+              "pressed": true,
+              "exited": true
+            }
+          },
+          "freshInstall": {
+            "services": {
+              "launchdJob": "present",
+              "daemonPid": 7869,
+              "btmDaemon": "[enabled, allowed, not notified]",
+              "btmApp": "[disabled, allowed, not notified]"
+            },
+            "secureInstall": "verified",
+            "approval": "typed",
+            "tunnel": {
+              "protected": true
+            }
+          }
+        }
+      }
+    }
+  },
+  "passing": [
+    {"name": "a login item that is gone from BTM is removed too", "set": [[["uninstall", "variants", "keep", "finish", "services", "btmApp"], "absent"]]},
+    {"name": "the purged journal log may be absent", "set": [[["uninstall", "variants", "purge", "after", "stateRoot", "files"], ["journal.json"]]]},
+    {"name": "an emptied anchor pf no longer lists passes too", "set": [[["uninstall", "variants", "keep", "after", "pf", "anchorListed"], false]]}
+  ],
+  "failing": [
+    {"expectation": "keep:protectedBefore", "set": [[["uninstall", "variants", "keep", "before", "pf", "references"], 0]]},
+    {"expectation": "keep:cliUninstalled", "set": [[["uninstall", "variants", "keep", "cli", "rc"], 4]]},
+    {"expectation": "keep:tunnelStopped", "set": [[["uninstall", "variants", "keep", "after", "observation", "tunnelInterfaces"], ["utun4"]]]},
+    {"expectation": "keep:noWgexPfRule", "set": [[["uninstall", "variants", "keep", "after", "pf", "anchorRules"], 29]]},
+    {"expectation": "keep:noWgexRoute", "set": [[["uninstall", "variants", "keep", "after", "observation", "routes"], ["127 127.0.0.1 UCS lo0", "127.0.0.1 127.0.0.1 UH lo0", "169.254 link#7 UCS en0", "192.0.2.1 192.168.64.1 UGHS2I en0", "192.168.64 link#7 UCS en0", "192.168.64.1/32 link#7 UCS en0", "192.168.64.232/32 link#7 UCS en0", "224.0.0/4 link#7 UmCS en0", "255.255.255.255/32 link#7 UCS en0", "default 192.168.64.1 UGScg en0"]]]},
+    {"expectation": "keep:dnsAsBeforeTunnel", "set": [[["uninstall", "variants", "keep", "after", "observation", "resolvers"], ["domain=254.169.in-addr.arpa;options=mdns", "domain=8.e.f.ip6.arpa;options=mdns", "domain=9.e.f.ip6.arpa;options=mdns", "domain=a.e.f.ip6.arpa;options=mdns", "domain=b.e.f.ip6.arpa;options=mdns", "domain=local;options=mdns", "if=en0;nameserver=192.168.64.1", "nameserver=10.77.0.1;search domain=localdomain", "scoped:if=en0;nameserver=192.168.64.1;search domain=localdomain"]]]},
+    {"expectation": "keep:statusReportsUninstalled", "set": [[["uninstall", "variants", "keep", "after", "status", "status"], {"phase": "idle", "protection": "unprotected"}]]},
+    {"expectation": "keep:mutatingRequestsRefused", "set": [[["uninstall", "variants", "keep", "after", "refused", "onDemand"], [0, "none"]]]},
+    {"expectation": "keep:appFinishOffered", "set": [[["uninstall", "variants", "keep", "finish", "offered"], false]]},
+    {"expectation": "keep:serviceRemovedByApp", "set": [[["uninstall", "variants", "keep", "finish", "services", "launchdJob"], "present"]]},
+    {"expectation": "keep:finishDidNotHang", "set": [[["uninstall", "variants", "keep", "finish", "seconds"], 95.0]]},
+    {"expectation": "keep:finalQuitEndsApp", "set": [[["uninstall", "variants", "keep", "finish", "quit"], {"pressed": true, "exited": false, "driverStopped": "term"}]]},
+    {"expectation": "keep:appProfilesKept", "set": [[["uninstall", "variants", "keep", "finish", "profiles", "profilePresent"], false]]},
+    {"expectation": "keep:freshInstallRestoresDaemon", "set": [[["uninstall", "variants", "keep", "freshInstall", "secureInstall"], "needsAttention(wrappingKeyUnavailable)"]]},
+    {"expectation": "keep:tunnelStartsAfterFreshInstall", "set": [[["uninstall", "variants", "keep", "freshInstall", "tunnel"], {"protected": false, "driverRestartedDaemon": true, "startFailure": ["start failed, type: HostAdapterError case: unboundInterfaces", "start failed at step: createEngine"], "protectedAfterDaemonRestart": true}]]},
+    {"expectation": "purge:protectedBefore", "set": [[["uninstall", "variants", "purge", "before", "pf", "references"], 0]]},
+    {"expectation": "purge:cliUninstalled", "set": [[["uninstall", "variants", "purge", "cli", "rc"], 4]]},
+    {"expectation": "purge:tunnelStopped", "set": [[["uninstall", "variants", "purge", "after", "observation", "tunnelInterfaces"], ["utun4"]]]},
+    {"expectation": "purge:noWgexPfRule", "set": [[["uninstall", "variants", "purge", "after", "pf", "anchorRules"], 29]]},
+    {"expectation": "purge:noWgexRoute", "set": [[["uninstall", "variants", "purge", "after", "observation", "routes"], ["127 127.0.0.1 UCS lo0", "127.0.0.1 127.0.0.1 UH lo0", "169.254 link#7 UCS en0", "192.0.2.1 192.168.64.1 UGHS2I en0", "192.168.64 link#7 UCS en0", "192.168.64.1/32 link#7 UCS en0", "192.168.64.232/32 link#7 UCS en0", "224.0.0/4 link#7 UmCS en0", "255.255.255.255/32 link#7 UCS en0", "default 192.168.64.1 UGScg en0"]]]},
+    {"expectation": "purge:dnsAsBeforeTunnel", "set": [[["uninstall", "variants", "purge", "after", "observation", "resolvers"], ["domain=254.169.in-addr.arpa;options=mdns", "domain=8.e.f.ip6.arpa;options=mdns", "domain=9.e.f.ip6.arpa;options=mdns", "domain=a.e.f.ip6.arpa;options=mdns", "domain=b.e.f.ip6.arpa;options=mdns", "domain=local;options=mdns", "if=en0;nameserver=192.168.64.1", "nameserver=10.77.0.1;search domain=localdomain", "scoped:if=en0;nameserver=192.168.64.1;search domain=localdomain"]]]},
+    {"expectation": "purge:statusReportsUninstalled", "set": [[["uninstall", "variants", "purge", "after", "status", "status"], {"phase": "idle", "protection": "unprotected"}]]},
+    {"expectation": "purge:mutatingRequestsRefused", "set": [[["uninstall", "variants", "purge", "after", "refused", "onDemand"], [0, "none"]]]},
+    {"expectation": "purge:appFinishOffered", "set": [[["uninstall", "variants", "purge", "finish", "offered"], false]]},
+    {"expectation": "purge:serviceRemovedByApp", "set": [[["uninstall", "variants", "purge", "finish", "services", "launchdJob"], "present"]]},
+    {"expectation": "purge:finishDidNotHang", "set": [[["uninstall", "variants", "purge", "finish", "seconds"], 95.0]]},
+    {"expectation": "purge:finalQuitEndsApp", "set": [[["uninstall", "variants", "purge", "finish", "quit"], {"pressed": true, "exited": false, "driverStopped": "term"}]]},
+    {"expectation": "purge:appProfilesKept", "set": [[["uninstall", "variants", "purge", "finish", "profiles", "profilePresent"], false]]},
+    {"expectation": "purge:freshInstallRestoresDaemon", "set": [[["uninstall", "variants", "purge", "freshInstall", "secureInstall"], "needsAttention(wrappingKeyUnavailable)"]]},
+    {"expectation": "purge:tunnelStartsAfterFreshInstall", "set": [[["uninstall", "variants", "purge", "freshInstall", "tunnel"], {"protected": false, "driverRestartedDaemon": true, "startFailure": ["start failed, type: HostAdapterError case: unboundInterfaces", "start failed at step: createEngine"], "protectedAfterDaemonRestart": true}]]},
+    {"expectation": "keep:loginItemRemovedByApp", "set": [[["uninstall", "variants", "keep", "finish", "services", "btmApp"], "[enabled, allowed, not notified]"]]},
+    {"expectation": "purge:stateRootMarkerOnly", "set": [[["uninstall", "variants", "purge", "after", "stateRoot", "files"], ["journal.json", "journal.log", "min-build", "status-sequence.json"]]]},
+    {"expectation": "keep:dnsAsBeforeTunnel", "set": [[["uninstall", "variants", "keep", "after", "observation", "resolvers"], ["domain=254.169.in-addr.arpa;options=mdns", "domain=8.e.f.ip6.arpa;options=mdns", "domain=9.e.f.ip6.arpa;options=mdns", "domain=a.e.f.ip6.arpa;options=mdns", "domain=b.e.f.ip6.arpa;options=mdns", "domain=local;options=mdns", "if=en0;nameserver=192.168.64.1;search domain=localdomain", "scoped:if=en0;nameserver=192.168.64.1;search domain=localdomain", "scoped:if=utun4;nameserver=10.77.0.1"]]]},
+    {"expectation": "purge:dnsAsBeforeTunnel", "set": [[["uninstall", "variants", "purge", "after", "observation", "resolvers"], ["domain=254.169.in-addr.arpa;options=mdns", "domain=8.e.f.ip6.arpa;options=mdns", "domain=9.e.f.ip6.arpa;options=mdns", "domain=a.e.f.ip6.arpa;options=mdns", "domain=b.e.f.ip6.arpa;options=mdns", "domain=local;options=mdns", "if=en0;nameserver=192.168.64.1;search domain=localdomain"]]]},
+    {"expectation": "purge:stateRootMarkerOnly", "set": [[["uninstall", "variants", "purge", "after", "stateRoot", "journal"], {"entries": "array:0", "generation.value": 5, "journalSequence": "integer", "lastGoodAddresses": "object:0", "pendingSecretDeletions": "array:0", "pfPolicy": "object:1", "pfPolicy.disconnected": "true", "resources": "array:0", "schemaVersion": "integer", "schemaVersion.value": 2, "settings": "object:4", "settings.default": "true", "uninstall": "object:3", "uninstall.completed": "true", "uninstall.purgeState": "true"}]]},
+    {"expectation": "purge:stateRootMarkerOnly", "set": [[["uninstall", "variants", "purge", "after", "stateRoot", "journal"], {"entries": "array:0", "generation": "integer", "journalSequence": "integer", "lastGoodAddresses": "object:0", "pendingSecretDeletions": "array:0", "pfPolicy": "object:1", "pfPolicy.disconnected": "true", "resources": "array:0", "schemaVersion": "integer", "schemaVersion.value": 2, "settings": "object:4", "settings.default": "true", "uninstall": "object:3", "uninstall.completed": "true", "uninstall.purgeState": "true"}]]},
+    {"expectation": "purge:stateRootMarkerOnly", "set": [[["uninstall", "variants", "purge", "after", "stateRoot", "journal"], {"entries": "array:0", "generation": "string", "generation.value": 5, "journalSequence": "integer", "lastGoodAddresses": "object:0", "pendingSecretDeletions": "array:0", "pfPolicy": "object:1", "pfPolicy.disconnected": "true", "resources": "array:0", "schemaVersion": "integer", "schemaVersion.value": 2, "settings": "object:4", "settings.default": "true", "uninstall": "object:3", "uninstall.completed": "true", "uninstall.purgeState": "true"}]]},
+    {"expectation": "purge:stateRootMarkerOnly", "set": [[["uninstall", "variants", "purge", "after", "stateRoot", "journal"], {"entries": "array:0", "generation": "integer", "generation.value": 5, "journalSequence": "integer", "lastGoodAddresses": "object:0", "pendingSecretDeletions": "array:0", "pfPolicy": "object:1", "pfPolicy.disconnected": "true", "resources": "array:0", "schemaVersion": "integer", "schemaVersion.value": 2, "settings": "object:4", "settings.default": "false", "uninstall": "object:3", "uninstall.completed": "true", "uninstall.purgeState": "true"}]]},
+    {"expectation": "purge:stateRootMarkerOnly", "set": [[["uninstall", "variants", "purge", "after", "stateRoot", "journal"], {"entries": "array:0", "generation": "integer", "generation.value": 5, "journalSequence": "integer", "lastGoodAddresses": "object:0", "pendingSecretDeletions": "array:0", "pfPolicy": "object:1", "pfPolicy.disconnected": "false", "resources": "array:0", "schemaVersion": "integer", "schemaVersion.value": 2, "settings": "object:4", "settings.default": "true", "uninstall": "object:3", "uninstall.completed": "true", "uninstall.purgeState": "true"}]]},
+    {"expectation": "purge:stateRootMarkerOnly", "set": [[["uninstall", "variants", "purge", "after", "stateRoot", "journal"], {"entries": "array:0", "generation": "integer", "generation.value": 5, "journalSequence": "integer", "lastGoodAddresses": "object:0", "pendingSecretDeletions": "array:0", "pfPolicy": "object:1", "pfPolicy.disconnected": "true", "resources": "array:0", "schemaVersion": "integer", "schemaVersion.value": 1, "settings": "object:4", "settings.default": "true", "uninstall": "object:3", "uninstall.completed": "true", "uninstall.purgeState": "true"}]]},
+    {"expectation": "purge:stateRootMarkerOnly", "set": [[["uninstall", "variants", "purge", "after", "stateRoot", "journal"], {"entries": "array:0", "generation": "integer", "generation.value": 5, "journalSequence": "integer", "lastGoodAddresses": "object:0", "pendingSecretDeletions": "array:0", "pfPolicy": "object:1", "pfPolicy.disconnected": "true", "resources": "array:0", "schemaVersion": "integer", "schemaVersion.value": 2, "settings": "object:4", "settings.default": "true", "uninstall": "object:3", "uninstall.completed": "false", "uninstall.purgeState": "true"}]]},
+    {"expectation": "purge:stateRootMarkerOnly", "set": [[["uninstall", "variants", "purge", "after", "stateRoot", "journal"], {"entries": "array:0", "generation": "integer", "generation.value": 5, "journalSequence": "null", "lastGoodAddresses": "object:0", "pendingSecretDeletions": "array:0", "pfPolicy": "object:1", "pfPolicy.disconnected": "true", "resources": "array:0", "schemaVersion": "integer", "schemaVersion.value": 2, "settings": "object:4", "settings.default": "true", "uninstall": "object:3", "uninstall.completed": "true", "uninstall.purgeState": "true"}]]},
+    {"expectation": "purge:stateRootMarkerOnly", "set": [[["uninstall", "variants", "purge", "after", "stateRoot", "journal"], {"entries": "array:0", "generation": "integer", "generation.value": 5, "journalSequence": "integer", "lastGoodAddresses": "object:0", "pendingSecretDeletions": "array:0", "pfPolicy": "object:1", "pfPolicy.disconnected": "true", "resources": "array:0", "schemaVersion": "integer", "schemaVersion.value": 2, "settings": "object:5", "settings.default": "true", "uninstall": "object:3", "uninstall.completed": "true", "uninstall.purgeState": "true"}]]},
+    {"expectation": "purge:stateRootMarkerOnly", "set": [[["uninstall", "variants", "purge", "after", "stateRoot", "journal"], {"entries": "array:0", "generation": "integer", "generation.value": 5, "journalSequence": "integer", "lastGoodAddresses": "object:0", "pendingSecretDeletions": "array:0", "pfPolicy": "object:2", "pfPolicy.disconnected": "true", "resources": "array:0", "schemaVersion": "integer", "schemaVersion.value": 2, "settings": "object:4", "settings.default": "true", "uninstall": "object:3", "uninstall.completed": "true", "uninstall.purgeState": "true"}]]},
+    {"expectation": "purge:stateRootMarkerOnly", "set": [[["uninstall", "variants", "purge", "after", "stateRoot", "journal"], {"entries": "array:0", "generation": "integer", "generation.value": 5, "journalSequence": "integer", "lastGoodAddresses": "object:0", "pendingSecretDeletions": "array:0", "pfPolicy": "object:1", "pfPolicy.disconnected": "true", "resources": "object:0", "schemaVersion": "integer", "schemaVersion.value": 2, "settings": "object:4", "settings.default": "true", "uninstall": "object:3", "uninstall.completed": "true", "uninstall.purgeState": "true"}]]},
+    {"expectation": "purge:stateRootMarkerOnly", "set": [[["uninstall", "variants", "purge", "after", "stateRoot", "journal"], {"entries": "array:0", "generation": "integer", "generation.value": 3, "journalSequence": "integer", "lastGoodAddresses": "object:0", "pendingSecretDeletions": "array:0", "pfPolicy": "object:1", "pfPolicy.disconnected": "true", "resources": "array:0", "schemaVersion": "integer", "schemaVersion.value": 2, "settings": "object:4", "settings.default": "true", "uninstall": "object:3", "uninstall.completed": "true", "uninstall.purgeState": "true"}]]},
+    {"expectation": "purge:stateRootMarkerOnly", "set": [[["uninstall", "variants", "purge", "after", "stateRoot", "journal"], {"entries": "array:0", "generation": "integer", "generation.value": 5, "journalSequence": "integer", "lastGoodAddresses": "object:0", "pendingSecretDeletions": "array:0", "pfPolicy": "object:1", "pfPolicy.disconnected": "true", "resources": "array:0", "schemaVersion": "integer", "schemaVersion.value": "2", "settings": "object:4", "settings.default": "true", "uninstall": "object:3", "uninstall.completed": "true", "uninstall.purgeState": "true"}]]},
+    {"expectation": "purge:stateRootMarkerOnly", "set": [[["uninstall", "variants", "purge", "after", "stateRoot", "journal"], {"entries": "object:0", "generation": "integer", "generation.value": 5, "journalSequence": "integer", "lastGoodAddresses": "object:0", "pendingSecretDeletions": "array:0", "pfPolicy": "object:1", "pfPolicy.disconnected": "true", "resources": "array:0", "schemaVersion": "integer", "schemaVersion.value": 2, "settings": "object:4", "settings.default": "true", "uninstall": "object:3", "uninstall.completed": "true", "uninstall.purgeState": "true"}]]},
+    {"expectation": "purge:stateRootMarkerOnly", "set": [[["uninstall", "variants", "purge", "after", "stateRoot", "journal"], {"entries": "array:0", "generation": "integer", "generation.value": 5, "journalSequence": "integer", "lastGoodAddresses": "object:0", "pendingSecretDeletions": "array:0", "pfPolicy": "object:1", "resources": "array:0", "schemaVersion": "integer", "schemaVersion.value": 2, "settings": "object:4", "settings.default": "true", "uninstall": "object:3", "uninstall.completed": "true", "uninstall.purgeState": "true"}]]},
+    {"expectation": "purge:stateRootMarkerOnly", "set": [[["uninstall", "variants", "purge", "after", "stateRoot", "journal"], {"entries": "array:0", "generation": "integer", "generation.value": 5, "journalSequence": "integer", "lastGoodAddresses": "object:0", "pendingSecretDeletions": "array:0", "pfPolicy": "object:1", "pfPolicy.disconnected": "true", "resources": "array:0", "schemaVersion": "integer", "schemaVersion.value": 2, "settings": "object:4", "settings.default": "true", "uninstall": "object:3", "uninstall.completed": "true", "uninstall.purgeState": "true", "intent": "object:3"}]]},
+    {"expectation": "purge:stateRootMarkerOnly", "set": [[["uninstall", "variants", "purge", "before", "stateRoot", "journal"], "unreadable"]]},
+    {"expectation": "purge:stateRootMarkerOnly", "set": [[["uninstall", "variants", "purge", "after", "stateRoot", "files"], "unknown"]]},
+    {"expectation": "purge:stateRootMarkerOnly", "set": [[["uninstall", "variants", "purge", "after", "stateRoot", "root"], "unknown"]]},
+    {"expectation": "purge:stateRootMarkerOnly", "set": [[["uninstall", "variants", "purge", "after", "stateRoot", "journal"], "unreadable"]]},
+    {"expectation": "keep:serviceRemovedByApp", "set": [[["uninstall", "variants", "keep", "finish", "services", "btmDaemon"], "unknown"]]},
+    {"expectation": "keep:serviceRemovedByApp", "set": [[["uninstall", "variants", "keep", "finish", "services", "launchdJob"], "unknown"]]},
+    {"expectation": "purge:serviceRemovedByApp", "set": [[["uninstall", "variants", "purge", "finish", "services", "daemonPid"], "unknown"]]},
+    {"expectation": "keep:loginItemRemovedByApp", "set": [[["uninstall", "variants", "keep", "finish", "services", "btmApp"], "unknown"]]},
+    {"expectation": "keep:loginItemRemovedByApp", "set": [[["uninstall", "variants", "keep", "before", "services", "btmApp"], "unknown"]]},
+    {"expectation": "keep:noWgexPfRule", "set": [[["uninstall", "variants", "keep", "after", "pf", "anchorRules"], "unknown"]]},
+    {"expectation": "keep:noWgexPfRule", "set": [[["uninstall", "variants", "keep", "after", "pf", "anchorTables"], "unknown"]]},
+    {"expectation": "keep:noWgexPfRule", "set": [[["uninstall", "variants", "keep", "after", "pf", "anchorNested"], "unknown"]]},
+    {"expectation": "keep:noWgexPfRule", "set": [[["uninstall", "variants", "keep", "after", "pf", "references"], "unknown"]]},
+    {"expectation": "purge:noWgexPfRule", "set": [[["uninstall", "variants", "purge", "after", "pf", "anchorListed"], "unknown"]]},
+    {"expectation": "purge:protectedBefore", "set": [[["uninstall", "variants", "purge", "before", "pf", "anchorRules"], "unknown"]]},
+    {"expectation": "keep:protectedBefore", "set": [[["uninstall", "variants", "keep", "before", "pf", "references"], "unknown"]]},
+    {"expectation": "purge:freshInstallRestoresDaemon", "set": [[["uninstall", "variants", "purge", "freshInstall", "services", "daemonPid"], "unknown"]]}
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "source": "P1-11 and M1-01 recorded observations; replay only",
+  "status": {
+    "phase": "active",
+    "protection": "protected"
+  },
+  "interface": "utun4",
+  "routes": [
+    "10.77/24 link#12 utun4"
+  ],
+  "dns": "underlay resolver; DNS-TUNNEL is not live verified",
+  "daemonLog": {
+    "events": 0,
+    "note": "recorded process predicate returned no lines"
+  }
+}

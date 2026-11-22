@@ -1,0 +1,8 @@
+No ALTQ support in kernel
+ALTQ related functions disabled
+scrub-anchor "com.apple/*" all fragment reassemble
+  [ Evaluations: 3161      Packets: 0         Bytes: 0           States: 0     ]
+  [ Inserted: uid 0 pid 128 ]
+anchor "com.apple/*" all
+  [ Evaluations: 445       Packets: 1709      Bytes: 389951      States: 0     ]
+  [ Inserted: uid 0 pid 128 ]

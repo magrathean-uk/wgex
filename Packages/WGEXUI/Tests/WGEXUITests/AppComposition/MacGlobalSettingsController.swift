@@ -1,0 +1,1 @@
+../../../../../Apps/WGEXMac/MacGlobalSettingsController.swift

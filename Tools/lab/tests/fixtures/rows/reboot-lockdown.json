@@ -1,0 +1,323 @@
+{
+ "source": "Synthetic, shaped on the manual reboot-with-lockdown pass (T/M1-02/guest.md:15: idle/blocked, one reference, runs 1) and the run 6 slice 4 boot timeline; no guest bytes",
+ "pass": {
+  "lockdownBeforeReboot": true,
+  "allowLANBeforeReboot": false,
+  "statusBeforeReboot": {
+   "phase": "idle",
+   "protection": "blocked"
+  },
+  "boot": {
+   "bootAt": 1793294283,
+   "appRunningAfterBoot": true,
+   "appStartedAt": 1793294297.0,
+   "daemonStartedAt": 1793294293.0,
+   "daemonRuns": 1,
+   "timeline": [
+    [1793294294.219, "idle", "unknown"],
+    [1793294295.44, "idle", "blocked"]
+   ],
+   "statusSamples": [
+    [1793294325.8, "idle", "blocked"],
+    [1793294326.4, "idle", "blocked"]
+   ],
+   "firstStatus": {
+    "phase": "idle",
+    "protection": "blocked"
+   },
+   "referenceCount": 1,
+   "outsideReceiptsBeforeFirstStatus": 0,
+   "lanReceiptsAfterBoot": 0,
+   "offSubnetReceiptsAfterBoot": 0,
+   "offSubnetAddresses": [],
+   "neverOpenWindow": {
+    "start": 1793294297.25,
+    "end": 1793294295.44,
+    "endSource": "daemonFirstBlockedStatus",
+    "sshReturnAt": 1793294297.25,
+    "driverFirstPollAt": 1793294325.8,
+    "daemonFirstStatusAt": 1793294294.219,
+    "daemonFirstBlockedAt": 1793294295.44,
+    "windowSeconds": 0.0,
+    "postBootCaptureAt": 1793294299.5,
+    "nonce": "lab-fixture",
+    "probedFrom": 1793294319.16,
+    "note": "empty: the daemon's first blocked status line precedes SSH return, so no post-boot probe can land before it; boot to enforcement is the uncaptured early-boot gap (bootObservation.earlyBootCapture)",
+    "measured": false,
+    "notMeasured": "not measured (empty window)"
+   }
+  }
+ },
+ "failing": [
+  {
+   "expectation": "lockdownReachedDaemon",
+   "set": [
+    [
+     [
+      "lockdownBeforeReboot"
+     ],
+     false
+    ]
+   ]
+  },
+  {
+   "expectation": "allowLANOffReachedDaemon",
+   "set": [
+    [
+     [
+      "allowLANBeforeReboot"
+     ],
+     true
+    ]
+   ]
+  },
+  {
+   "expectation": "allowLANOffReachedDaemon",
+   "set": [
+    [
+     [
+      "allowLANBeforeReboot"
+     ],
+     null
+    ]
+   ]
+  },
+  {
+   "expectation": "zeroLANReceiptsAfterBoot",
+   "set": [
+    [
+     [
+      "boot",
+      "lanReceiptsAfterBoot"
+     ],
+     96
+    ]
+   ]
+  },
+  {
+   "expectation": "zeroLANReceiptsAfterBoot",
+   "set": [
+    [
+     [
+      "boot",
+      "lanReceiptsAfterBoot"
+     ],
+     null
+    ]
+   ]
+  },
+  {
+   "expectation": "zeroOffSubnetReceiptsAfterBoot",
+   "set": [
+    [
+     [
+      "boot",
+      "offSubnetReceiptsAfterBoot"
+     ],
+     1
+    ],
+    [
+     [
+      "boot",
+      "offSubnetAddresses"
+     ],
+     ["10.77.0.1"]
+    ]
+   ]
+  },
+  {
+   "expectation": "zeroOffSubnetReceiptsAfterBoot",
+   "set": [
+    [
+     [
+      "boot",
+      "offSubnetReceiptsAfterBoot"
+     ],
+     null
+    ]
+   ]
+  },
+  {
+   "expectation": "lockdownReachedDaemon",
+   "set": [
+    [
+     [
+      "statusBeforeReboot"
+     ],
+     {
+      "phase": "idle",
+      "protection": "unprotected"
+     }
+    ]
+   ]
+  },
+  {
+   "expectation": "idleBlockedAfterBoot",
+   "set": [
+    [
+     [
+      "boot",
+      "firstStatus"
+     ],
+     {
+      "phase": "idle",
+      "protection": "unprotected"
+     }
+    ]
+   ]
+  },
+  {
+   "expectation": "oneReferenceAfterBoot",
+   "set": [
+    [
+     [
+      "boot",
+      "referenceCount"
+     ],
+     2
+    ]
+   ]
+  },
+  {
+   "expectation": "zeroReceiptsBeforeFirstStatus",
+   "set": [
+    [
+     [
+      "boot",
+      "outsideReceiptsBeforeFirstStatus"
+     ],
+     3
+    ]
+   ]
+  },
+  {
+   "expectation": "neverUnprotectedAfterBoot",
+   "set": [
+    [
+     [
+      "boot",
+      "statusSamples",
+      1
+     ],
+     [1793294326.4, "idle", "unprotected"]
+    ]
+   ]
+  },
+  {
+   "expectation": "neverUnprotectedAfterBoot",
+   "set": [
+    [
+     [
+      "boot",
+      "timeline"
+     ],
+     []
+    ],
+    [
+     [
+      "boot",
+      "statusSamples"
+     ],
+     []
+    ]
+   ]
+  },
+  {
+   "expectation": "neverUnprotectedAfterBoot",
+   "set": [
+    [
+     [
+      "boot",
+      "timeline"
+     ],
+     []
+    ]
+   ]
+  },
+  {
+   "expectation": "noRestartLoop",
+   "set": [
+    [
+     [
+      "boot",
+      "daemonRuns"
+     ],
+     3
+    ]
+   ]
+  },
+  {
+   "expectation": "noRestartLoop",
+   "set": [
+    [
+     [
+      "boot",
+      "daemonRuns"
+     ],
+     null
+    ]
+   ]
+  },
+  {
+   "expectation": "postRestartTimelineConsistent",
+   "set": [
+    [
+     [
+      "boot",
+      "timeline"
+     ],
+     [
+      [
+       1793294280.0,
+       "active",
+       "protected",
+       282
+      ]
+     ]
+    ],
+    [
+     [
+      "boot",
+      "daemonPid"
+     ],
+     336
+    ]
+   ]
+  },
+  {
+   "expectation": "postRestartTimelineConsistent",
+   "set": [
+    [
+     [
+      "boot",
+      "timeline"
+     ],
+     [
+      [
+       1793294294.219,
+       "idle",
+       "unknown",
+       336
+      ],
+      [
+       1793294295.44,
+       "idle",
+       "blocked",
+       400
+      ]
+     ]
+    ],
+    [
+     [
+      "boot",
+      "daemonPid"
+     ],
+     336
+    ]
+   ]
+  },
+  {"expectation": "postRestartTimelineConsistent", "set": [[["boot", "timeline"], [[1793294294.219, "idle", "unknown", 336, 1], [1793294295.44, "idle", "blocked", 336, 0]]], [["boot", "daemonPid"], 336]]},
+  {"expectation": "postRestartTimelineConsistent", "set": [[["boot", "daemonPid"], 336]]},
+  {"expectation": "postRestartTimelineConsistent", "set": [[["boot", "clockSamples"], [{"sampledAt": 1793294330.0, "hostStartedAt": 1793294339.0, "hostReturnedAt": 1793294340.0, "offsetSeconds": 0.1, "uncertaintySeconds": 0.05}]]]}
+ ]
+}

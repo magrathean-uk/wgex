@@ -1,0 +1,23 @@
+{
+  "configurations": [
+    {
+      "id": "2FAB3E44-2D1E-5B04-B815-6A0438A7B6F1",
+      "name": "Default",
+      "options": {}
+    }
+  ],
+  "defaultOptions": {
+    "codeCoverage": false,
+    "testTimeoutsEnabled": true
+  },
+  "testTargets": [
+    {
+      "target": {
+        "containerPath": "container:WGEX.xcodeproj",
+        "identifier": "C22ED179D8714C560AF60E53",
+        "name": "WGEXTVUITests"
+      }
+    }
+  ],
+  "version": 1
+}

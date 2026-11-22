@@ -1,0 +1,66 @@
+{
+  "synthetic": true,
+  "note": "Authored configd notification sequence, no host network state was read. NWPath is a secondary signal only.",
+  "events": [
+    {
+      "ipv4": {
+        "PrimaryInterface": "en0",
+        "PrimaryService": "wifi"
+      },
+      "ipv6": {
+        "PrimaryInterface": "en0",
+        "PrimaryService": "wifi6"
+      },
+      "indexes": {
+        "en0": 4
+      },
+      "resolvers": [
+        "192.0.2.53"
+      ],
+      "mtu": 1500,
+      "satisfied": true
+    },
+    {
+      "ipv4": {
+        "PrimaryInterface": "en1",
+        "PrimaryService": "ethernet"
+      },
+      "ipv6": {
+        "PrimaryInterface": "en0",
+        "PrimaryService": "wifi6"
+      },
+      "indexes": {
+        "en0": 4,
+        "en1": 8
+      },
+      "resolvers": [
+        "198.51.100.53"
+      ],
+      "mtu": 1400,
+      "satisfied": true
+    },
+    {
+      "ipv4": {},
+      "ipv6": {
+        "PrimaryInterface": "en1",
+        "PrimaryService": "v6-only"
+      },
+      "indexes": {
+        "en1": 8
+      },
+      "resolvers": [
+        "2001:db8::53"
+      ],
+      "mtu": 1500,
+      "satisfied": true
+    },
+    {
+      "ipv4": {},
+      "ipv6": {},
+      "indexes": {},
+      "resolvers": [],
+      "mtu": 1500,
+      "satisfied": false
+    }
+  ]
+}

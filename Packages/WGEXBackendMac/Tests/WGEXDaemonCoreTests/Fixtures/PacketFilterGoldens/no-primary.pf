@@ -1,0 +1,27 @@
+block drop out quick on lo0 inet proto udp from any to 127.0.0.2 port 9 user 0 label "wgex-canary"
+pass quick on lo0 all no state
+block drop out quick proto tcp from any to any port 53
+block drop out quick proto tcp from any to any port 853
+block drop out quick proto udp from any to any port 53
+block drop out quick proto udp from any to any port 853
+pass out quick inet proto udp from any port 68 to 255.255.255.255 port 67 no state
+pass in quick inet proto udp from any port 67 to any port 68 no state
+pass out quick inet6 proto udp from fe80::/10 port 546 to ff02::1:2 port 547 no state
+pass in quick inet6 proto udp from fe80::/10 port 547 to fe80::/10 port 546 no state
+pass quick inet6 proto icmp6 from fe80::/10 to fe80::/10 icmp6-type 133 no state
+pass quick inet6 proto icmp6 from fe80::/10 to fe80::/10 icmp6-type 134 no state
+pass quick inet6 proto icmp6 from fe80::/10 to fe80::/10 icmp6-type 135 no state
+pass quick inet6 proto icmp6 from fe80::/10 to fe80::/10 icmp6-type 136 no state
+pass quick inet6 proto icmp6 from fe80::/10 to ff02::/16 icmp6-type 133 no state
+pass quick inet6 proto icmp6 from fe80::/10 to ff02::/16 icmp6-type 134 no state
+pass quick inet6 proto icmp6 from fe80::/10 to ff02::/16 icmp6-type 135 no state
+pass quick inet6 proto icmp6 from fe80::/10 to ff02::/16 icmp6-type 136 no state
+pass quick inet6 proto icmp6 from :: to fe80::/10 icmp6-type 133 no state
+pass quick inet6 proto icmp6 from :: to fe80::/10 icmp6-type 134 no state
+pass quick inet6 proto icmp6 from :: to fe80::/10 icmp6-type 135 no state
+pass quick inet6 proto icmp6 from :: to fe80::/10 icmp6-type 136 no state
+pass quick inet6 proto icmp6 from :: to ff02::/16 icmp6-type 133 no state
+pass quick inet6 proto icmp6 from :: to ff02::/16 icmp6-type 134 no state
+pass quick inet6 proto icmp6 from :: to ff02::/16 icmp6-type 135 no state
+pass quick inet6 proto icmp6 from :: to ff02::/16 icmp6-type 136 no state
+block drop quick all

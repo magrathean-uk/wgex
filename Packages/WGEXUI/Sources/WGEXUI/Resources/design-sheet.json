@@ -1,0 +1,87 @@
+{
+  "name": "WGEX layout A",
+  "version": 1,
+  "colours": {
+    "accent": { "light": { "hex": "#1C5DBB", "opacity": 1 }, "dark": { "hex": "#62A3FF", "opacity": 1 } },
+    "indigo": { "light": { "hex": "#4B45C6", "opacity": 1 }, "dark": { "hex": "#918BFF", "opacity": 1 } },
+    "success": { "light": { "hex": "#086B33", "opacity": 1 }, "dark": { "hex": "#47E08C", "opacity": 1 } },
+    "error": { "light": { "hex": "#B81C17", "opacity": 1 }, "dark": { "hex": "#FF736B", "opacity": 1 } },
+    "caution": { "light": { "hex": "#8C5200", "opacity": 1 }, "dark": { "hex": "#FFB847", "opacity": 1 } },
+    "pageBackground": { "light": { "hex": "#F2F2F7", "opacity": 1 }, "dark": { "hex": "#0B0B0D", "opacity": 1 } },
+    "sidebarBackground": { "light": { "hex": "#E8E8EE", "opacity": 1 }, "dark": { "hex": "#151518", "opacity": 1 } },
+    "card": { "light": { "hex": "#FFFFFF", "opacity": 1 }, "dark": { "hex": "#1C1C1F", "opacity": 1 } },
+    "text": { "light": { "hex": "#1C1C1E", "opacity": 1 }, "dark": { "hex": "#F2F2F7", "opacity": 1 } },
+    "textSecondary": { "light": { "hex": "#636369", "opacity": 1 }, "dark": { "hex": "#98989F", "opacity": 1 } },
+    "hairline": { "light": { "hex": "#000000", "opacity": 0.09 }, "dark": { "hex": "#FFFFFF", "opacity": 0.1 } },
+    "cardBorder": { "light": { "hex": "#000000", "opacity": 0.18 }, "dark": { "hex": "#FFFFFF", "opacity": 0.2 } },
+    "onAccent": { "light": { "hex": "#FFFFFF", "opacity": 1 }, "dark": { "hex": "#06101F", "opacity": 1 } }
+  },
+  "shape": {
+    "cardRadius": 10,
+    "controlRadius": 7,
+    "sidebarRowRadius": 6,
+    "cardBorderWidth": 0.5,
+    "buttonBorderWidth": 0.8
+  },
+  "spacing": {
+    "scale": [4, 8, 12, 16, 20],
+    "pagePadding": 16,
+    "groupGap": 10,
+    "rowPaddingVertical": 5,
+    "rowPaddingHorizontal": 12
+  },
+  "type": {
+    "pageTitle": { "size": 17, "weight": "bold", "colour": "text" },
+    "body": { "size": 13, "weight": "regular", "colour": "text" },
+    "groupHeading": { "size": 11, "weight": "semibold", "colour": "textSecondary" },
+    "sidebarHeading": { "size": 12, "weight": "bold", "colour": "text", "ruleWidth": 1 },
+    "caption": { "size": 11, "weight": "regular", "colour": "textSecondary" },
+    "monospacedDigits": true
+  },
+  "parts": {
+    "secondaryButton": { "fill": "accent", "fillOpacity": 0.12, "border": "accent", "borderOpacity": 0.3, "text": "accent", "weight": "semibold" },
+    "primaryButton": { "gradientFrom": "accent", "gradientTo": "indigo", "direction": "topLeadingToBottomTrailing", "text": "onAccent", "weight": "semibold" },
+    "destructiveButton": { "text": "error", "fillOpacity": 0 },
+    "sidebarSelection": { "highlight": "native selection tinted with accent", "selectedText": "onHighlight", "unselectedText": "text", "statusColour": "textSecondary" },
+    "sidebarStatus": { "colour": "textSecondary", "size": 11 },
+    "statusActive": { "colour": "success" }
+  },
+  "ios": {
+    "rowMinHeight": 44,
+    "rowPaddingVertical": 4,
+    "groupGap": 12,
+    "buttonRadius": 8,
+    "type": {
+      "body": { "role": "body", "weight": "regular", "colour": "text" },
+      "firstScreenHeading": { "role": "subheadline", "weight": "bold", "colour": "text", "ruleWidth": 1 },
+      "groupHeading": { "role": "footnote", "weight": "semibold", "colour": "textSecondary" },
+      "caption": { "role": "footnote", "weight": "regular", "colour": "textSecondary" },
+      "button": { "role": "subheadline", "weight": "semibold" },
+      "field": { "role": "subheadline", "weight": "regular", "colour": "text" },
+      "key": { "role": "footnote", "weight": "regular", "monospaced": true },
+      "sheetTitle": { "role": "title2", "weight": "bold", "colour": "text" }
+    },
+    "grid": {
+      "screenMargin": 16,
+      "cardPadding": 12,
+      "step": 4,
+      "labelColumn": 112,
+      "columnGap": 8,
+      "rowMinHeight": 44,
+      "fieldHeight": 36,
+      "fieldRadius": 8,
+      "fieldInset": 10,
+      "buttonHeight": 32,
+      "buttonPadding": 12,
+      "buttonGap": 8,
+      "iconButton": 32,
+      "formMaxWidth": 560,
+      "glyph": 20,
+      "headingAbove": 12,
+      "headingBelow": 4,
+      "switchOverhang": 2,
+      "menuInset": 2,
+      "padBarInset": 10
+    }
+  }
+}

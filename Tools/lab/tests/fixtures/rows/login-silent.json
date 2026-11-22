@@ -1,0 +1,1030 @@
+{
+ "source": "M03-T07 LOGIN-SILENT (DEC-021): synthetic presentation samples in the guest action's shape; never a guest run",
+ "pass": {
+  "relaunchPrevention": {
+   "mechanism": "loginwindow-reopen-state",
+   "userMatch": true,
+   "savesLogoutState": false,
+   "relaunchesApps": false,
+   "savedRelaunchEntries": 0,
+   "savedRelaunchEntriesBefore": 1,
+   "savedListHeldWGEX": true,
+   "duplicateKeys": [],
+   "applied": true,
+   "undo": "snapshot restore"
+  },
+  "loginSilent": {
+   "ordinaryLaunch": {
+    "samples": [
+     {
+      "readable": true,
+      "sampledAt": 1793294000.0,
+      "process": "running",
+      "standardWindows": 1,
+      "otherWindows": 0,
+      "menuBarItem": true,
+      "dockItem": true,
+      "appType": "Foreground"
+     },
+     {
+      "readable": true,
+      "sampledAt": 1793294002.0,
+      "process": "running",
+      "standardWindows": 1,
+      "otherWindows": 0,
+      "menuBarItem": true,
+      "dockItem": true,
+      "appType": "Foreground"
+     },
+     {
+      "readable": true,
+      "sampledAt": 1793294004.0,
+      "process": "running",
+      "standardWindows": 1,
+      "otherWindows": 0,
+      "menuBarItem": true,
+      "dockItem": true,
+      "appType": "Foreground"
+     }
+    ]
+   },
+   "loginItem": {
+    "autoConnectAtLogin": true,
+    "hideDockIcon": false
+   },
+   "variants": {
+    "hideDockOff": {
+     "loginItem": {
+      "autoConnectAtLogin": true,
+      "hideDockIcon": false
+     },
+     "loggedOut": true,
+     "loggedIn": true,
+     "loginLaunchSeen": true,
+     "afterLogin": [
+      {
+       "readable": true,
+       "sampledAt": 1793294100.0,
+       "process": "running",
+       "standardWindows": 0,
+       "otherWindows": 0,
+       "menuBarItem": true,
+       "dockItem": false,
+       "appType": "UIElement"
+      },
+      {
+       "readable": true,
+       "sampledAt": 1793294102.0,
+       "process": "running",
+       "standardWindows": 0,
+       "otherWindows": 0,
+       "menuBarItem": true,
+       "dockItem": false,
+       "appType": "UIElement"
+      },
+      {
+       "readable": true,
+       "sampledAt": 1793294104.0,
+       "process": "running",
+       "standardWindows": 0,
+       "otherWindows": 0,
+       "menuBarItem": true,
+       "dockItem": false,
+       "appType": "UIElement"
+      }
+     ],
+     "menuOpened": true,
+     "fromMenu": [
+      {
+       "readable": true,
+       "sampledAt": 1793294110.0,
+       "process": "running",
+       "standardWindows": 1,
+       "otherWindows": 0,
+       "menuBarItem": true,
+       "dockItem": true,
+       "appType": "Foreground"
+      },
+      {
+       "readable": true,
+       "sampledAt": 1793294112.0,
+       "process": "running",
+       "standardWindows": 1,
+       "otherWindows": 0,
+       "menuBarItem": true,
+       "dockItem": true,
+       "appType": "Foreground"
+      },
+      {
+       "readable": true,
+       "sampledAt": 1793294114.0,
+       "process": "running",
+       "standardWindows": 1,
+       "otherWindows": 0,
+       "menuBarItem": true,
+       "dockItem": true,
+       "appType": "Foreground"
+      }
+     ],
+     "statusAfterLogin": {
+      "phase": "active",
+      "protection": "protected"
+     }
+    },
+    "hideDockOn": {
+     "loginItem": {
+      "autoConnectAtLogin": true,
+      "hideDockIcon": true
+     },
+     "loggedOut": true,
+     "loggedIn": true,
+     "loginLaunchSeen": true,
+     "afterLogin": [
+      {
+       "readable": true,
+       "sampledAt": 1793294300.0,
+       "process": "running",
+       "standardWindows": 0,
+       "otherWindows": 0,
+       "menuBarItem": true,
+       "dockItem": false,
+       "appType": "UIElement"
+      },
+      {
+       "readable": true,
+       "sampledAt": 1793294302.0,
+       "process": "running",
+       "standardWindows": 0,
+       "otherWindows": 0,
+       "menuBarItem": true,
+       "dockItem": false,
+       "appType": "UIElement"
+      },
+      {
+       "readable": true,
+       "sampledAt": 1793294304.0,
+       "process": "running",
+       "standardWindows": 0,
+       "otherWindows": 0,
+       "menuBarItem": true,
+       "dockItem": false,
+       "appType": "UIElement"
+      }
+     ],
+     "menuOpened": true,
+     "fromMenu": [
+      {
+       "readable": true,
+       "sampledAt": 1793294310.0,
+       "process": "running",
+       "standardWindows": 1,
+       "otherWindows": 0,
+       "menuBarItem": true,
+       "dockItem": false,
+       "appType": "UIElement"
+      },
+      {
+       "readable": true,
+       "sampledAt": 1793294312.0,
+       "process": "running",
+       "standardWindows": 1,
+       "otherWindows": 0,
+       "menuBarItem": true,
+       "dockItem": false,
+       "appType": "UIElement"
+      },
+      {
+       "readable": true,
+       "sampledAt": 1793294314.0,
+       "process": "running",
+       "standardWindows": 1,
+       "otherWindows": 0,
+       "menuBarItem": true,
+       "dockItem": false,
+       "appType": "UIElement"
+      }
+     ],
+     "statusAfterLogin": {
+      "phase": "active",
+      "protection": "protected"
+     }
+    }
+   },
+   "protectedWithoutAction": true
+  }
+ },
+ "passing": [
+  {
+   "name": "a background-only app type is silent too",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOff",
+      "afterLogin",
+      1,
+      "appType"
+     ],
+     "BackgroundOnly"
+    ]
+   ]
+  },
+  {
+   "name": "the menu's own window beside the main window is not a second main window",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOn",
+      "fromMenu",
+      0,
+      "otherWindows"
+     ],
+     1
+    ]
+   ]
+  },
+  {
+   "name": "protection that needed a reconnect after login is recorded, not judged",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "protectedWithoutAction"
+     ],
+     false
+    ]
+   ]
+  }
+ ],
+ "failing": [
+  {
+   "expectation": "loginItemConfigured",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "loginItem",
+      "autoConnectAtLogin"
+     ],
+     false
+    ]
+   ]
+  },
+  {
+   "expectation": "loginItemConfigured",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "loginItem",
+      "autoConnectAtLogin"
+     ],
+     null
+    ]
+   ]
+  },
+  {
+   "expectation": "reopenRelaunchPrevented",
+   "set": [
+    [
+     [
+      "relaunchPrevention",
+      "applied"
+     ],
+     false
+    ]
+   ]
+  },
+  {
+   "expectation": "reopenRelaunchPrevented",
+   "set": [
+    [
+     [
+      "relaunchPrevention",
+      "savesLogoutState"
+     ],
+     null
+    ]
+   ]
+  },
+  {
+   "expectation": "ordinaryLaunchShowsWindowOnce",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "ordinaryLaunch",
+      "samples",
+      1,
+      "standardWindows"
+     ],
+     2
+    ]
+   ]
+  },
+  {
+   "expectation": "ordinaryLaunchShowsWindowOnce",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "ordinaryLaunch",
+      "samples",
+      0,
+      "standardWindows"
+     ],
+     0
+    ]
+   ]
+  },
+  {
+   "expectation": "ordinaryLaunchShowsWindowOnce",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "ordinaryLaunch",
+      "samples",
+      2,
+      "dockItem"
+     ],
+     false
+    ]
+   ]
+  },
+  {
+   "expectation": "ordinaryLaunchShowsWindowOnce",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "ordinaryLaunch",
+      "samples"
+     ],
+     [
+      {
+       "readable": true,
+       "sampledAt": 1793294000.0,
+       "process": "running",
+       "standardWindows": 1,
+       "otherWindows": 0,
+       "menuBarItem": true,
+       "dockItem": true,
+       "appType": "Foreground"
+      }
+     ]
+    ]
+   ]
+  },
+  {
+   "expectation": "ordinaryLaunchShowsWindowOnce",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "ordinaryLaunch",
+      "samples",
+      1,
+      "readable"
+     ],
+     false
+    ]
+   ]
+  },
+  {
+   "expectation": "hideDockIconSet:hideDockOff",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOff",
+      "loginItem",
+      "hideDockIcon"
+     ],
+     true
+    ]
+   ]
+  },
+  {
+   "expectation": "hideDockIconSet:hideDockOff",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOff",
+      "loginItem",
+      "hideDockIcon"
+     ],
+     null
+    ]
+   ]
+  },
+  {
+   "expectation": "hideDockIconSet:hideDockOff",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOff",
+      "loginItem",
+      "autoConnectAtLogin"
+     ],
+     false
+    ]
+   ]
+  },
+  {
+   "expectation": "loggedOutAndIn:hideDockOff",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOff",
+      "loggedIn"
+     ],
+     null
+    ]
+   ]
+  },
+  {
+   "expectation": "loggedOutAndIn:hideDockOff",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOff",
+      "loggedOut"
+     ],
+     false
+    ]
+   ]
+  },
+  {
+   "expectation": "silentAfterLogin:hideDockOff",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOff",
+      "loginLaunchSeen"
+     ],
+     false
+    ]
+   ]
+  },
+  {
+   "expectation": "silentAfterLogin:hideDockOff",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOff",
+      "afterLogin",
+      0,
+      "standardWindows"
+     ],
+     1
+    ]
+   ]
+  },
+  {
+   "expectation": "silentAfterLogin:hideDockOff",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOff",
+      "afterLogin",
+      2,
+      "dockItem"
+     ],
+     true
+    ]
+   ]
+  },
+  {
+   "expectation": "silentAfterLogin:hideDockOff",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOff",
+      "afterLogin",
+      1,
+      "appType"
+     ],
+     "Foreground"
+    ]
+   ]
+  },
+  {
+   "expectation": "silentAfterLogin:hideDockOff",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOff",
+      "afterLogin",
+      1,
+      "appType"
+     ],
+     "unknown"
+    ]
+   ]
+  },
+  {
+   "expectation": "silentAfterLogin:hideDockOff",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOff",
+      "afterLogin",
+      1,
+      "menuBarItem"
+     ],
+     false
+    ]
+   ]
+  },
+  {
+   "expectation": "silentAfterLogin:hideDockOff",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOff",
+      "afterLogin",
+      0,
+      "process"
+     ],
+     "absent"
+    ]
+   ]
+  },
+  {
+   "expectation": "silentAfterLogin:hideDockOff",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOff",
+      "afterLogin"
+     ],
+     [
+      {
+       "readable": true,
+       "sampledAt": 1.0,
+       "process": "running",
+       "standardWindows": 0,
+       "otherWindows": 0,
+       "menuBarItem": true,
+       "dockItem": false,
+       "appType": "UIElement"
+      }
+     ]
+    ]
+   ]
+  },
+  {
+   "expectation": "silentAfterLogin:hideDockOff",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOff",
+      "afterLogin",
+      0,
+      "readable"
+     ],
+     false
+    ]
+   ]
+  },
+  {
+   "expectation": "windowFromMenu:hideDockOff",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOff",
+      "menuOpened"
+     ],
+     false
+    ]
+   ]
+  },
+  {
+   "expectation": "windowFromMenu:hideDockOff",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOff",
+      "fromMenu",
+      0,
+      "standardWindows"
+     ],
+     0
+    ]
+   ]
+  },
+  {
+   "expectation": "windowFromMenu:hideDockOff",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOff",
+      "fromMenu",
+      1,
+      "standardWindows"
+     ],
+     2
+    ]
+   ]
+  },
+  {
+   "expectation": "windowFromMenu:hideDockOff",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOff",
+      "fromMenu",
+      2,
+      "dockItem"
+     ],
+     false
+    ]
+   ]
+  },
+  {
+   "expectation": "windowFromMenu:hideDockOff",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOff",
+      "fromMenu",
+      2,
+      "appType"
+     ],
+     "UIElement"
+    ]
+   ]
+  },
+  {
+   "expectation": "windowFromMenu:hideDockOff",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOff",
+      "fromMenu"
+     ],
+     []
+    ]
+   ]
+  },
+  {
+   "expectation": "hideDockIconSet:hideDockOn",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOn",
+      "loginItem",
+      "hideDockIcon"
+     ],
+     false
+    ]
+   ]
+  },
+  {
+   "expectation": "hideDockIconSet:hideDockOn",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOn",
+      "loginItem",
+      "hideDockIcon"
+     ],
+     null
+    ]
+   ]
+  },
+  {
+   "expectation": "hideDockIconSet:hideDockOn",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOn",
+      "loginItem",
+      "autoConnectAtLogin"
+     ],
+     false
+    ]
+   ]
+  },
+  {
+   "expectation": "loggedOutAndIn:hideDockOn",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOn",
+      "loggedIn"
+     ],
+     null
+    ]
+   ]
+  },
+  {
+   "expectation": "loggedOutAndIn:hideDockOn",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOn",
+      "loggedOut"
+     ],
+     false
+    ]
+   ]
+  },
+  {
+   "expectation": "silentAfterLogin:hideDockOn",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOn",
+      "loginLaunchSeen"
+     ],
+     false
+    ]
+   ]
+  },
+  {
+   "expectation": "silentAfterLogin:hideDockOn",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOn",
+      "afterLogin",
+      0,
+      "standardWindows"
+     ],
+     1
+    ]
+   ]
+  },
+  {
+   "expectation": "silentAfterLogin:hideDockOn",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOn",
+      "afterLogin",
+      2,
+      "dockItem"
+     ],
+     true
+    ]
+   ]
+  },
+  {
+   "expectation": "silentAfterLogin:hideDockOn",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOn",
+      "afterLogin",
+      1,
+      "appType"
+     ],
+     "Foreground"
+    ]
+   ]
+  },
+  {
+   "expectation": "silentAfterLogin:hideDockOn",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOn",
+      "afterLogin",
+      1,
+      "appType"
+     ],
+     "unknown"
+    ]
+   ]
+  },
+  {
+   "expectation": "silentAfterLogin:hideDockOn",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOn",
+      "afterLogin",
+      1,
+      "menuBarItem"
+     ],
+     false
+    ]
+   ]
+  },
+  {
+   "expectation": "silentAfterLogin:hideDockOn",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOn",
+      "afterLogin",
+      0,
+      "process"
+     ],
+     "absent"
+    ]
+   ]
+  },
+  {
+   "expectation": "silentAfterLogin:hideDockOn",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOn",
+      "afterLogin"
+     ],
+     [
+      {
+       "readable": true,
+       "sampledAt": 1.0,
+       "process": "running",
+       "standardWindows": 0,
+       "otherWindows": 0,
+       "menuBarItem": true,
+       "dockItem": false,
+       "appType": "UIElement"
+      }
+     ]
+    ]
+   ]
+  },
+  {
+   "expectation": "silentAfterLogin:hideDockOn",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOn",
+      "afterLogin",
+      0,
+      "readable"
+     ],
+     false
+    ]
+   ]
+  },
+  {
+   "expectation": "windowFromMenu:hideDockOn",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOn",
+      "menuOpened"
+     ],
+     false
+    ]
+   ]
+  },
+  {
+   "expectation": "windowFromMenu:hideDockOn",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOn",
+      "fromMenu",
+      0,
+      "standardWindows"
+     ],
+     0
+    ]
+   ]
+  },
+  {
+   "expectation": "windowFromMenu:hideDockOn",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOn",
+      "fromMenu",
+      1,
+      "standardWindows"
+     ],
+     2
+    ]
+   ]
+  },
+  {
+   "expectation": "windowFromMenu:hideDockOn",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOn",
+      "fromMenu",
+      2,
+      "dockItem"
+     ],
+     true
+    ]
+   ]
+  },
+  {
+   "expectation": "windowFromMenu:hideDockOn",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOn",
+      "fromMenu",
+      2,
+      "appType"
+     ],
+     "Foreground"
+    ]
+   ]
+  },
+  {
+   "expectation": "windowFromMenu:hideDockOn",
+   "set": [
+    [
+     [
+      "loginSilent",
+      "variants",
+      "hideDockOn",
+      "fromMenu"
+     ],
+     []
+    ]
+   ]
+  }
+ ]
+}

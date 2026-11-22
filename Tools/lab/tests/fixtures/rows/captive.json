@@ -1,0 +1,367 @@
+{
+ "source": "Synthetic observation shaped on TunnelController+Captive.swift (failed-intent open, timed close, typed 754 refusal without intent) and the error-lan*-captive1.pf goldens; no guest bytes",
+ "pass": {
+  "lockdownBeforeOpen": true,
+  "durationSeconds": 60,
+  "durationConfirmed": true,
+  "statusBeforeOpen": {
+   "phase": "reasserting",
+   "protection": "blocked"
+  },
+  "scenarios": [
+   {
+    "name": "expiry",
+    "openClickedAt": 1793310000.0,
+    "openedAt": 1793310001.2,
+    "protectionWhileOpen": "captiveWindow",
+    "passesWhileOpen": {
+     "port80": 1,
+     "port443": 1
+    },
+    "closedAt": 1793310062.0,
+    "protectionAfterClose": "blocked",
+    "phaseAfterClose": "failed",
+    "passesAfterClose": {
+     "port80": 0,
+     "port443": 0
+    }
+   },
+   {
+    "name": "manualEnd",
+    "openClickedAt": 1793310100.0,
+    "openedAt": 1793310100.9,
+    "protectionWhileOpen": "captiveWindow",
+    "passesWhileOpen": {
+     "port80": 1,
+     "port443": 1
+    },
+    "endClickedAt": 1793310105.0,
+    "closedAt": 1793310107.3,
+    "protectionAfterClose": "blocked",
+    "phaseAfterClose": "failed",
+    "passesAfterClose": {
+     "port80": 0,
+     "port443": 0
+    }
+   },
+   {
+    "name": "appKill",
+    "openClickedAt": 1793310200.0,
+    "openedAt": 1793310200.4,
+    "protectionWhileOpen": "captiveWindow",
+    "passesWhileOpen": {
+     "port80": 1,
+     "port443": 1
+    },
+    "killedAt": 1793310210.6,
+    "closedAt": 1793310261.9,
+    "appAbsentAtClose": true,
+    "protectionAfterClose": "blocked",
+    "phaseAfterClose": "failed",
+    "passesAfterClose": {
+     "port80": 0,
+     "port443": 0
+    }
+   }
+  ],
+  "typedRefusal": {
+   "requestFailures": [
+    [
+     "DaemonPortError",
+     "system",
+     754
+    ]
+   ],
+   "statusAfter": {
+    "phase": "idle",
+    "protection": "blocked"
+   },
+   "passesAfter": {
+    "port80": 0,
+    "port443": 0
+   }
+  }
+ },
+ "failing": [
+  {
+   "expectation": "lockdownReachedDaemon",
+   "set": [
+    [
+     [
+      "lockdownBeforeOpen"
+     ],
+     false
+    ]
+   ]
+  },
+  {
+   "expectation": "d8FailedIntentOpens",
+   "set": [
+    [
+     [
+      "statusBeforeOpen"
+     ],
+     {
+      "phase": "active",
+      "protection": "protected"
+     }
+    ]
+   ]
+  },
+  {
+   "expectation": "d8FailedIntentOpens",
+   "set": [
+    [
+     [
+      "scenarios",
+      0,
+      "protectionWhileOpen"
+     ],
+     "blocked"
+    ]
+   ]
+  },
+  {
+   "expectation": "captivePassesWhileOpen:expiry",
+   "set": [
+    [
+     [
+      "scenarios",
+      0,
+      "passesWhileOpen",
+      "port443"
+     ],
+     0
+    ]
+   ]
+  },
+  {
+   "expectation": "captivePassesWhileOpen:manualEnd",
+   "set": [
+    [
+     [
+      "scenarios",
+      1,
+      "protectionWhileOpen"
+     ],
+     "blocked"
+    ]
+   ]
+  },
+  {
+   "expectation": "captivePassesWhileOpen:appKill",
+   "set": [
+    [
+     [
+      "scenarios",
+      2,
+      "passesWhileOpen",
+      "port80"
+     ],
+     0
+    ]
+   ]
+  },
+  {
+   "expectation": "expiryCloses",
+   "set": [
+    [
+     [
+      "scenarios",
+      0,
+      "passesAfterClose",
+      "port80"
+     ],
+     1
+    ]
+   ]
+  },
+  {
+   "expectation": "expiryCloses",
+   "set": [
+    [
+     [
+      "scenarios",
+      0,
+      "closedAt"
+     ],
+     1793310020.0
+    ]
+   ]
+  },
+  {
+   "expectation": "expiryCloses",
+   "set": [
+    [
+     [
+      "scenarios",
+      0,
+      "protectionAfterClose"
+     ],
+     "captiveWindow"
+    ]
+   ]
+  },
+  {
+   "expectation": "manualEndCloses",
+   "set": [
+    [
+     [
+      "scenarios",
+      1,
+      "closedAt"
+     ],
+     1793310145.0
+    ]
+   ]
+  },
+  {
+   "expectation": "manualEndCloses",
+   "set": [
+    [
+     [
+      "scenarios",
+      1,
+      "passesAfterClose",
+      "port443"
+     ],
+     2
+    ]
+   ]
+  },
+  {
+   "expectation": "appKillCannotExtend",
+   "set": [
+    [
+     [
+      "scenarios",
+      2,
+      "appAbsentAtClose"
+     ],
+     false
+    ]
+   ]
+  },
+  {
+   "expectation": "appKillCannotExtend",
+   "set": [
+    [
+     [
+      "scenarios",
+      2,
+      "closedAt"
+     ],
+     1793310350.0
+    ]
+   ]
+  },
+  {
+   "expectation": "appKillCannotExtend",
+   "set": [
+    [
+     [
+      "scenarios",
+      2,
+      "killedAt"
+     ],
+     1793310202.0
+    ]
+   ]
+  },
+  {
+   "expectation": "appKillCannotExtend",
+   "set": [
+    [
+     [
+      "scenarios",
+      2,
+      "passesAfterClose",
+      "port80"
+     ],
+     1
+    ]
+   ]
+  },
+  {
+   "expectation": "d8TypedRefusal",
+   "set": [
+    [
+     [
+      "typedRefusal",
+      "requestFailures"
+     ],
+     [
+      [
+       "UnknownError",
+       "withheld",
+       -1
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "expectation": "d8TypedRefusal",
+   "set": [
+    [
+     [
+      "typedRefusal",
+      "requestFailures"
+     ],
+     [
+      [
+       "DaemonPortError",
+       "system",
+       754
+      ],
+      [
+       "UnknownError",
+       "withheld",
+       -1
+      ]
+     ]
+    ]
+   ]
+  },
+  {
+   "expectation": "d8TypedRefusal",
+   "set": [
+    [
+     [
+      "typedRefusal",
+      "requestFailures"
+     ],
+     []
+    ]
+   ]
+  },
+  {
+   "expectation": "d8TypedRefusal",
+   "set": [
+    [
+     [
+      "typedRefusal",
+      "statusAfter"
+     ],
+     {
+      "phase": "captiveWindow",
+      "protection": "captiveWindow"
+     }
+    ]
+   ]
+  },
+  {
+   "expectation": "d8TypedRefusal",
+   "set": [
+    [
+     [
+      "typedRefusal",
+      "passesAfter",
+      "port80"
+     ],
+     1
+    ]
+   ]
+  }
+ ]
+}

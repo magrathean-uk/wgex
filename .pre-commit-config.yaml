@@ -1,0 +1,38 @@
+# Run with `pre-commit run --all-files`. Tool hooks use the Homebrew binaries
+# meeting Toolchain.lock minimum versions (language: system); newer is fine.
+# Excluded: linter negative fixtures, the vendored Go module tree and the
+# design tool's scratch directories (same set as Tools/lint/lib.sh).
+exclude: ^(Tools/lint/tests/|Engine/go/vendor/|Design/\.work/|Design/\.taste-skill/)
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-merge-conflict
+      - id: check-yaml
+      - id: check-json
+      - id: check-toml
+      - id: detect-private-key
+  - repo: local
+    hooks:
+      - id: gitleaks
+        name: gitleaks (working tree, redacted)
+        entry: gitleaks dir --redact --no-banner .
+        language: system
+        pass_filenames: false
+        always_run: true
+      - id: typos
+        name: typos
+        entry: typos --force-exclude
+        language: system
+        types: [text]
+        exclude: ^\.plan/
+      - id: shellcheck
+        name: shellcheck
+        entry: shellcheck
+        language: system
+        types: [shell]
+      - id: shfmt
+        name: shfmt
+        entry: shfmt -i 2 -ci -d
+        language: system
+        types: [shell]

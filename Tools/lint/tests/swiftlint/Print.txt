@@ -1,0 +1,6 @@
+// M1-13: print is forbidden in Apps/, Daemon/, Extensions/ and Packages/*/Sources.
+// Tools/** command-line output and Tests are allowed; the daemon version/doctor
+// branch has a separate scope check. This fixture is copied to each scope.
+private func diagnostic() {
+    print("fixture")
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<!-- Ad hoc variant (WGEX_RESTRICTED_ENTITLEMENTS = NO, Config/Signing-AdHoc.xcconfig):
+     restricted entitlements need a provisioning profile (P0-10). The Location entitlement is a hardened-runtime
+     resource-access entitlement, not a restricted one, so the ad hoc (Lab) build carries it too and asks for Location
+     as a Release build does (ADR-030 section 3). -->
+<dict>
+	<key>com.apple.security.personal-information.location</key>
+	<true/>
+</dict>
+</plist>

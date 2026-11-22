@@ -1,0 +1,6 @@
+# ADR-014 Transport layer
+
+Status: Accepted 2026-10-25
+
+**Decision.** `SwitchBind` is the single `conn.Bind` given to `device.NewDevice`; inner transports `udp` (one unconnected socket per family, interface-bound) and `vless` over carriers `reality` (MPL-2.0 port on utls pinned at `v1.8.3-0.20260301010127-aa6edf4b11af`, fingerprints restricted to MLKEM-capable presets) and `wstls` (coder/websocket, ALPN http/1.1). Non-blocking `Open`, receive functions that survive carrier reconnects, constant `BatchSize`, serialised writes with deadlines, single-peer restriction for carriers, 1420 MTU and ≤ 25 s keepalive clamps with a carrier, VLESS target as its own field sent in the header and never resolved client-side, plain VLESS UDP framing, bootstrap through bound sockets and the `UnderlayResolver`, health from engine events with an active probe before failover, whole-path switching inside the networking owner, manual override, no automatic failback. **HTTPUpgrade and Xray interop move to the backlog**; v1 targets sing-box-compatible servers, with Cloudflare WebSocket as the second path. The relay transports feature flag defaults to off; the Mac settings no longer expose its toggle (`Packages/WGEXCore/Sources/WGEXCore/Values/FeatureFlags.swift:6`, `Packages/WGEXUI/Sources/WGEXUI/Screens/Mac/MacSettingsView.swift:48`).
+

@@ -1,0 +1,4 @@
+AXWindow | name=Service | value= | desc= | id= |
+AXGroup | name=missing value | value=missing value | desc=group | id=wgex.settings.surface | pos=132,182 size=760x650 en=true
+AXToolbar | name=missing value | value=missing value | desc=toolbar | id= | pos=132,130 size=760x52 en=missing value
+AXButton | name=Service | value=missing value | desc=Service | id=wgex.settings.tab.service | pos=400,130 size=60x52 en=true

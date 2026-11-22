@@ -1,0 +1,525 @@
+{
+ "source": "Synthetic boot observations (epochs, phases, protections and pids only; no guest bytes) for verdict.restart_timeline and boot_report, M1-10u. Times are offsets from the post-restart daemon's start S = 1793294293.0.",
+ "cases": [
+  {
+   "name": "pre-restart lines only",
+   "about": "the log read holds only the previous daemon's lines (pid 282); the post-restart daemon (pid 336) logged none",
+   "boot": {
+    "appRunningAfterBoot": false,
+    "appStartedAt": null,
+    "daemonStartedAt": 1793294293.0,
+    "daemonPid": 336,
+    "daemonRuns": 1,
+    "statusSamples": [
+     [
+      1793294325.8,
+      "active",
+      "protected"
+     ]
+    ],
+    "firstStatus": {
+     "phase": "active",
+     "protection": "protected"
+    },
+    "referenceCount": 1,
+    "outsideReceiptsBeforeFirstStatus": 0,
+    "timeline": [
+     [
+      1793294280.0,
+      "idle",
+      "blocked",
+      282
+     ],
+     [
+      1793294280.5,
+      "active",
+      "protected",
+      282
+     ]
+    ]
+   },
+   "expect": {
+    "counted": 0,
+    "excluded": 2,
+    "diagnostics": [
+     "noPostRestartStatusLine",
+     "pidSetContradictsRestart"
+    ],
+    "consistent": false
+   }
+  },
+  {
+   "name": "pid reuse",
+   "about": "the previous daemon had the same pid (336) as the post-restart one; its last line is dated before the new daemon's start. Time excludes it; the pid cannot tell reuse from a stepped clock, so the row fails closed",
+   "boot": {
+    "appRunningAfterBoot": false,
+    "appStartedAt": null,
+    "daemonStartedAt": 1793294293.0,
+    "daemonPid": 336,
+    "daemonRuns": 1,
+    "statusSamples": [
+     [
+      1793294325.8,
+      "active",
+      "protected"
+     ]
+    ],
+    "firstStatus": {
+     "phase": "active",
+     "protection": "protected"
+    },
+    "referenceCount": 1,
+    "outsideReceiptsBeforeFirstStatus": 0,
+    "timeline": [
+     [
+      1793294280.0,
+      "active",
+      "protected",
+      336
+     ],
+     [
+      1793294294.2,
+      "idle",
+      "unknown",
+      336
+     ],
+     [
+      1793294295.4,
+      "idle",
+      "blocked",
+      336
+     ],
+     [
+      1793294296.9,
+      "preparing",
+      "blocked",
+      336
+     ],
+     [
+      1793294298.1,
+      "configuring",
+      "blocked",
+      336
+     ],
+     [
+      1793294298.9,
+      "active",
+      "protected",
+      336
+     ]
+    ]
+   },
+   "expect": {
+    "counted": 5,
+    "excluded": 1,
+    "samePidLinesBeforeStart": 1,
+    "diagnostics": [
+     "postRestartLineBeforeDaemonStart",
+     "firstProtectedBeforeDaemonStart"
+    ],
+    "consistent": false
+   }
+  },
+  {
+   "name": "stepped guest clock forward",
+   "about": "the guest clock stepped forward after the daemon started: its own lines are dated before the start derived from ps etime",
+   "boot": {
+    "appRunningAfterBoot": false,
+    "appStartedAt": null,
+    "daemonStartedAt": 1793294293.0,
+    "daemonPid": 336,
+    "daemonRuns": 1,
+    "statusSamples": [
+     [
+      1793294325.8,
+      "active",
+      "protected"
+     ]
+    ],
+    "firstStatus": {
+     "phase": "active",
+     "protection": "protected"
+    },
+    "referenceCount": 1,
+    "outsideReceiptsBeforeFirstStatus": 0,
+    "timeline": [
+     [
+      1793294284.0,
+      "idle",
+      "unknown",
+      336
+     ],
+     [
+      1793294285.0,
+      "active",
+      "protected",
+      336
+     ]
+    ]
+   },
+   "expect": {
+    "counted": 0,
+    "excluded": 2,
+    "diagnostics": [
+     "noPostRestartStatusLine",
+     "postRestartLineBeforeDaemonStart",
+     "firstProtectedBeforeDaemonStart"
+    ],
+    "consistent": false
+   }
+  },
+  {
+   "name": "stepped guest clock back",
+   "about": "the guest clock stepped back: the previous daemon's last line (pid 282) is dated after the new daemon's start",
+   "boot": {
+    "appRunningAfterBoot": false,
+    "appStartedAt": null,
+    "daemonStartedAt": 1793294293.0,
+    "daemonPid": 336,
+    "daemonRuns": 1,
+    "statusSamples": [
+     [
+      1793294325.8,
+      "active",
+      "protected"
+     ]
+    ],
+    "firstStatus": {
+     "phase": "active",
+     "protection": "protected"
+    },
+    "referenceCount": 1,
+    "outsideReceiptsBeforeFirstStatus": 0,
+    "timeline": [
+     [
+      1793294293.5,
+      "active",
+      "protected",
+      282
+     ],
+     [
+      1793294294.2,
+      "idle",
+      "unknown",
+      336
+     ],
+     [
+      1793294295.4,
+      "idle",
+      "blocked",
+      336
+     ],
+     [
+      1793294296.9,
+      "preparing",
+      "blocked",
+      336
+     ],
+     [
+      1793294298.1,
+      "configuring",
+      "blocked",
+      336
+     ],
+     [
+      1793294298.9,
+      "active",
+      "protected",
+      336
+     ]
+    ]
+   },
+   "expect": {
+    "counted": 5,
+    "excluded": 1,
+    "diagnostics": [
+     "pidSetContradictsRestart"
+    ],
+    "consistent": false
+   }
+  },
+  {
+   "name": "empty timeline",
+   "about": "the log read returned no status line: the existing unknown (BOOT_TIMELINE_GAP), not a consistency failure",
+   "boot": {
+    "appRunningAfterBoot": false,
+    "appStartedAt": null,
+    "daemonStartedAt": 1793294293.0,
+    "daemonPid": 336,
+    "daemonRuns": 1,
+    "statusSamples": [
+     [
+      1793294325.8,
+      "active",
+      "protected"
+     ]
+    ],
+    "firstStatus": {
+     "phase": "active",
+     "protection": "protected"
+    },
+    "referenceCount": 1,
+    "outsideReceiptsBeforeFirstStatus": 0,
+    "timeline": []
+   },
+   "expect": {
+    "counted": 0,
+    "excluded": 0,
+    "diagnostics": [],
+    "consistent": true,
+    "timelineAvailable": false
+   }
+  },
+  {
+   "name": "daemon unidentified",
+   "about": "status lines were read but neither the daemon's ps start nor its pid: nothing can be attributed to it",
+   "boot": {
+    "appRunningAfterBoot": false,
+    "appStartedAt": null,
+    "daemonStartedAt": null,
+    "daemonPid": null,
+    "daemonRuns": 1,
+    "statusSamples": [
+     [
+      1793294325.8,
+      "active",
+      "protected"
+     ]
+    ],
+    "firstStatus": {
+     "phase": "active",
+     "protection": "protected"
+    },
+    "referenceCount": 1,
+    "outsideReceiptsBeforeFirstStatus": 0,
+    "timeline": [
+     [
+      1793294294.2,
+      "idle",
+      "unknown"
+     ],
+     [
+      1793294295.4,
+      "idle",
+      "blocked"
+     ],
+     [
+      1793294296.9,
+      "preparing",
+      "blocked"
+     ],
+     [
+      1793294298.1,
+      "configuring",
+      "blocked"
+     ],
+     [
+      1793294298.9,
+      "active",
+      "protected"
+     ]
+    ]
+   },
+   "expect": {
+    "counted": 0,
+    "excluded": 5,
+    "diagnostics": [
+     "postRestartDaemonUnidentified",
+     "noPostRestartStatusLine"
+    ],
+    "consistent": false
+   }
+  },
+  {
+   "name": "daemon pid changed between samples",
+   "about": "two boot samples read different oldest daemon pids: the daemon restarted again after the first",
+   "boot": {
+    "appRunningAfterBoot": false,
+    "appStartedAt": null,
+    "daemonStartedAt": 1793294293.0,
+    "daemonPid": 336,
+    "daemonRuns": 1,
+    "statusSamples": [
+     [
+      1793294325.8,
+      "active",
+      "protected"
+     ]
+    ],
+    "firstStatus": {
+     "phase": "active",
+     "protection": "protected"
+    },
+    "referenceCount": 1,
+    "outsideReceiptsBeforeFirstStatus": 0,
+    "timeline": [
+     [
+      1793294294.2,
+      "idle",
+      "unknown",
+      336
+     ],
+     [
+      1793294295.4,
+      "idle",
+      "blocked",
+      336
+     ],
+     [
+      1793294296.9,
+      "preparing",
+      "blocked",
+      336
+     ],
+     [
+      1793294298.1,
+      "configuring",
+      "blocked",
+      336
+     ],
+     [
+      1793294298.9,
+      "active",
+      "protected",
+      336
+     ]
+    ],
+    "daemonPidSamples": [
+     336,
+     401
+    ]
+   },
+   "expect": {
+    "counted": 5,
+    "excluded": 0,
+    "diagnostics": [
+     "pidSetContradictsRestart"
+    ],
+    "consistent": false
+   }
+  },
+  {
+   "name": "no restart",
+   "about": "one daemon, every line after its start, no pids (the pre-M1-10u shape): nothing excluded, the first protected status is the first protected line",
+   "boot": {
+    "appRunningAfterBoot": false,
+    "appStartedAt": null,
+    "daemonStartedAt": 1793294293.0,
+    "daemonPid": null,
+    "daemonRuns": 1,
+    "statusSamples": [
+     [
+      1793294325.8,
+      "active",
+      "protected"
+     ]
+    ],
+    "firstStatus": {
+     "phase": "active",
+     "protection": "protected"
+    },
+    "referenceCount": 1,
+    "outsideReceiptsBeforeFirstStatus": 0,
+    "timeline": [
+     [
+      1793294294.2,
+      "idle",
+      "unknown"
+     ],
+     [
+      1793294295.4,
+      "idle",
+      "blocked"
+     ],
+     [
+      1793294296.9,
+      "preparing",
+      "blocked"
+     ],
+     [
+      1793294298.1,
+      "configuring",
+      "blocked"
+     ],
+     [
+      1793294298.9,
+      "active",
+      "protected"
+     ]
+    ]
+   },
+   "expect": {
+    "counted": 5,
+    "excluded": 0,
+    "diagnostics": [],
+    "consistent": true,
+    "firstProtectedAt": 1793294298.9,
+    "timelineAvailable": true
+   }
+  },
+  {
+   "name": "restart with previous daemon lines, no pids",
+   "about": "the stored-capture shape: the previous daemon's last protected line is in the timeline without a pid; the daemon's ps start alone excludes it",
+   "boot": {
+    "appRunningAfterBoot": false,
+    "appStartedAt": null,
+    "daemonStartedAt": 1793294293.0,
+    "daemonPid": null,
+    "daemonRuns": 1,
+    "statusSamples": [
+     [
+      1793294325.8,
+      "active",
+      "protected"
+     ]
+    ],
+    "firstStatus": {
+     "phase": "active",
+     "protection": "protected"
+    },
+    "referenceCount": 1,
+    "outsideReceiptsBeforeFirstStatus": 0,
+    "timeline": [
+     [
+      1793294280.0,
+      "active",
+      "protected"
+     ],
+     [
+      1793294294.2,
+      "idle",
+      "unknown"
+     ],
+     [
+      1793294295.4,
+      "idle",
+      "blocked"
+     ],
+     [
+      1793294296.9,
+      "preparing",
+      "blocked"
+     ],
+     [
+      1793294298.1,
+      "configuring",
+      "blocked"
+     ],
+     [
+      1793294298.9,
+      "active",
+      "protected"
+     ]
+    ]
+   },
+   "expect": {
+    "counted": 5,
+    "excluded": 1,
+    "diagnostics": [],
+    "consistent": true,
+    "firstProtectedAt": 1793294298.9,
+    "timelineAvailable": true
+   }
+  }
+ ]
+}

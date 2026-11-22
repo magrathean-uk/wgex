@@ -1,0 +1,2 @@
+# Written by Config/Scripts/generate-build-identifiers.sh before every build.
+*.generated.swift

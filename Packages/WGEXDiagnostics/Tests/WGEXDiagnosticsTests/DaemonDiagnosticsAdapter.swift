@@ -1,0 +1,1 @@
+../../../../Daemon/WGEXDaemon/DaemonDiagnosticsAdapter.swift

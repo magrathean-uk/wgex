@@ -1,0 +1,1 @@
+{"source":"Synthetic guarded guest observations; no VM or host command executed","pass":{"edited":true,"preserved":true,"restored":true},"failing":[{"expectation":"adminDNSEdited","set":[[["edited"],false]]},{"expectation":"adminDNSPreservedOnDisconnect","set":[[["preserved"],false]]},{"expectation":"priorDNSRestored","set":[[["restored"],false]]}]}

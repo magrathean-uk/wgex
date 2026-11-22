@@ -1,0 +1,17 @@
+wombat-vpn (vendored subset)
+
+Origin:      https://github.com/ventz/wombat-vpn.git
+Commit:      a27bce1b6f25cccaee0fb2b4ec4107f9a101f004
+Licence:     MIT, see LICENSE in this directory
+Copyright:   (c) 2026 Ventz Petkov
+
+The files in this directory are verbatim copies from the origin commit. The
+origin files carry no per-file licence header; the grant is the repository
+LICENSE copied alongside them. Local changes, if any, are recorded per file in
+Vendor/PATCHES.md and marked in the changed file.
+
+Scope: only the files listed in Vendor/PATCHES.md (tunnel configuration
+parser, statistics, key type, tests, QR import and on-demand rules).
+Vendor/WireGuardKit of the origin repository (C and Go sources, MIT under
+WireGuard LLC copyright) and the optional engine and vendor files carrying
+separate copyleft or OpenSSL terms are NOT copied.

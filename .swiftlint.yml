@@ -1,0 +1,65 @@
+# SwiftLint house rules (plan 03 §9). Fixtures under Tools/lint/tests are
+# excluded from the tree scan; Tools/lint/run-selftests.sh lints them directly.
+# Supported entry point: just lint (Tools/lint/lint.sh), which sets WGEX_LINT_ROOT.
+# Direct swiftlint invocation is unsupported without WGEX_LINT_ROOT set to the
+# absolute repository root; the fixture runner sets its own explicit root.
+only_rules:
+  - custom_rules
+  - cyclomatic_complexity
+  - explicit_acl
+  - file_length
+  - force_cast
+  - force_try
+  - force_unwrapping
+  - function_body_length
+  - implicitly_unwrapped_optional
+  - nesting
+  - type_body_length
+
+excluded:
+  - .build
+  # SwiftPM scratch inside each package (`swift test` without --scratch-path)
+  - Packages/*/.build
+  - Packages/*/.swiftpm
+  - DerivedData
+  - Tools/lint/tests
+  - Vendor
+  - Engine/go/vendor
+  - Design/.work
+  - Design/.taste-skill
+
+file_length:
+  warning: 600
+  error: 1200
+
+force_unwrapping:
+  severity: error
+
+force_cast: error
+force_try: error
+
+custom_rules:
+  wgex_no_print:
+    name: No console printing
+    # Product code only: developer command-line tools under Tools/** print by design.
+    # Tests are exempt; check-daemon-print.py restricts the daemon exception to
+    # its --version/--doctor branch rather than exempting every daemon print.
+    # Entry points set WGEX_LINT_ROOT; quote the absolute root so ancestors named
+    # Tools or Tests cannot accidentally exempt product code.
+    included: '^\Q${WGEX_LINT_ROOT}\E/(?:(?:Apps|Daemon|Extensions)/|Packages/[^/]+/Sources/)'
+    regex: '\bprint\s*\('
+    excluded: '^\Q${WGEX_LINT_ROOT}\E/(?:Tools/|(?:[^/]+/)*(?:Tests|[^/]*Tests)/|Daemon/WGEXDaemon/main\.swift$)'
+    match_kinds: [identifier]
+    message: Use structured logging in product sources; Tools, tests and daemon metadata may print.
+    severity: error
+  wgex_ticket_comment:
+    name: Ticketed work comments
+    regex: '\b(?:TODO|FIXME)\b(?![^\n]*[A-Z]\d-\d\d\b)[^\n]*'
+    match_kinds: [comment, doccomment]
+    message: TODO and FIXME comments require a ticket such as M1-13.
+    severity: error
+  wgex_bare_risk:
+    name: Explicit risk identifiers
+    regex: '\bR-\d\d\b'
+    message: Use RISK identifiers for risks or RT identifiers for regressions.
+    severity: error

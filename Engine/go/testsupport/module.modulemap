@@ -1,0 +1,5 @@
+module CWGEXEngineTest {
+    header "wgex.h"
+    header "wgex_test.h"
+    export *
+}

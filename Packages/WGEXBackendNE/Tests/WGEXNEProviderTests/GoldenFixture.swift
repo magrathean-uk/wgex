@@ -1,0 +1,1 @@
+../WGEXNEClientTests/GoldenFixture.swift

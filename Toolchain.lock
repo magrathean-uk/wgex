@@ -1,0 +1,47 @@
+# WGEX minimum versions for [xcode], [swift], [go], [xcodegen] and [homebrew].
+# Newer is fine; `just doctor` prints found versions and rejects older or missing tools.
+# [go_tools] keeps exact module versions for offline resolution from the module cache.
+# [sparkle] and [iperf3] identify release artefacts; their URLs and SHA-256 values
+# protect artefact integrity and are not host tool pins.
+
+[xcode]
+version = "27.2"
+
+[swift]
+version = "6.4.2"
+
+[go]
+version = "go1.27.3"
+
+[xcodegen]
+version = "2.46.0"
+
+[homebrew]
+python3 = "3.15.1"
+rg = "15.2.0"
+swiftlint = "0.65.1"
+swiftformat = "0.64.1"
+just = "1.59.0"
+xcbeautify = "3.2.1"
+typos = "1.51.1"
+shellcheck = "0.11.0"
+shfmt = "3.14.1"
+pre-commit = "4.7.0"
+gitleaks = "8.30.1"
+
+[go_tools]
+staticcheck = "honnef.co/go/tools/cmd/staticcheck@v0.8.2"
+go-licenses = "github.com/google/go-licenses/v2@v2.0.1"
+govulncheck = "golang.org/x/vuln/cmd/govulncheck@v1.9.0"
+
+[sparkle]
+version = "2.9.3"
+archive = "Sparkle-2.9.3.tar.xz"
+url = "https://github.com/sparkle-project/Sparkle/releases/download/2.9.3/Sparkle-2.9.3.tar.xz"
+sha256 = "74a07da821f92b79310009954c0e15f350173374a3abe39095b4fc5096916be6"
+
+[iperf3]
+version = "3.22"
+asset = "iperf3-arm64-osx-15"
+url = "https://github.com/userdocs/iperf3-static/releases/download/3.22/iperf3-arm64-osx-15"
+sha256 = "b314e8f62cb7ee1277f6c9fcc8b7a659c154aadd6b672d00e9e842d59a895d05"

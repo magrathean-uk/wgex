@@ -1,0 +1,30 @@
+{
+  "configurations": [
+    {
+      "id": "30F91D98-FA51-537A-8BF7-92EA9CDC1983",
+      "name": "Default",
+      "options": {}
+    }
+  ],
+  "defaultOptions": {
+    "codeCoverage": false,
+    "testTimeoutsEnabled": true
+  },
+  "testTargets": [
+    {
+      "target": {
+        "containerPath": "container:WGEX.xcodeproj",
+        "identifier": "95E2CE31A53DDC76B00B1B97",
+        "name": "WGEXiOSUnitTests"
+      }
+    },
+    {
+      "target": {
+        "containerPath": "container:WGEX.xcodeproj",
+        "identifier": "670604CCBCF7667803A79A3A",
+        "name": "WGEXiOSUITests"
+      }
+    }
+  ],
+  "version": 1
+}

@@ -1,0 +1,4 @@
+module CWGEXEngine {
+    header "wgex.h"
+    export *
+}

@@ -1,0 +1,42 @@
+// WGEX settings shared by every target (plan 03 §3-§5, ADR-002, ADR-016).
+// Every identifier derives from WGEX_BUNDLE_ID_BASE; nothing is typed twice.
+
+WGEX_BUNDLE_ID_BASE = com.magrathean.WGEXApp
+WGEX_BUNDLE_ID_BASE[config=Debug] = com.magrathean.WGEXApp.dev
+WGEX_BUNDLE_ID_BASE[config=Lab] = com.magrathean.WGEXApp.dev
+// Placeholder team. Put your own Apple Developer team in the git-ignored
+// Config/Local.xcconfig (copy Config/Local.xcconfig.example); the include below
+// overrides this value.
+WGEX_TEAM = ABCDE12345
+#include? "Local.xcconfig"
+WGEX_MAC_APP_GROUP = group.$(WGEX_BUNDLE_ID_BASE)
+
+MARKETING_VERSION = 0.1.0
+CURRENT_PROJECT_VERSION = 1
+
+// Signing defaults once provisioning exists (P0-10). Signing-AdHoc.xcconfig
+// overrides these until then.
+DEVELOPMENT_TEAM = $(WGEX_TEAM)
+CODE_SIGN_STYLE = Automatic
+WGEX_RESTRICTED_ENTITLEMENTS = YES
+WGEX_ENTITLEMENTS_VARIANT_YES =
+WGEX_ENTITLEMENTS_VARIANT_NO = .adhoc
+WGEX_ENTITLEMENTS_VARIANT = $(WGEX_ENTITLEMENTS_VARIANT_$(WGEX_RESTRICTED_ENTITLEMENTS))
+
+// Swift 6 language mode with explicit upcoming features (ADR-002).
+SWIFT_VERSION = 6
+SWIFT_UPCOMING_FEATURE_NONISOLATED_NONSENDING_BY_DEFAULT = YES
+SWIFT_UPCOMING_FEATURE_INFER_ISOLATED_CONFORMANCES = YES
+SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES
+SWIFT_UPCOMING_FEATURE_EXISTENTIAL_ANY = YES
+SWIFT_TREAT_WARNINGS_AS_ERRORS = YES
+GCC_TREAT_WARNINGS_AS_ERRORS = YES
+
+ARCHS = arm64
+ONLY_ACTIVE_ARCH = NO
+ENABLE_USER_SCRIPT_SANDBOXING = YES
+DEBUG_INFORMATION_FORMAT = dwarf-with-dsym
+DEAD_CODE_STRIPPING = YES
+// Keeps Contents/MacOS to exactly WGEX and WGEXDaemon (no *.debug.dylib).
+ENABLE_DEBUG_DYLIB = NO
+ENABLE_HARDENED_RUNTIME[sdk=macosx*] = YES

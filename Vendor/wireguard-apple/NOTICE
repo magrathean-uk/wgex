@@ -1,0 +1,17 @@
+wireguard-apple (vendored subset)
+
+Origin:      https://github.com/WireGuard/wireguard-apple.git
+Commit:      2fec12a6e1f6e3460b6ee483aa00ad29cddadab1
+Licence:     MIT (SPDX id MIT), see COPYING in this directory
+Copyright:   (c) 2018-2023 WireGuard LLC. All Rights Reserved.
+
+The files in this directory are verbatim copies from the origin commit with
+their original headers intact. Local changes, if any, are recorded per file in
+Vendor/PATCHES.md and marked in the changed file.
+
+Scope: only the files listed in Vendor/PATCHES.md. The optional vendored
+MiniZip (separate zlib-style / Info-ZIP terms), the C key code, the Go bridge
+and the Network Extension sources of the origin repository are not copied.
+
+"WireGuard" is a registered trademark of Jason A. Donenfeld. WGEX is not
+affiliated with or endorsed by the WireGuard project.

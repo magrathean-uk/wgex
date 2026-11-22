@@ -1,0 +1,17 @@
+# SYNTHETIC: authored fixture, never read from the host.
+DNS configuration
+resolver #1
+  domain   : corp.example.test
+  nameserver[0] : 10.77.0.1
+  flags    : Supplemental, Request A records
+  order    : 1
+resolver #2
+  nameserver[0] : 192.0.2.53
+  flags    : Request A records
+  order    : 200000
+DNS configuration (for service-specific queries)
+resolver #1
+  domain   : corp.example.test
+  nameserver[0] : 203.0.113.53
+  flags    : Supplemental, Request A records
+  order    : 0

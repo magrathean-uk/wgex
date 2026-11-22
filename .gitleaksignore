@@ -1,0 +1,9 @@
+# Single findings accepted by fingerprint (path:rule:line). Keep this list short.
+# Vendor/wombat-vpn: a test vector key inside the upstream MIT test file, copied verbatim.
+Vendor/wombat-vpn/Packages/TunnelCore/Tests/TunnelCoreTests/ReviewAndStatsTests.swift:generic-api-key:83
+# UAPI goldens (P2-05): hex of the throwaway fixture keys in Tests/Fixtures/keys, verified key by key.
+Packages/WGEXCore/Tests/WGEXCoreTests/Golden/ipv6-dual-stack.uapi:generic-api-key:1
+Packages/WGEXCore/Tests/WGEXCoreTests/Golden/single-peer-full-tunnel.uapi:generic-api-key:1
+Packages/WGEXCore/Tests/WGEXCoreTests/Golden/single-peer-full-tunnel.uapi:generic-api-key:5
+Packages/WGEXCore/Tests/WGEXCoreTests/Golden/multi-peer-split.uapi:generic-api-key:1
+Packages/WGEXCore/Tests/WGEXCoreTests/Golden/multi-peer-split.uapi:generic-api-key:5

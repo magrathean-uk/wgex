@@ -1,0 +1,31 @@
+Armed-trial daemon journal shape from a guest run (M1-12c, 30 Oct 2026). Lab values only; no key material.
+
+Capture: armed-journal.json.log (journal.json, 2053 B, SHA-256
+b1279299939d20edefa5c93c327be4fdb5fc4ed953c7e3a5a674698be9482851) and armed-journal.log.jsonl.log (the raw framed
+journal.log, 7852 B, SHA-256 6bcf2cb483fa4b06b56a5600e5cc0358cec1207d4e7937a5cc0357f68acc49ea), read with sudo -n cat from
+/Library/Application Support/WGEX in the guest while a trial was armed (run 7 step 7, 30 Oct 2026 07:43-07:44 host local time).
+Guest: macos26-wgex restored from snapshot ready10 (Lab build of main eb37626, no reinstall), macOS 26.6.2, daemon pid 350
+after the run 7 armed-reboot scenario; host tree main 15997b1. Profile 00000000-0000-4000-8000-000000000101 (the dedicated
+lab profile), armed with `wgex cutover start ... --confirm-within 10m` from the console session; the trial was aborted
+straight after the capture.
+
+- journal.json: byte-identical to the captured journal.json. The flat schema-2 checkpoint written when the trial was
+  armed and generation 10 allocated (journalSequence 368): cutover.state.armed set, resources [] and no pfToken.
+- journal.log.jsonl: the 44 record bodies of the captured journal.log (sequences 369..412, contiguous; 16 durable,
+  28 non-durable bookkeeping), one per line, byte-identical to the framed bodies. Framing them as the dry run does
+  (little-endian length with the high bit set when durable is false, body, SHA-256 of the body) reproduces the captured
+  journal.log byte for byte (same SHA-256 as above).
+- expected-replayed.json: the stdout of `perl Tools/lab/tart/guest/journal-replay.pl` over a copy of the two captured
+  files (rc 0, no stderr), unedited. Cross-checked by hand against the RUNBOOK keys and the run 7 report: journalSequence
+  412, generation 10, cutover.profileID as above, one resource of generation 10 (10.77.0.2/24 on utun4 index 12,
+  routeFlags 16384 = RTF_PROTO2, routes 192.0.2.1/32 en0 and 10.77.0.0/24 utun4, canaryRoute en0 index 6 via
+  192.168.64.1, DNS 10.77.0.1, dnsKey State:/Network/Service/00000000-0000-4000-8000-000000000101/DNS), pfTokenPID 1088,
+  pfBootSession 00000000-0000-4000-8000-000000000102 and a numeric 20-digit pfToken.
+
+The pfToken is the guest boot's PF enable reference token for a boot that no longer exists (the guest was rebooted and
+restored since). Keep it inside these files: tests and the dry run compare against expected-replayed.json and never
+print it. canaryRoute.identity.linkAddress is the guest VM's en0 MAC address, a lab value kept so the bodies stay
+byte-exact.
+
+Replaces the synthetic fixture cutover-armed-synthetic (M1-12b), which had the same shape (checkpoint without resources
+or token, one current-generation resource in the log, non-durable last record) and nothing the real capture lacks.

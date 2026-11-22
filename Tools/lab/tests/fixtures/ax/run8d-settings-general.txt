@@ -1,0 +1,20 @@
+AXWindow | name=General | value= | desc= | id= | pos=62,30 size=900x738
+AXGroup | name=missing value | value=missing value | desc=group | id= | pos=62,30 size=900x738 en=missing value
+AXScrollArea | name=missing value | value=missing value | desc=scroll area | id= | pos=62,82 size=900x686 en=missing value
+AXGroup | name=missing value | value=missing value | desc=group | id= | pos=62,82 size=900x420 en=missing value
+AXStaticText | name=General | value=General | desc=text | id= | pos=102,102 size=60x16 en=true
+AXCheckBox | name=Show status in menu bar | value=1 | desc=Show status in menu bar | id=wgex.settings.showStatusInMenuBar | pos=880,130 size=42x24 en=false
+AXStaticText | name=Show status in menu bar | value=Show status in menu bar | desc=text | id= | pos=112,134 size=160x16 en=true
+AXCheckBox | name=Hide Dock icon | value=0 | desc=Hide Dock icon | id=wgex.settings.hideDockIcon | pos=880,190 size=42x24 en=true
+AXStaticText | name=Hide Dock icon | value=Hide Dock icon | desc=text | id= | pos=112,194 size=100x16 en=true
+AXPopUpButton | name=Default tunnel | value=wgex-lab-full4 | desc=Default tunnel | id=wgex.protection.defaultTunnel | pos=700,250 size=222x24 en=true
+AXToolbar | name=missing value | value=missing value | desc=toolbar | id= | pos=62,30 size=900x52 en=missing value
+AXButton | name=General | value=missing value | desc=General | id= | pos=224,32 size=72x48 en=true
+AXButton | name=Protection | value=missing value | desc=Protection | id= | pos=296,32 size=72x48 en=true
+AXButton | name=Network | value=missing value | desc=Network | id= | pos=368,32 size=72x48 en=true
+AXButton | name=Service | value=missing value | desc=Service | id= | pos=440,32 size=72x48 en=true
+AXButton | name=Transports | value=missing value | desc=Transports | id= | pos=512,32 size=72x48 en=true
+AXButton | name=Updates | value=missing value | desc=Updates | id= | pos=584,32 size=72x48 en=true
+AXButton | name=Diagnostics | value=missing value | desc=Diagnostics | id= | pos=656,32 size=72x48 en=true
+AXButton | name=About | value=missing value | desc=About | id= | pos=728,32 size=72x48 en=true
+ax-walk: elements=19 truncated=0 errors=0

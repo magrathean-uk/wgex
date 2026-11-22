@@ -1,0 +1,104 @@
+{
+ "source": "Synthetic boot observation for the REBOOT-INTENT dry run (C8), shaped on run 6 slice 4: the daemon began preparing at 10:18:16.986, the app process started at 10:18:17 and protected followed at 10:18:18.861, so the app may have started first and the reconnect is not shown daemon-driven",
+ "pass": {
+  "boot": {
+   "appRunningAfterBoot": true,
+   "appStartedAt": 1793294297.0,
+   "daemonStartedAt": 1793294293.0,
+   "daemonRuns": 1,
+   "timeline": [
+    [1793294294.219, "idle", "unknown"],
+    [1793294295.44, "idle", "blocked"],
+    [1793294296.986, "preparing", "blocked"],
+    [1793294298.129, "configuring", "blocked"],
+    [1793294298.861, "active", "protected"]
+   ],
+   "statusSamples": [
+    [1793294325.8, "active", "protected"]
+   ],
+   "firstStatus": {
+    "phase": "active",
+    "protection": "protected"
+   },
+   "referenceCount": 1,
+   "outsideReceiptsBeforeFirstStatus": 0
+  }
+ },
+ "failing": [
+  {
+   "expectation": "timelineAvailable",
+   "set": [
+    [
+     [
+      "boot",
+      "timeline"
+     ],
+     []
+    ]
+   ]
+  },
+  {
+   "expectation": "postRestartTimelineConsistent",
+   "set": [
+    [
+     [
+      "boot",
+      "timeline"
+     ],
+     [
+      [
+       1793294280.0,
+       "active",
+       "protected",
+       282
+      ]
+     ]
+    ],
+    [
+     [
+      "boot",
+      "daemonPid"
+     ],
+     336
+    ]
+   ]
+  },
+  {
+   "expectation": "postRestartTimelineConsistent",
+   "set": [
+    [
+     [
+      "boot",
+      "timeline"
+     ],
+     [
+      [
+       1793294294.219,
+       "idle",
+       "unknown",
+       336
+      ],
+      [
+       1793294295.44,
+       "idle",
+       "blocked",
+       400
+      ]
+     ]
+    ],
+    [
+     [
+      "boot",
+      "daemonPid"
+     ],
+     336
+    ]
+   ]
+  },
+  {"expectation": "noRestartLoop", "set": [[["boot", "daemonRuns"], 2]]},
+  {"expectation": "postRestartTimelineConsistent", "set": [[["boot", "timeline"], [[1793294280.0, "active", "protected", 282], [1793294294.2, "idle", "unknown", 336], [1793294296.0, "idle", "blocked", 401]]], [["boot", "daemonPid"], 401], [["boot", "daemonStartedAt"], 1793294295.0], [["boot", "preRestartDaemonPid"], 282]]},
+  {"expectation": "postRestartTimelineConsistent", "set": [[["boot", "timeline"], [[1793294294.219, "idle", "unknown", 336, 0], [1793294295.44, "idle", "blocked", 336, 1], [1793294295.9, "active", "protected", 336, 4], [1793294296.986, "preparing", "blocked", 336, 2], [1793294298.129, "configuring", "blocked", 336, 3]]], [["boot", "daemonPid"], 336]]},
+  {"expectation": "postRestartTimelineConsistent", "set": [[["boot", "daemonPid"], 336]]},
+  {"expectation": "postRestartTimelineConsistent", "set": [[["boot", "clockSamples"], [{"sampledAt": 1793294330.0, "hostStartedAt": 1793294339.0, "hostReturnedAt": 1793294340.0, "offsetSeconds": 0.1, "uncertaintySeconds": 0.05}]]]}
+ ]
+}

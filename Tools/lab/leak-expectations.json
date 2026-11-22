@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "source": "Receiver-based protection expectations, test strategy section 6",
+  "protocols": ["dns", "http", "udp", "tcp"],
+  "states": {
+    "protected": {"claim": "protected", "require": "in_tunnel", "denyOutside": true},
+    "blocked": {"claim": "blocked", "require": null, "denyOutside": true},
+    "captiveWindow": {"claim": "unprotected", "require": "captive", "denyOutside": false},
+    "unprotected": {"claim": "unprotected", "require": "outside_tunnel", "denyOutside": false},
+    "unknown": {"claim": "unknown", "require": null, "denyOutside": false},
+    "detectionWindow": {"claim": "unknown", "require": null, "denyOutside": false, "maxSeconds": 7, "source": "docs/architecture.md:457"}
+  }
+}

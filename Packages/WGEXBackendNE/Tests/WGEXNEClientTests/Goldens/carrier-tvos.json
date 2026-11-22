@@ -1,0 +1,1 @@
+{"enforceRoutes":true,"onDemandRules":[{"action":"connect","interface":"any","ssids":[]}],"passwordReference":"AQID","profileID":"00000000-0000-0000-0000-000000000001","providerBundleIdentifier":"test.wgex.tunnel","serverAddress":"WGEX"}

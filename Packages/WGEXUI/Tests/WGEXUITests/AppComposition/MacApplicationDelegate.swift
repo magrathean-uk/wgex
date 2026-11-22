@@ -1,0 +1,1 @@
+../../../../../Apps/WGEXMac/MacApplicationDelegate.swift

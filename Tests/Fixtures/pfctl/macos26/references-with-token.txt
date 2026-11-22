@@ -1,0 +1,5 @@
+No ALTQ support in kernel
+ALTQ related functions disabled
+TOKENS:
+PID      Process Name                 TOKEN                    TIMESTAMP
+12060    pfctl                        6419684541550600056      0 days 00:00:00

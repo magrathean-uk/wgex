@@ -1,0 +1,1 @@
+../../../../../Apps/WGEXMac/MacUninstallComposition.swift

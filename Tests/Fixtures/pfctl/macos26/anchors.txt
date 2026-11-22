@@ -1,0 +1,5 @@
+No ALTQ support in kernel
+ALTQ related functions disabled
+  com.apple/200.AirDrop
+  com.apple/250.ApplicationFirewall
+  com.apple/wgex

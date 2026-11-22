@@ -1,0 +1,45 @@
+table <wgex_045190130243153191141153> const { 10.77.0.0/24, 10.77.0.1/32 }
+pass quick on lo0 all no state
+pass out quick on utun7 all no state
+pass in quick on utun7 all no state
+block drop out quick on en0 inet proto udp from any to 192.0.2.1 port 9 user 0 label "wgex-canary"
+pass out quick on en0 inet proto udp from any to 198.51.100.8 port 51820 user 0 keep state
+pass out quick on en0 inet6 proto udp from any to 2001:db8::8 port 51820 user 0 keep state
+pass out quick on en0 inet proto udp from any to 192.168.20.1 port 53 user 0 group = 1464288600 keep state label "wgex-resolver"
+pass out quick on en0 inet proto tcp from any to 192.168.20.1 port 53 user 0 group = 1464288600 flags S/SA keep state label "wgex-resolver"
+pass out quick on en0 inet6 proto udp from any to 2001:db8:20::1 port 53 user 0 group = 1464288600 keep state label "wgex-resolver"
+pass out quick on en0 inet6 proto tcp from any to 2001:db8:20::1 port 53 user 0 group = 1464288600 flags S/SA keep state label "wgex-resolver"
+pass out quick on utun7 inet proto udp from any to 10.77.0.1 port 53 no state
+pass out quick on utun7 inet proto tcp from any to 10.77.0.1 port 53 no state
+pass out quick on en0 inet proto udp from any to 192.168.20.53 port 53 no state
+pass out quick on en0 inet proto tcp from any to 192.168.20.53 port 53 no state
+block drop out quick proto tcp from any to any port 53
+block drop out quick proto tcp from any to any port 853
+block drop out quick proto udp from any to any port 53
+block drop out quick proto udp from any to any port 853
+pass out quick on en0 inet proto udp from any port 68 to 255.255.255.255 port 67 no state
+pass out quick on en0 inet proto udp from any port 68 to 192.168.20.0/24 port 67 no state
+pass in quick on en0 inet proto udp from any port 67 to any port 68 no state
+pass out quick on en0 inet6 proto udp from fe80::/10 port 546 to ff02::1:2 port 547 no state
+pass in quick on en0 inet6 proto udp from fe80::/10 port 547 to fe80::/10 port 546 no state
+pass quick on en0 inet6 proto icmp6 from fe80::/10 to fe80::/10 icmp6-type 133 no state
+pass quick on en0 inet6 proto icmp6 from fe80::/10 to fe80::/10 icmp6-type 134 no state
+pass quick on en0 inet6 proto icmp6 from fe80::/10 to fe80::/10 icmp6-type 135 no state
+pass quick on en0 inet6 proto icmp6 from fe80::/10 to fe80::/10 icmp6-type 136 no state
+pass quick on en0 inet6 proto icmp6 from fe80::/10 to ff02::/16 icmp6-type 133 no state
+pass quick on en0 inet6 proto icmp6 from fe80::/10 to ff02::/16 icmp6-type 134 no state
+pass quick on en0 inet6 proto icmp6 from fe80::/10 to ff02::/16 icmp6-type 135 no state
+pass quick on en0 inet6 proto icmp6 from fe80::/10 to ff02::/16 icmp6-type 136 no state
+pass quick on en0 inet6 proto icmp6 from :: to fe80::/10 icmp6-type 133 no state
+pass quick on en0 inet6 proto icmp6 from :: to fe80::/10 icmp6-type 134 no state
+pass quick on en0 inet6 proto icmp6 from :: to fe80::/10 icmp6-type 135 no state
+pass quick on en0 inet6 proto icmp6 from :: to fe80::/10 icmp6-type 136 no state
+pass quick on en0 inet6 proto icmp6 from :: to ff02::/16 icmp6-type 133 no state
+pass quick on en0 inet6 proto icmp6 from :: to ff02::/16 icmp6-type 134 no state
+pass quick on en0 inet6 proto icmp6 from :: to ff02::/16 icmp6-type 135 no state
+pass quick on en0 inet6 proto icmp6 from :: to ff02::/16 icmp6-type 136 no state
+pass in quick on en0 inet proto icmp from 198.51.100.8 to any icmp-type 3 code 4 no state
+pass in quick on en0 inet6 proto icmp6 from 2001:db8::8 to any icmp6-type 2 no state
+block drop out quick on en0 inet from any to <wgex_045190130243153191141153>
+pass out quick on en0 inet6 all keep state
+block drop quick all

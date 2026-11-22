@@ -1,0 +1,10 @@
+// Opt-in Apple Development signing for the own-Mac Release build.
+// WGEX_TEAM, WGEX_OWN_MAC_LEAF and WGEX_OWN_MAC_PROFILE come from the git-ignored Config/Local.xcconfig (via Base.xcconfig).
+CODE_SIGN_STYLE = Manual
+CODE_SIGN_IDENTITY = $(WGEX_OWN_MAC_IDENTITY_SHA1)
+DEVELOPMENT_TEAM = $(WGEX_TEAM)
+WGEX_RESTRICTED_ENTITLEMENTS = YES
+// Xcode does not expose this prefix in showBuildSettings; preflight verifies it matches the profile.
+TeamIdentifierPrefix = $(DEVELOPMENT_TEAM).
+WGEX_MAC_APP_GROUP = $(TeamIdentifierPrefix)$(WGEX_BUNDLE_ID_BASE)
+OTHER_CODE_SIGN_FLAGS = $(inherited) --timestamp=none

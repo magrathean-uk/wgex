@@ -1,0 +1,46 @@
+AXWindow | name=Service | value= | desc= | id= | pos=62,30 size=900x738
+AXGroup | name=missing value | value=missing value | desc=group | id= | pos=62,30 size=900x738 en=missing value
+AXGroup | name=missing value | value=missing value | desc=group | id= | pos=160,164 size=704x514 en=true
+AXStaticText | name=Daemon connected with build 1. | value=Daemon connected with build 1. | desc=text | id= | pos=170,174 size=193x16 en=true
+AXStaticText | name=Background service | value=Background service | desc=text | id= | pos=190,231 size=128x16 en=true
+AXButton | name=missing value | value=missing value | desc=button | id=wgex.onboarding.refreshServiceState | pos=170,391 size=155x24 en=true
+AXGroup | name=missing value | value=missing value | desc=group | id=wgex.service.secureInstall | pos=170,429 size=684x85 en=true
+AXStaticText | name=Secure install verified | value=Secure install verified | desc=text | id= | pos=215,449 size=140x16 en=true
+AXStaticText | name=WGEX is in Applications and the privileged service matches this app | value=WGEX is in Applications and the privileged service matches this app | desc=text | id= | pos=190,478 size=411x16 en=true
+AXStaticText | name=Secure install removes non-root write access. The interim admin-to-root exposure remains until this completes. | value=Secure install removes non-root write access. The interim admin-to-root exposure remains until this completes. | desc=text | id= | pos=170,528 size=537x13 en=true
+AXButton | name=missing value | value=missing value | desc=button | id=wgex.settings.reRegisterBackgroundService | pos=170,562 size=215x24 en=true
+AXStaticText | name=Downgrade state | value=Downgrade state | desc=text | id= | pos=170,607 size=103x16 en=true
+AXStaticText | name=Downgrade state | value=Downgrade state | desc=text | id=wgex.settings.downgradeState | pos=709,607 size=144x16 en=true
+AXButton | name=missing value | value=missing value | desc=button | id=wgex.settings.uninstall | pos=170,644 size=87x24 en=true
+AXGroup | name=missing value | value=missing value | desc=group | id= | pos=160,734 size=704x128 en=true
+AXRadioGroup | name=missing value | value=missing value | desc=radio group | id=wgex.main.startupOption | pos=170,744 size=684x16 en=true
+AXStaticText | name=Connection at startup | value=Connection at startup | desc=text | id= | pos=170,744 size=132x16 en=true
+AXRadioButton | name=Connection at startup | value=1 | desc=radio button | id= | pos=466,744 size=40x16 en=true
+AXRadioButton | name=Connection at startup | value=0 | desc=radio button | id= | pos=522,744 size=120x16 en=true
+AXRadioButton | name=Connection at startup | value=0 | desc=radio button | id= | pos=659,744 size=195x16 en=true
+AXStaticText | name=FileVault: The Mac must be unlocked before the encrypted startup disk is available. | value=FileVault: The Mac must be unlocked before the encrypted startup disk is available. | desc=text | id= | pos=170,772 size=400x13 en=true
+AXStaticText | name=Lockdown | value=Lockdown | desc=text | id= | pos=170,797 size=61x16 en=true
+AXCheckBox | name=Lockdown | value=0 | desc=Lockdown | id=wgex.onboarding.lockdown | pos=818,798 size=36x16 en=true
+AXStaticText | name=If the tunnel is unavailable, internet traffic stays blocked, including before you sign in. With boot connection and Lockdown enabled, a failed connection can prevent internet access at the login screen. | value=If the tunnel is unavailable, internet traffic stays blocked, including before you sign in. With boot connection and Lockdown enabled, a failed connection can prevent internet access at the login screen. | desc=text | id= | pos=170,825 size=677x26 en=true
+AXGroup | name=missing value | value=missing value | desc=group | id= | pos=160,918 size=704x359 en=true
+AXButton | name=missing value | value=missing value | desc=button | id=wgex.settings.action.0 | pos=170,928 size=202x24 en=true
+AXButton | name=missing value | value=missing value | desc=button | id=wgex.settings.action.1 | pos=170,973 size=155x24 en=true
+AXButton | name=missing value | value=missing value | desc=button | id=wgex.settings.action.2 | pos=170,1018 size=145x24 en=true
+AXButton | name=missing value | value=missing value | desc=button | id=wgex.settings.action.7 | pos=170,1063 size=105x24 en=true
+AXButton | name=missing value | value=missing value | desc=button | id=wgex.settings.action.3 | pos=170,1108 size=148x24 en=true
+AXButton | name=missing value | value=missing value | desc=button | id=wgex.settings.action.4 | pos=170,1153 size=156x24 en=true
+AXButton | name=missing value | value=missing value | desc=button | id=wgex.settings.action.5 | pos=170,1198 size=133x24 en=true
+AXButton | name=missing value | value=missing value | desc=button | id=wgex.settings.action.6 | pos=170,1243 size=130x24 en=true
+AXToolbar | name=missing value | value=missing value | desc=toolbar | id= | pos=62,62 size=900x56 en=missing value
+AXButton | name=General | value=missing value | desc=button | id= | pos=265,62 size=55x56 en=true
+AXButton | name=Protection | value=missing value | desc=button | id= | pos=321,62 size=66x56 en=true
+AXButton | name=Network | value=missing value | desc=button | id= | pos=389,62 size=56x56 en=true
+AXButton | name=Service | value=missing value | desc=button | id= | pos=446,62 size=55x56 en=true
+AXButton | name=Transports | value=missing value | desc=button | id= | pos=502,62 size=68x56 en=true
+AXButton | name=Updates | value=missing value | desc=button | id= | pos=571,62 size=56x56 en=true
+AXButton | name=Diagnostics | value=missing value | desc=button | id= | pos=629,62 size=73x56 en=true
+AXButton | name=About | value=missing value | desc=button | id= | pos=703,62 size=55x56 en=true
+AXGroup | name=missing value | value=missing value | desc=group | id= | pos=117,39 size=14x14 en=missing value
+AXGroup | name=missing value | value=missing value | desc=group | id= | pos=117,39 size=14x14 en=missing value
+AXStaticText | name=Service | value=Service | desc=text | id= | pos=485,37 size=53x16 en=true
+ax-walk: elements=61 truncated=0 errors=0

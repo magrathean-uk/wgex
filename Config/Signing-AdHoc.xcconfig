@@ -1,0 +1,10 @@
+// Ad hoc signing until P0-10 delivers provisioning profiles. Selects the
+// *.adhoc.entitlements files, which omit the restricted entitlements
+// (keychain-access-groups, application groups, Network Extension, Wi-Fi
+// information) that need a profile. Remove the #include lines in Debug and
+// Release once profiles exist; the full *.entitlements files are ready.
+CODE_SIGN_IDENTITY = -
+CODE_SIGN_STYLE = Manual
+DEVELOPMENT_TEAM =
+PROVISIONING_PROFILE_SPECIFIER =
+WGEX_RESTRICTED_ENTITLEMENTS = NO

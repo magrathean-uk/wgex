@@ -1,0 +1,35 @@
+[files]
+extend-exclude = [
+  ".plan/**",
+  "Tools/lint/tests/**",
+  "Vendor/**",
+  # Vendored Go module tree: upstream spelling is not ours to fix.
+  "Engine/go/vendor/**",
+  # Design tool scratch (Design/*.md stays checked).
+  "Design/.work/**",
+  "Design/.taste-skill/**",
+  # Claude Design prototypes: generated HTML, upstream spelling.
+  "Design/mac-v2/*.dc.html",
+  "*.xcframework",
+  "Toolchain.lock",
+]
+
+[default]
+# Base64 and hex blobs (keys in fixtures, checksums) are not words.
+extend-ignore-re = [
+  "[A-Za-z0-9+/]{40,}={0,2}",
+  "[0-9a-fA-F]{32,}",
+  # Escape hatch for test vectors: end a line with `// spellchecker:disable-line`
+  # (or `#`), or wrap a block in `spellchecker:off` ... `spellchecker:on` comments.
+  "(?Rm)^.*(#|//)\\s*spellchecker:disable-line$",
+  "(?s)(#|//)\\s*spellchecker:off.*?\\n\\s*(#|//)\\s*spellchecker:on",
+]
+
+[default.extend-words]
+# WireGuard and Apple terms
+wg = "wg"
+udid = "udid"
+
+[default.extend-identifiers]
+# Plural of an acronym: typos splits it at the case change and reads "PN".
+PNGs = "PNGs"

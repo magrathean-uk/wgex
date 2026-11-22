@@ -1,0 +1,29 @@
+# macOS
+.DS_Store
+
+# Xcode user data and generated project
+xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+WGEX.xcodeproj/
+DerivedData/
+*.dSYM
+*.dSYM.zip
+
+# SwiftPM
+.build/
+.swiftpm/
+
+# Engine build output
+*.xcframework
+Packages/WGEXEngine/Binary
+Packages/WGEXEngine/.Binary.build.lock*
+Engine/build/
+
+# Host-local state
+Config/Local.xcconfig
+Config/host-uuid.local
+
+# Python bytecode
+__pycache__/
+*.pyc

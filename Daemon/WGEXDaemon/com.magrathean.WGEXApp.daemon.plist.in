@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- Template: Config/Scripts/preprocess-daemon-plist.sh expands ${WGEX_BUNDLE_ID_BASE}
+     and installs the result as Contents/Library/LaunchDaemons/<base>.daemon.plist.
+     No EnvironmentVariables key, ever (enforced by Tools/lint/check-launchd-plists.sh). -->
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>${WGEX_BUNDLE_ID_BASE}.daemon</string>
+	<key>BundleProgram</key>
+	<string>Contents/MacOS/WGEXDaemon</string>
+	<key>MachServices</key>
+	<dict>
+		<key>${WGEX_BUNDLE_ID_BASE}.daemon</key>
+		<true/>
+	</dict>
+	<key>RunAtLoad</key>
+	<true/>
+	<key>KeepAlive</key>
+	<dict>
+		<key>SuccessfulExit</key>
+		<false/>
+	</dict>
+	<key>ThrottleInterval</key>
+	<integer>60</integer>
+	<key>ProcessType</key>
+	<string>Interactive</string>
+	<key>AssociatedBundleIdentifiers</key>
+	<array>
+		<string>${WGEX_BUNDLE_ID_BASE}</string>
+	</array>
+	<key>SpawnConstraint</key>
+	<dict>
+		<key>signing-identifier</key><string>${WGEX_BUNDLE_ID_BASE}.daemon</string>
+	</dict>
+	<!-- RISK-30: team-identifier and validation-category 6 require Developer ID; ad hoc has neither.
+	<key>team-identifier</key><string>TEAMID</string>
+	<key>validation-category</key><integer>6</integer>
+	-->
+	<!-- RISK-30: a launchd daemon's responsible process is launchd, not the app.
+	<key>ResponsibleProcessConstraint</key>
+	<dict>
+		<key>signing-identifier</key><string>${WGEX_BUNDLE_ID_BASE}</string>
+	</dict>
+	-->
+</dict>
+</plist>

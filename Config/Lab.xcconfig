@@ -1,0 +1,8 @@
+// Lab is never used for Release. LabGuard also requires the hypervisor
+// sysctl kern.hv_vmm_present == 1 and the root-owned 0644 guest marker.
+#include "Debug.xcconfig"
+
+SWIFT_ACTIVE_COMPILATION_CONDITIONS = $(inherited) WGEX_LAB_BUILD
+WGEX_LAB_BUILD = 1
+// Match Debug identifiers; Base.xcconfig's Debug-only conditional needs this.
+WGEX_BUNDLE_ID_BASE = com.magrathean.WGEXApp.dev

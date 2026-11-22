@@ -1,0 +1,18 @@
+# gitleaks configuration. Defaults stay on; only the paths below are allowed.
+title = "WGEX gitleaks"
+
+[extend]
+useDefault = true
+
+# P0-19: Tests/Fixtures holds committed, deliberately fake WireGuard test keys
+# (Tests/Fixtures/keys) and the .conf vectors that embed them
+# (Tests/Fixtures/conf). Every key file starts with a "NOT A REAL KEY" line.
+# Tools/lint/tests/secrets holds the secret-scanner negative fixtures.
+# Nothing else is allowed here; the same key-shaped strings in any other path
+# are still reported (see Tools/lint/run-selftests.sh).
+[[allowlists]]
+description = "Test fixtures: fake keys and linter negative fixtures"
+paths = [
+  '''^Tests/Fixtures/''',
+  '''^Tools/lint/tests/secrets/''',
+]

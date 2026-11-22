@@ -1,0 +1,1119 @@
+{
+  "schemaVersion": 1,
+  "rows": {
+    "M5.1-01": {
+      "title": "IPv4-only full tunnel",
+      "steps": [
+        "Restore ready; rebuild/import full4 /1 profile after the app IPv6-policy choice fix lands",
+        "Measure connected, connecting, error and disconnected with all four protocols",
+        "Keep host SSH escape hatch available",
+        "After the blocked-during-loss window, restore relay and wait up to 120 s for automatic protected recovery; do not click Connect or call down"
+      ],
+      "expected": [
+        "Connected: only peer receives",
+        "Connecting/error: reasserting/blocked (or failed/blocked) during loss, polled every 250 ms for up to 90 s with the daemon's status stream kept; failed is accepted but not required; no outside receiver sees markers",
+        "Disconnected: host receives all protocols",
+        "Automatic recovery to protected within 120 s after fault removal; M1-04 backoff may reach 60 s"
+      ],
+      "state": "protected",
+      "action": "none",
+      "exercise": [
+        "protected",
+        "connecting",
+        "error",
+        "unprotected"
+      ],
+      "profile": "full4",
+      "dependencies": {}
+    },
+    "M5.1-02": {
+      "title": "Dual stack",
+      "steps": [
+        "Provision wg-peer with --variant dual; rebuild/import dual profile only after the routable IPv6 topology and daemon ENETUNREACH fix are verified",
+        "Apply Dual stack on the guest/peer only",
+        "Generate markers while the fault is present",
+        "Restore scoped fault and probe recovery"
+      ],
+      "expected": [
+        "Tunnel receives IPv4 and IPv6; outside receives neither"
+      ],
+      "state": "protected",
+      "action": "none",
+      "requiredFamilies": [
+        "ipv4",
+        "ipv6"
+      ],
+      "gap": "Requires routable vmnet host IPv6 and peer IPv6; current peer wg0 is IPv4-only. Supply an approved dual-stack topology; no host interface changes by this tool. The second live run also requires the daemon fix for IPv6 ENETUNREACH when the underlay lacks an IPv6 default; dual-stack import alone is not acceptance.",
+      "profile": "dual",
+      "dependencies": {}
+    },
+    "M5.1-03": {
+      "title": "IPv6-only NAT64/DNS64",
+      "steps": [
+        "Restore ready; prepare the dedicated profile",
+        "Apply IPv6-only NAT64/DNS64 on the guest/peer only",
+        "Generate markers while the fault is present",
+        "Restore scoped fault and probe recovery"
+      ],
+      "expected": [
+        "DNS64 synthesis and tunnel traffic; no outside leak"
+      ],
+      "state": "protected",
+      "action": "none",
+      "requiredFamilies": [
+        "ipv4",
+        "ipv6"
+      ],
+      "gap": "Requires an owner-provided IPv6-only guest network and NAT64/DNS64 router; current shared vmnet is IPv4.",
+      "profile": "dual",
+      "dependencies": {}
+    },
+    "M5.1-04": {
+      "title": "Path UDP cut after connection",
+      "steps": [
+        "Restore ready; prepare the dedicated profile",
+        "Apply Path UDP cut after connection on the guest/peer only",
+        "Generate markers while the fault is present",
+        "Restore scoped fault and probe recovery"
+      ],
+      "expected": [
+        "Blocked during loss; protected after relay returns"
+      ],
+      "state": "blocked",
+      "action": "relay-stop",
+      "requiredFamilies": [
+        "ipv4"
+      ],
+      "profile": "full4",
+      "dependencies": {}
+    },
+    "M5.1-05": {
+      "title": "20 percent loss",
+      "steps": [
+        "Restore ready; prepare the dedicated profile",
+        "Apply 20 percent loss on the guest/peer only",
+        "Generate markers while the fault is present",
+        "Restore scoped fault and probe recovery"
+      ],
+      "expected": [
+        "No outside leak; handshake recovers"
+      ],
+      "state": "protected",
+      "action": "loss",
+      "requiredFamilies": [
+        "ipv4"
+      ],
+      "profile": "full4",
+      "dependencies": {}
+    },
+    "M5.1-06": {
+      "title": "300 ms path latency",
+      "steps": [
+        "Restore ready; prepare the dedicated profile",
+        "Apply 300 ms path latency on the guest/peer only",
+        "Generate markers while the fault is present",
+        "Restore scoped fault and probe recovery"
+      ],
+      "expected": [
+        "No outside leak under latency"
+      ],
+      "state": "protected",
+      "action": "latency",
+      "requiredFamilies": [
+        "ipv4"
+      ],
+      "profile": "full4",
+      "dependencies": {}
+    },
+    "M5.1-07": {
+      "title": "MTU 1280 path",
+      "steps": [
+        "Restore ready; prepare the dedicated profile",
+        "Apply MTU 1280 path on the guest/peer only",
+        "Generate markers while the fault is present",
+        "Restore scoped fault and probe recovery"
+      ],
+      "expected": [
+        "Tunnel works at MTU 1280; no outside leak"
+      ],
+      "state": "protected",
+      "action": "mtu",
+      "requiredFamilies": [
+        "ipv4"
+      ],
+      "profile": "full4",
+      "dependencies": {}
+    },
+    "M5.1-08": {
+      "title": "Blackholed endpoint",
+      "steps": [
+        "Restore ready; prepare the dedicated profile",
+        "Apply Blackholed endpoint on the guest/peer only",
+        "Generate markers while the fault is present",
+        "Restore scoped fault and probe recovery",
+        "After the blocked-during-loss window, restore relay and wait up to 120 s for automatic protected recovery; do not click Connect or call down"
+      ],
+      "expected": [
+        "Connecting/error stays blocked: reasserting/blocked (or failed/blocked) during loss, polled every 250 ms for up to 90 s with the daemon's status stream kept; failed is accepted but not required; no outside leak",
+        "Automatic recovery to protected within 120 s after fault removal; M1-04 backoff may reach 60 s"
+      ],
+      "state": "blocked",
+      "action": "blackhole",
+      "requiredFamilies": [
+        "ipv4"
+      ],
+      "profile": "full4",
+      "dependencies": {}
+    },
+    "M5.1-09": {
+      "title": "Wrong dedicated fixture key",
+      "steps": [
+        "Restore ready; prepare the dedicated profile",
+        "Apply Wrong dedicated fixture key on the guest/peer only",
+        "Generate markers while the fault is present",
+        "Restore scoped fault and probe recovery"
+      ],
+      "expected": [
+        "Handshake fails: reasserting/blocked (or failed/blocked) during loss, polled every 250 ms for up to 90 s with the daemon's status stream kept; failed is accepted but not required; no outside leak"
+      ],
+      "state": "blocked",
+      "action": "wrong-key",
+      "requiredFamilies": [
+        "ipv4"
+      ],
+      "profile": "full4",
+      "dependencies": {}
+    },
+    "M5.1-10": {
+      "title": "Hostname changes while in lockdown",
+      "steps": [
+        "Restore ready; prepare the dedicated profile",
+        "Apply Hostname changes while in lockdown on the guest/peer only",
+        "Generate markers while the fault is present",
+        "Restore scoped fault and probe recovery"
+      ],
+      "expected": [
+        "Blocked until new endpoint is reconciled"
+      ],
+      "state": "protected",
+      "action": "none",
+      "requiredFamilies": [
+        "ipv4"
+      ],
+      "gap": "Requires a controlled DNS endpoint and live Lockdown setting. Current CLI exposes neither global settings nor a lab DNS-change injection.",
+      "profile": "lockdown",
+      "dependencies": {}
+    },
+    "M5.1-11": {
+      "title": "Candidate rotation with broken IPv6",
+      "steps": [
+        "Restore ready; prepare the dedicated profile",
+        "Apply Candidate rotation with broken IPv6 on the guest/peer only",
+        "Generate markers while the fault is present",
+        "Restore scoped fault and probe recovery"
+      ],
+      "expected": [
+        "Rotate A/AAAA candidates and establish IPv4 without a leak"
+      ],
+      "state": "protected",
+      "action": "none",
+      "requiredFamilies": [
+        "ipv4",
+        "ipv6"
+      ],
+      "gap": "Requires controlled A/AAAA endpoint DNS and an IPv6 fixture; current lab profile is a numeric endpoint.",
+      "profile": "full4",
+      "dependencies": {}
+    },
+    "M5.2-01": {
+      "title": "Wi-Fi to Ethernet to Wi-Fi",
+      "steps": [
+        "Restore ready; connect",
+        "Start continuous probes",
+        "Wi-Fi to Ethernet to Wi-Fi",
+        "Compare ifconfig indexes, routes and resolver ownership before/after",
+        "Probe recovery"
+      ],
+      "expected": [
+        "No cleartext leak; new path used; ownership preserved"
+      ],
+      "state": "protected",
+      "action": "none",
+      "gap": "Gap-declared, the maintainer's call (M1-10h): requires two routable guest adapters with distinct gateways; the Tart ready image has only en0 and the tool will not manufacture host interfaces. Closing it needs G to provide a second adapter in the lab topology or to waive the row.",
+      "profile": "full4",
+      "dependencies": {}
+    },
+    "M5.2-03": {
+      "title": "DHCP renewal and gateway change",
+      "steps": [
+        "Restore ready; connect",
+        "Start continuous probes",
+        "DHCP renewal and gateway change",
+        "Compare ifconfig indexes, routes and resolver ownership before/after",
+        "Probe recovery"
+      ],
+      "expected": [
+        "No cleartext leak; new path used; ownership preserved"
+      ],
+      "state": "protected",
+      "action": "none",
+      "gap": "Gap-declared, the maintainer's call (M1-10h): requires an owner-controlled second DHCP gateway; a DHCP renewal on the existing network cannot prove a gateway change. Closing it needs G to provide that gateway in the lab topology or to waive the row.",
+      "profile": "full4",
+      "dependencies": {}
+    },
+    "M5.2-04": {
+      "title": "Lab utun identity during down/up",
+      "steps": [
+        "Restore ready; connect",
+        "Start continuous probes",
+        "Interface index reuse",
+        "Compare ifconfig indexes, routes and resolver ownership before/after",
+        "Probe recovery"
+      ],
+      "expected": [
+        "Record if_nametoindex before and after guest-only down/up; lab route ownership remains valid",
+        "Automatic recovery to protected; unprotected tail proves the guest-to-host path"
+      ],
+      "state": "protected",
+      "action": "interface-cycle",
+      "limitations": [
+        "Down/up tests identity continuity; allocator-driven numeric index reuse remains a separate fixture"
+      ],
+      "profile": "full4",
+      "dependencies": {}
+    },
+    "M5.3-01": {
+      "title": "Quit the app while connected",
+      "steps": [
+        "Restore ready; connect; start markers",
+        "Quit the app while connected",
+        "Collect independent pf, route, DNS and daemon-log observations",
+        "Probe recovery and count pf tokens"
+      ],
+      "expected": [
+        "The app quits via its Quit command; the daemon keeps the tunnel protected and outside receivers remain silent",
+        "A final unprotected window requires receipts for every configured host protocol"
+      ],
+      "state": "protected",
+      "action": "app-quit",
+      "profile": "full4",
+      "dependencies": {}
+    },
+    "M5.3-02": {
+      "title": "SIGKILL daemon with app running",
+      "steps": [
+        "Restore ready; connect; start markers",
+        "SIGKILL daemon with app running",
+        "Collect independent pf, route, DNS and daemon-log observations",
+        "Probe recovery and count pf tokens"
+      ],
+      "expected": [
+        "SIGKILL with the app running leaves outside markers blocked, restarts the daemon and returns to one pf reference",
+        "A final unprotected window requires receipts for every configured host protocol"
+      ],
+      "state": "blocked",
+      "action": "kill-app",
+      "profile": "full4",
+      "dependencies": {}
+    },
+    "M5.3-03": {
+      "title": "SIGKILL daemon with app quit",
+      "steps": [
+        "Restore ready; connect; start markers",
+        "SIGKILL daemon with app quit",
+        "Collect independent pf, route, DNS and daemon-log observations",
+        "Probe recovery and count pf tokens"
+      ],
+      "expected": [
+        "After a real app Quit, SIGKILL leaves outside markers blocked; no app is opened to provide secrets; one reference remains",
+        "A final unprotected window requires receipts for every configured host protocol"
+      ],
+      "state": "blocked",
+      "action": "kill-no-app",
+      "profile": "full4",
+      "dependencies": {}
+    },
+    "M5.3-07": {
+      "title": "App update during connection",
+      "steps": [
+        "Build a second Lab bundle from the same commit with a higher CURRENT_PROJECT_VERSION (Tools/lab/update/build.sh)",
+        "Restore ready; install and connect the base bundle; start markers",
+        "Start overlapping protected-state marker generators; quit the app; replace /Applications/WGEX.app with the update while the tunnel stays connected; re-trust the wrapping key for the new daemon from the guest escrow",
+        "Open the new app; switch to overlapping blocked-state generators, then press Finish update; the administrator prompt is approved at the guest console",
+        "Keep generating without a gap from before the quit until the new daemon is confirmed protected; observe the new daemon, the kept intent and protection through the hand-off; record the update bundle's hashes and receipt",
+        "Probe the final unprotected control"
+      ],
+      "expected": [
+        "A distinct compatible signed update performs handoff without an outside marker or lost intent",
+        "A final unprotected window requires receipts for every configured host protocol"
+      ],
+      "state": "protected",
+      "action": "update",
+      "profile": "full4",
+      "dependencies": {},
+      "checks": "update",
+      "limitations": [
+        "Lab builds have no stable certificate (DEC-007): the update carries the Lab signing class and the base build's inputs except CURRENT_PROJECT_VERSION, which check-verdicts compares receipt to receipt.",
+        "The driver never enters a password. Finish update asks for the administrator right (authenticate-admin-nonshared); the lab user or the maintainer approves it at the guest console, and a missing approval fails with updateApprovalMissing.",
+        "The end-of-row installed re-measure is replaced for this row only by the update bundle's own hashes and build receipt."
+      ]
+    },
+    "M5.3-08": {
+      "title": "Reboot mid-transaction",
+      "steps": [
+        "Restore ready; connect; start markers",
+        "Reboot mid-transaction",
+        "Collect independent pf, route, DNS and daemon-log observations",
+        "Probe recovery and count pf tokens"
+      ],
+      "expected": [
+        "A transaction-barrier reboot reconciles the journal before other work and never opens traffic",
+        "A final unprotected window requires receipts for every configured host protocol"
+      ],
+      "state": "blocked",
+      "action": "none",
+      "gap": "Requires a deterministic transaction barrier exposed by the daemon. No lab barrier/injection RPC exists; a random reboot cannot prove this row.",
+      "profile": "full4",
+      "dependencies": {}
+    },
+    "M5.3-09": {
+      "title": "Logout with/without start-before-login",
+      "steps": [
+        "Connect full4; set wgex boot-intent <profile-uuid> off and read it back",
+        "Log out the guest console; observe unprotected with no WGEX reference",
+        "Wait for the lab user to relogin at the guest console; observe restored protection",
+        "Repeat with boot-intent on; observe protection and one reference throughout logout; relogin",
+        "Probe the final unprotected control"
+      ],
+      "expected": [
+        "Logout preserves the selected start-before-login policy; the two settings variants have distinct recorded outcomes",
+        "A final unprotected window requires receipts for every configured host protocol"
+      ],
+      "state": "blocked",
+      "action": "logout",
+      "profile": "full4",
+      "dependencies": {},
+      "checks": "logout",
+      "limitations": [
+        "The driver never enters a password. Console relogin must be supplied by the ready guest or the maintainer; a missing relogin fails with consoleReloginMissing."
+      ]
+    },
+    "LOGIN-SILENT": {
+      "title": "Silent login launch: no window, no Dock icon, the menu bar item (DEC-021)",
+      "steps": [
+        "Restore ready; import and connect full4",
+        "Ordinary launch with Hide Dock icon off (wgex.settings.hideDockIcon, read back from the app preference): quit, open -a WGEX; sample the console session three times",
+        "Settings, Service tab, Connection at startup: Connect at login, the app's own login item; require autoConnectAtLogin true in the profile document",
+        "Hide Dock icon off; quit the app; prevent loginwindow's reopen-state relaunch (loginwindow-reopen-state, as BOOT-SECRETS), so only the login item can start the app; log out the guest console",
+        "Wait for the console login at the guest console (no password is scripted) and for the login item to start WGEX; sample three times",
+        "Open the window from the menu bar item (menu bar 2, then wgex.menu.openWindow); sample three times",
+        "Repeat the quit, logout, login and both sample series with Hide Dock icon on",
+        "Wait for protected (reconnect from the main window if Connect at login did not bring it), probe protected; probe the final unprotected control"
+      ],
+      "expected": [
+        "An ordinary launch shows the window once: every sample has exactly one standard WGEX window, the menu bar item, a running WGEX Dock item and application type Foreground",
+        "Connect at login reaches the profile document (autoConnectAtLogin true) and the reopen-state prevention is applied before the first logout",
+        "After each login the login item starts WGEX within 60 s and every sample shows no standard WGEX window, no running WGEX Dock item, an application type other than Foreground and the menu bar item",
+        "Opening the window from the menu bar item shows exactly one standard window in every sample, with the Dock item and application type Foreground when Hide Dock icon is off, and neither when it is on",
+        "A final unprotected window requires receipts for every configured host protocol"
+      ],
+      "state": "protected",
+      "action": "login-silent",
+      "profile": "full4",
+      "dependencies": {},
+      "checks": "login-silent",
+      "limitations": [
+        "The driver never enters a password: each console login comes from the maintainer at the guest console within HARNESS_CONSOLE_RELOGIN (120 s); a missing login fails with consoleReloginMissing",
+        "Window and Dock state come from System Events in the console session (WGEX standard windows, the Dock's list) and lsappinfo's application type; a sample that cannot be read fails its check, never passes it",
+        "Protection after login is recorded (protectedWithoutAction), not judged: the row is about the presentation of the login launch"
+      ]
+    },
+    "M5.3-10": {
+      "title": "Captive window: expiry, manual End and app kill at 10 s (pf read-back)",
+      "steps": [
+        "Restore ready; connect full4; explicit down, then the unprotected lead control (before Lockdown, which the row never turns off); connect full4 again and wait for protected",
+        "Turn Lockdown on (wgex.protection.lockdown); set the captive window to 1 minute (wgex.settings.captiveWindow, best effort; the read-back decides the deadline)",
+        "Stop the relay and wait for reasserting/blocked or failed/blocked with the intent kept",
+        "Open from wgex.main.openCaptiveWindow and confirm wgex.protection.confirmCaptiveWindow; read the anchor while open; let it expire; read back; probe blocked",
+        "Open again; End with wgex.protection.endCaptiveWindow; read back; probe blocked",
+        "Open again; SIGKILL the app 10 s after opening; wait for the deadline with the app absent; read back; probe blocked",
+        "D8 typed refusal: relaunch the app, explicit down under Lockdown (idle/blocked, no intent), open and confirm; read the daemon's request failure line and the anchor",
+        "Restart the relay; Lockdown stays on (turning it off raises the macOS administrator prompt, which the driver never answers), so no trailing tail: the lead control stands in for it (lockdownOffNeedsAdmin, tailControlPosition lead)"
+      ],
+      "expected": [
+        "Lockdown reaches the daemon (journal settings.lockdown true)",
+        "D8: an intended failed or reasserting tunnel (relay stopped) opens the captive window",
+        "While open: status captiveWindow and the anchor carries captive TCP 80 and 443 passes",
+        "Expiry closes it within the configured duration (-5 s/+30 s): blocked, no 80/443 pass left in the anchor",
+        "Manual End closes it within 15 s: blocked, no 80/443 pass left",
+        "An app SIGKILL 10 s after opening cannot extend the deadline: the window closes on time with the app absent, blocked, no pass left",
+        "No captive pass survives into the blocking policy: every blocked window after a close has no outside receipt",
+        "D8 typed refusal: with no intent the open is refused with a typed captive code (754-757), not UnknownError; idle/blocked and no pass",
+        "The unprotected lead window, before Lockdown on, requires receipts for every configured host protocol"
+      ],
+      "state": "blocked",
+      "action": "captive",
+      "profile": "full4",
+      "dependencies": {},
+      "checks": "captive",
+      "limitations": [
+        "Privileged 80/53 listeners are out of scope: the captive passes are proven by the anchor read-back, not by receipts at ports 80, 443 or 53 (host privilege is forbidden; high-port receivers cannot prove them)",
+        "Only the TCP 80/443 captive passes are read back; not checked: that no non-root captive DNS exception remains after the window closes (M1-04), and that the tunnel routes and DNS are withdrawn while the window is open",
+        "Operator alarm: allow 4200 s for this row, not 3600 s (guest run 8e took 3273 s of a 3600 s alarm, 1796 s of it in 29 accessibility dumps; the lead control adds an explicit down, one window, a profile selection and a Connect search, two full walks); the verdict's guiSeconds records the row's total GUI time"
+      ]
+    },
+    "M5.4-01": {
+      "title": "Foreign utun /1 routes",
+      "steps": [
+        "Restore ready; establish baseline",
+        "Foreign utun /1 routes",
+        "Probe under filtering and compare independent state",
+        "Undo only the row-owned fixture"
+      ],
+      "expected": [
+        "A separate guarded fixture owns a foreign utun and scoped IPv4 /1 routes",
+        "Both foreign routes and the interface survive WGEX reconciliation; teardown removes only the fixture"
+      ],
+      "state": "protected",
+      "action": "foreign-up",
+      "profile": "full4",
+      "dependencies": {}
+    },
+    "M5.4-02": {
+      "title": "Second pass-out anchor",
+      "steps": [
+        "Restore ready; establish baseline",
+        "Second pass-out anchor",
+        "Probe under filtering and compare independent state",
+        "Undo only the row-owned fixture"
+      ],
+      "expected": [
+        "A com.apple/zzz-test pass-out sibling cannot defeat the WGEX quick block; the WGEX canary increments",
+        "An unprotected tail is required to establish guest-to-host reachability"
+      ],
+      "state": "protected",
+      "action": "second-anchor",
+      "profile": "full4",
+      "dependencies": {}
+    },
+    "M5.4-03": {
+      "title": "Custom resolver ownership",
+      "steps": [
+        "Restore ready; establish baseline",
+        "Custom resolver ownership",
+        "Probe under filtering and compare independent state",
+        "Undo only the row-owned fixture"
+      ],
+      "expected": [
+        "The row-owned resolver file remains unchanged and scutil --dns exposes its domain after WGEX operation",
+        "An unprotected tail is required to establish guest-to-host reachability"
+      ],
+      "state": "protected",
+      "action": "resolver",
+      "profile": "full4",
+      "dependencies": {}
+    },
+    "M5.4-04": {
+      "title": "Administrator DNS edit preserved",
+      "steps": [
+        "Restore ready; establish baseline",
+        "Administrator DNS edit preserved",
+        "Probe under filtering and compare independent state",
+        "Undo only the row-owned fixture"
+      ],
+      "expected": [
+        "An administrator DNS edit made while connected survives WGEX disconnect and the prior value is restored by fixture teardown",
+        "An unprotected tail is required to establish guest-to-host reachability"
+      ],
+      "state": "protected",
+      "action": "dns-edit",
+      "profile": "full4",
+      "dependencies": {},
+      "checks": "dns-edit"
+    },
+    "M5.4-05": {
+      "title": "Internet Sharing and scoped state kill",
+      "steps": [
+        "Restore ready; establish baseline",
+        "Internet Sharing and scoped state kill",
+        "Probe under filtering and compare independent state",
+        "Undo only the row-owned fixture"
+      ],
+      "expected": [
+        "Internet Sharing traffic and foreign state survive an interface-scoped WGEX state kill",
+        "An unprotected tail is required to establish guest-to-host reachability"
+      ],
+      "state": "protected",
+      "action": "none",
+      "gap": "Requires guest Internet Sharing entitlement/GUI setup and a second adapter; current ready topology has neither.",
+      "profile": "full4",
+      "dependencies": {}
+    },
+    "M5.4-06": {
+      "title": "AirDrop and Continuity",
+      "steps": [
+        "Restore ready; establish baseline",
+        "AirDrop and Continuity",
+        "Probe under filtering and compare independent state",
+        "Undo only the row-owned fixture"
+      ],
+      "expected": [
+        "AirDrop/Continuity remains functional on the designated hardware while the anchor is active",
+        "An unprotected tail is required to establish guest-to-host reachability"
+      ],
+      "state": "protected",
+      "action": "none",
+      "gap": "Deferred: hardware. Tart has no AirDrop/Continuity radio path.",
+      "profile": "full4",
+      "dependencies": {}
+    },
+    "M5.4-07": {
+      "title": "Third-party global pf disable",
+      "steps": [
+        "Restore ready; establish baseline",
+        "Third-party global pf disable",
+        "Probe under filtering and compare independent state",
+        "Undo only the row-owned fixture"
+      ],
+      "expected": [
+        "A guest-only pf disable publishes unknown and restores enforcement within seven seconds (leaks recorded inside that window), then leaves one WGEX-owned reference and no leak",
+        "An unprotected tail is required to establish guest-to-host reachability"
+      ],
+      "state": "protected",
+      "action": "pf-disable",
+      "profile": "full4",
+      "dependencies": {},
+      "checks": "pf-disable",
+      "detectionWindow": {
+        "state": "detectionWindow",
+        "maxSeconds": 7,
+        "source": "docs/architecture.md:457"
+      }
+    },
+    "RT-16": {
+      "title": "Anchor evaluation and hostile sibling",
+      "steps": [
+        "Connect; save canary count",
+        "Install com.apple/zzz-test pass out all",
+        "Generate blocked probes; canary must increment; remove only zzz-test"
+      ],
+      "expected": [
+        "Canary increments; sibling cannot defeat the quick block"
+      ],
+      "state": "protected",
+      "action": "second-anchor",
+      "profile": "full4",
+      "dependencies": {}
+    },
+    "RT-17": {
+      "title": "XPC identity rejection matrix",
+      "steps": [
+        "Connect full4; stage the corpus client (universal), copies of the genuine CLI and a bundle layout holding a copy of the running daemon in the guest",
+        "Build the corpus in the guest: unsigned, ad hoc, a second lab identity as the wrong team, wrong identifier, get-task-allow, old protocol version and older build clients",
+        "Each client sends privileged work from where only the daemon can refuse it; record its exit and own report, the daemon's libxpc code-signing refusals, the daemon state before and after and the daemon's lifecycle log lines; the genuine CLI from the same layout is served (layout control)",
+        "Register a user LaunchAgent impostor claiming the daemon's Mach service; an unprivileged lookup reaches it, the privileged lookup reaches only the daemon",
+        "Genuine CLI down as the log observer's control; probe the final unprotected control"
+      ],
+      "expected": [
+        "Every invalid identity refused; privileged daemon only"
+      ],
+      "state": "protected",
+      "action": "rt17",
+      "profile": "full4",
+      "dependencies": {},
+      "checks": "rt17",
+      "limitations": [
+        "On Lab builds the listener pins the bundle's own app and CLI code-directory hashes, so every corpus client is refused at the connection's code-signing check; the protocol-version and build checks behind it are covered by WGEXBackendMac unit tests, not this row.",
+        "Corpus identities (the wrong-team certificate and its throwaway keychain) are created and removed inside the guest stage; nothing touches the host keychain or any of the maintainer's identities.",
+        "A refusal counts only with the daemon's own evidence: libxpc's refusal line in the daemon process (macOS 26 and 27 wording, such as Dropping check-in message due to code signing requirement; the product daemon logs nothing for a refused peer), the client's fixed report of the dropped connection, no refusal by the client itself and unchanged state. A launch, loader, guard, parsing or local validation failure fails the row.",
+        "Apple silicon never executes unsigned arm64 code: the unsigned client is the corpus client's x86_64 slice, run under Rosetta, so a guest without Rosetta fails refused:unsigned."
+      ]
+    },
+    "RT-21": {
+      "title": "Live pf order and scoped state kills",
+      "steps": [
+        "Connect; inspect live rules",
+        "Arm the guest-only filtered pf exec observer; run both POWER-WAKE sleep injections",
+        "Verify DNS blocks precede LAN passes, a final quick block and no set lines before and after wake",
+        "Require state-kill executions from the daemon to be scoped to en0; retain no raw exec events"
+      ],
+      "expected": [
+        "Correct rule ordering; state kills interface-scoped"
+      ],
+      "state": "protected",
+      "action": "rt21",
+      "profile": "full4",
+      "dependencies": {},
+      "checks": "rt21",
+      "variants": [
+        {
+          "name": "short",
+          "sleepSeconds": 3
+        },
+        {
+          "name": "long",
+          "sleepSeconds": 130
+        }
+      ],
+      "limitations": [
+        "The guest process observer uses the built-in eslogger; missing permission or missing exec evidence fails the row. The power events are injected, as in POWER-WAKE."
+      ]
+    },
+    "RT-22": {
+      "title": "Crash reconciliation ordering and one token",
+      "steps": [
+        "Connect; persist intent; kill daemon",
+        "Measure from before SIGKILL across restart",
+        "Verify error policy before any other operation; count one reference"
+      ],
+      "expected": [
+        "Blocking restored within 3 s; error replaces connected first; exactly one journalled token"
+      ],
+      "state": "blocked",
+      "action": "rt22",
+      "profile": "full4",
+      "dependencies": {},
+      "checks": "rt22"
+    },
+    "CRASH-TERM": {
+      "title": "SIGTERM daemon",
+      "steps": [
+        "Connect; start probes",
+        "Send SIGTERM to the exact WGEXDaemon PID",
+        "Observe teardown/restart without any global reset"
+      ],
+      "expected": [
+        "No outside leak; honest blocked/unknown state"
+      ],
+      "state": "blocked",
+      "action": "term",
+      "profile": "full4",
+      "dependencies": {}
+    },
+    "CRASH-TOKEN": {
+      "title": "Release only our pf reference",
+      "steps": [
+        "Connect; read journal-owned token",
+        "Release exactly that reference",
+        "Probe repair and inspect reference count"
+      ],
+      "expected": [
+        "Unknown on token loss, enforcement restored at most 7 s from the release (leaks recorded inside that window); then one replacement reference and no leak"
+      ],
+      "state": "blocked",
+      "action": "token",
+      "profile": "full4",
+      "dependencies": {},
+      "checks": "token",
+      "detectionWindow": {
+        "state": "detectionWindow",
+        "maxSeconds": 7,
+        "source": "docs/architecture.md:457"
+      }
+    },
+    "CRASH-PF-DISABLE": {
+      "title": "Global pf disable",
+      "steps": [
+        "Request third-party disable",
+        "Observe unknown within 7 s; re-enable and probe"
+      ],
+      "expected": [
+        "Unknown, with filtering restored within seven seconds (leaks recorded inside that window); then filtering held with one WGEX-owned reference and no leak"
+      ],
+      "state": "protected",
+      "action": "pf-disable",
+      "profile": "full4",
+      "dependencies": {},
+      "checks": "pf-disable",
+      "detectionWindow": {
+        "state": "detectionWindow",
+        "maxSeconds": 7,
+        "source": "docs/architecture.md:457"
+      }
+    },
+    "REBOOT-INTENT": {
+      "title": "Reboot with persisted intent",
+      "steps": [
+        "Restore ready; configure intent/lockdown and persisted secrets",
+        "Start probes; sudo shutdown -r now in guarded guest",
+        "Wait for key-only SSH; do not launch app; sample the app and daemon processes, launchd runs and the daemon status lines since boot",
+        "Read status, pf references, DNS/routes; probe before GUI login"
+      ],
+      "expected": [
+        "Receivers are armed before reboot; do not open the app after SSH returns",
+        "No outside-tunnel marked receipts between SSH return and first status; blocked or restored protected is accepted; one reference",
+        "Unprotected tail requires host receipts after explicit down",
+        "Recorded, not a pass criterion (timing only, who restored protection is not measured): appRunningAfterBoot, protectedBeforeAppSeen (the post-restart daemon's first protected status before the earliest possible app start; null without a usable boot timeline) and protectedOnlyAfterAppSeen when an app process came first; daemonDrivenReconnect stays null (not measured) unless the capture records whether the app sent a mutating request before the first protected status. The app may relaunch at login in this row"
+      ],
+      "state": "blocked",
+      "action": "reboot",
+      "profile": "full4",
+      "dependencies": {}
+    },
+    "REBOOT-LOCKDOWN": {
+      "title": "Reboot under lockdown",
+      "steps": [
+        "Restore ready; import the lockdown profile without connecting (no intent)",
+        "While idle and unprotected, before the Lockdown press: the unprotected lead control (Lockdown is never turned off)",
+        "Strict case: turn Allow LAN off with the main window Protection toggle wgex.protection.allowLocalNetwork (setGlobalSettings allowLAN false is tightening, no administrator prompt); require settings.allowLAN false in the daemon's replayed journal; it stays off, so the underlay subnet must stay dark under lockdown",
+        "Turn Lockdown on with the main window toggle wgex.protection.lockdown; require settings.lockdown true in the daemon's replayed journal and idle/blocked status; read settings.lockdown and settings.allowLAN back right before the reboot",
+        "Quit the app; start probes; sudo shutdown -r now in guarded guest",
+        "Wait for key-only SSH; do not launch app; sample processes, launchd runs and the daemon status lines since boot",
+        "Start the post-boot en0 capture (a guest capture cannot survive the reboot and a host live capture is out of policy, so boot to here is uncaptured) and probe before the first driver poll; read status, pf rules and references, DNS/routes",
+        "Lockdown stays on (turning it off raises the macOS administrator prompt, which the driver never answers), so no trailing tail: the lead control stands in for it (lockdownOffNeedsAdmin, tailControlPosition lead)"
+      ],
+      "expected": [
+        "Lockdown reaches the daemon before the reboot: journal settings.lockdown true and idle/blocked",
+        "Allow LAN off reaches the daemon before the reboot: journal settings.allowLAN false",
+        "First status after boot is idle/blocked; exactly one pf reference after boot",
+        "No receipts carrying the row's own nonce between SSH return and the daemon's first blocked status line from the boot timeline (the driver's first poll when there is none); both instants are recorded, and an end before SSH return is an empty window, stated as such",
+        "The strict case after boot, between SSH return and the driver's first poll, by the row's own nonce: zero LAN receipts (underlay subnet 192.168.64.0/24) and, counted apart, zero off-subnet receipts (the row never connects, so the peer 10.77.0.1 counts as outside)",
+        "Never unprotected after boot (daemon status lines since boot and every driver poll) while Lockdown stays on; without status lines since boot that start no later than the first poll the check fails with a gap, never a pass",
+        "No restart loop: launchd runs = 1 after boot",
+        "The unprotected lead window, before the Lockdown press, requires host receipts",
+        "Recorded, not a pass criterion: the early-boot interval from kernel boot to the first enforcing status line and to the post-boot capture start is uncaptured, the ADR-009 documented gap (bootObservation.earlyBootCapture); outside flows in the post-boot en0 capture that no after-boot pass rule could match are named in unexplainedOutsideFlow for the next run"
+      ],
+      "state": "blocked",
+      "action": "reboot",
+      "profile": "lockdown",
+      "dependencies": {},
+      "checks": "reboot-lockdown",
+      "connect": false
+    },
+    "BOOT-SECRETS": {
+      "title": "Boot before login with persisted secrets",
+      "steps": [
+        "Restore ready; import and connect full4",
+        "Settings, Service tab, Connection at startup: Connect at boot before login; require startBeforeLoginOverride true in the daemon registry",
+        "Stay connected (an explicit down deletes the daemon's bundle even with boot intent set); quit the app; prevent the login relaunch in the guest (mechanism loginwindow-reopen-state, refused unless the console user is the SSH user: for the console user loginwindow neither saves the running applications at logout nor reopens saved ones at login, and the saved relaunch list is emptied; read back and recorded; the snapshot restore undoes it); start probes; sudo shutdown -r now",
+        "Wait for key-only SSH; never open the app; sample processes, launchd runs, the count of the app's own log lines since the daemon's start and the daemon status lines since boot, at SSH return and again once protected (no app process and no app log line may appear)",
+        "Probe before the first status; wait up to 120 s for protected without user action; probe; read pf references",
+        "Unprotected tail after explicit down"
+      ],
+      "expected": [
+        "Boot choice reaches the daemon: startBeforeLoginOverride true",
+        "Blocked or protected before retrieval and never unprotected after boot (a missing boot timeline fails with a gap, never a pass); zero outside-tunnel marked receipts before the first status",
+        "Protected again after boot; exactly one pf reference; launchd runs = 1",
+        "PASS requires the post-restart daemon to reach protected from its persisted secrets (inferred, not measured) with no app process seen after boot (timing, causation not claimed): the row records the relaunch prevention it applied before the reboot, every planned boot sample read with the last at or after the first protected status, appRunningAfterBoot false with appStartedAt absent and no app log line counted since the daemon's start; an app process or app log activity that appears anyway is relaunchNotPrevented (what started it is not measured), a lost sample is the gap no-app window not covered, not a PASS, and protectedOnlyAfterAppSeen stays the named gap when protection came only after the app was seen",
+        "Unprotected tail requires host receipts after explicit down"
+      ],
+      "state": "blocked",
+      "action": "reboot",
+      "profile": "full4",
+      "dependencies": {},
+      "checks": "boot-secrets"
+    },
+    "DNS-TUNNEL": {
+      "title": "Resolver in tunnel",
+      "steps": [
+        "Import DNS profile with DNS = 10.77.0.1",
+        "Run peer resolver on 10.77.0.1:53",
+        "Probe DNS via 10.77.0.1; inspect scutil --dns",
+        "For every protected window require scutil nameserver[0] : 10.77.0.1 and a peer DNS receipt with nonce <window>-system; the dns profile is split (AllowedIPs 10.77.0.0/24), so probes to the underlay host and relay 192.168.64.1 over en0 are expected"
+      ],
+      "expected": [
+        "Every protected window has nameserver[0] : 10.77.0.1 in scutil --dns and at least one in-tunnel DNS receipt on 10.77.0.1:53 with exact nonce <window>-system",
+        "Split profile: receipts at the underlay host and relay 192.168.64.1 over en0 are expected, not leaks; any other outside receipt, an outside <window>-system DNS receipt (DNS to any other resolver) or a marked port 53 packet on en0 still fails the window"
+      ],
+      "state": "protected",
+      "action": "dns",
+      "profile": "dns",
+      "dependencies": {}
+    },
+    "IPERF3": {
+      "title": "Throughput through vmnet UDP relay",
+      "steps": [
+        "Connect; peer iperf3 server on 10.77.0.1",
+        "Run guest iperf3 JSON through tunnel and relay",
+        "Record bits/s; compare raw bridge baseline if available"
+      ],
+      "expected": [
+        "Pass the measurement row when a finite positive received Mbit/s number is recorded through the relay",
+        "Record an engine follow-up below 100 Mbit/s; raw baseline and the performance gate are separate and not accepted here"
+      ],
+      "state": "protected",
+      "action": "iperf",
+      "profile": "default",
+      "dependencies": {}
+    },
+    "POWER-WAKE": {
+      "title": "Injected power event: sleep and wake handling (Lab-only injection, 3 s and 130 s)",
+      "steps": [
+        "Restore ready; import and connect full4; probe protected",
+        "Inside the guest: sample status and the pf reference count every 0.25 s; a detached guest generator probes the LAN and tunnel receivers through the window",
+        "Short variant, injected power event: SIGUSR1 to the Lab daemon (sleep), 3 s, SIGUSR2 (wake); no forced handshake expected while the handshake is fresh",
+        "Wait for protected without user action; probe protected",
+        "Long variant, injected power event: sleep, 130 s, wake; the daemon forces a handshake (reasserting/blocked), then protected",
+        "Collect the guest samples and the daemon's injected-event log lines; wait for protected; probe protected; then the unprotected tail"
+      ],
+      "expected": [
+        "Both injected-event log lines (lab power inject sleep, then lab power inject wake) are in the daemon log, one each, in order, the sleep held for the requested time",
+        "Never unprotected from the injected sleep until the first protected sample after the wake",
+        "Traffic (protected) within 3 s after the wake, timed from the wake log line to the first protected sample after the last non-protected one (a stale protected status never counts)",
+        "Exactly one pf reference in every sample throughout",
+        "Zero outside-tunnel marked receipts from the sleep until protected again, with probes attempted (full4)",
+        "Long variant: a reasserting or blocked sample after the wake (the forced handshake), then protected; the daemon's own reasserting status line with reason wake counts when the samples miss it",
+        "Protected windows before and after each injected event have no outside leak",
+        "A final unprotected window requires receipts for every configured host protocol"
+      ],
+      "state": "protected",
+      "action": "power-wake",
+      "exercise": [
+        "protected"
+      ],
+      "profile": "full4",
+      "variants": [
+        {
+          "name": "short",
+          "sleepSeconds": 3
+        },
+        {
+          "name": "long",
+          "sleepSeconds": 130
+        }
+      ],
+      "checks": "power-wake",
+      "limitations": [
+        "Limits: injected events exercise the daemon's sleep/wake handling only (the Lab daemon treats SIGUSR1 and SIGUSR2 as its own sleep and wake events, M1-47); the guest, its network stack and its WireGuard timers do not sleep, so RT-18 handshake ageing across a real sleep stays with the owner cutover on real hardware",
+        "The short variant's handshake is only as fresh as the guest's traffic keeps it: a forced handshake there is recorded (reassertingAfterWake), not judged",
+        "Sleep and wake share one lifecycle kind with a latest-state revision: a wake that arrives before the sleep was applied replaces it and forces the handshake conservatively (an unknown sleep length); the 3 s gap of the short variant leaves an idle daemon time to apply the sleep, and a busy one would show a forced handshake there (recorded, not judged)"
+      ],
+      "dependencies": {}
+    },
+    "CRASH-KILL-APP": {
+      "title": "SIGKILL daemon with app running",
+      "steps": [
+        "Restore ready; connect; start markers",
+        "SIGKILL daemon with app running",
+        "Collect independent pf, route, DNS and daemon-log observations",
+        "Probe recovery and count pf tokens"
+      ],
+      "expected": [
+        "SIGKILL with the app running leaves outside markers blocked, restarts the daemon and returns to one pf reference",
+        "A final unprotected window requires receipts for every configured host protocol"
+      ],
+      "state": "blocked",
+      "action": "kill-app",
+      "aliasOf": "M5.3-02",
+      "profile": "full4",
+      "dependencies": {}
+    },
+    "CRASH-KILL-NO-APP": {
+      "title": "SIGKILL daemon with app quit",
+      "steps": [
+        "Restore ready; connect; start markers",
+        "SIGKILL daemon with app quit",
+        "Collect independent pf, route, DNS and daemon-log observations",
+        "Probe recovery and count pf tokens"
+      ],
+      "expected": [
+        "After a real app Quit, SIGKILL leaves outside markers blocked; no app is opened to provide secrets; one reference remains",
+        "A final unprotected window requires receipts for every configured host protocol"
+      ],
+      "state": "blocked",
+      "action": "kill-no-app",
+      "aliasOf": "M5.3-03",
+      "profile": "full4",
+      "dependencies": {}
+    },
+    "EN0-LOSS": {
+      "title": "Ethernet loss and return (en0 down 20 s, then up)",
+      "steps": [
+        "Restore ready; import and connect the split default profile; probe protected",
+        "Inside the guest (the SSH session dies with en0): sample status and the pf reference count every 0.25 s, arm a 90 s watchdog, take en0 down for 20 s, then up",
+        "Full-tunnel variant only: a detached guest generator probes the LAN and tunnel receivers through the loss",
+        "Wait for SSH; collect the guest samples; wait for protected without user action; probe protected",
+        "Repeat on full4; then the unprotected tail"
+      ],
+      "expected": [
+        "The daemon notices the loss: at least one sample from en0 down to en0 up is blocked, or failed/reasserting (M1-04: protected, failed/blocked, reasserting, active/protected)",
+        "Protected again within 10 s of en0 up, with no user action, timed from the first protected sample after the last non-protected one (a stale protected status never counts)",
+        "Never unprotected from en0 down until protected again",
+        "Exactly one pf reference in every sample throughout",
+        "full4: zero outside-tunnel marked receipts while en0 is down, with probes attempted",
+        "Protected windows before and after the loss have no outside leak (split: underlay receipts expected)",
+        "A final unprotected window requires receipts for every configured host protocol"
+      ],
+      "state": "protected",
+      "action": "en0-loss",
+      "exercise": [
+        "protected"
+      ],
+      "profile": "default",
+      "profiles": [
+        "default",
+        "full4"
+      ],
+      "lossSeconds": 20,
+      "checks": "en0-loss",
+      "dependencies": {}
+    },
+    "ONDEMAND-ETH": {
+      "title": "On-demand Ethernet rule: activation after daemon start and en0 return, removal, Lockdown and kill switch",
+      "steps": [
+        "Restore ready; import the full4 profile without connecting; the unprotected lead control (before Lockdown, which the row never turns off)",
+        "Through the app: Edit, tick Ethernet in the On-Demand section, Save; read the saved policy back from the app's profile store",
+        "Through the app: press the On-Demand toggle (arm); with no other action the daemon brings the tunnel up (activated by on-demand); probe protected",
+        "Terminate the daemon (SIGTERM); with no GUI action wait for the replacement daemon and sample it (pid, status, on-demand fields) every second; probe protected",
+        "Inside the guest (the SSH session dies with en0): sample status and the pf reference count every 0.25 s, arm a 90 s watchdog, take en0 down for 20 s, then up; a detached guest generator probes the LAN and tunnel receivers through the loss",
+        "Wait for SSH; collect the guest samples; wait for protected without user action; probe protected",
+        "Turn Lockdown on; through the app press the On-Demand toggle again (disarm and deactivate); read status, probe blocked",
+        "Cycle en0 again (20 s) with the rule withdrawn and Lockdown on; collect the samples; probe blocked"
+      ],
+      "expected": [
+        "The Ethernet rule saved through the app reaches the app's profile store as ethernetOnly (it was off before)",
+        "Arming from idle brings the tunnel up with no further action: protected, status onDemand armed for this profile, activated, network ethernet, decision connect",
+        "After a daemon restart the replacement daemon (new pid and start time, kept only when identical before and after the status read) reports protected again with no GUI action: armed, activated, an evaluation made by that daemon, network ethernet, decision connect; no post-start sample is unprotected (judged on the post-start daemon's samples only)",
+        "After en0 returns the tunnel is protected again within 10 s with no user action, as without on-demand: loss noticed, never unprotected from en0 down to protected, exactly one pf reference in every sample, zero outside-tunnel marked receipts while en0 is down (full4), still armed and activated afterwards",
+        "Removing the rule (disarm with deactivate) takes the tunnel down: not armed, not activated, idle; with Lockdown on protection is blocked (never unprotected), one pf reference, no outside receipts",
+        "With the rule withdrawn an en0 loss and return does not bring the tunnel back: every sample stays idle and never protected or unprotected, blocked except for a transient unknown while the link is down and for 10 s after it returns, with one pf reference throughout, and the status stays not armed",
+        "Lockdown and the kill switch behave as they do without on-demand: Lockdown journal true, blocked windows have no outside leak, the blocking policy never lapses through the loss or the removal",
+        "The unprotected lead window requires receipts for every configured host protocol"
+      ],
+      "state": "protected",
+      "action": "ondemand-eth",
+      "profile": "full4",
+      "connect": false,
+      "lossSeconds": 20,
+      "checks": "ondemand-eth",
+      "dependencies": {},
+      "limitations": [
+        "A Tart guest has an Ethernet interface and no Wi-Fi (ADR-030): the rule can never produce a disconnect decision, so removal is the user's disarm (Disable On-Demand and Deactivate), which stops the tunnel; saving the rule as off while the tunnel runs leaves it up by design (ADR-030 section 6 rule 7) and is not measured here",
+        "The daemon restart is a SIGTERM with the profile armed; the tunnel intent is journalled, so the row proves the replacement daemon reports the armed, activated, evaluated state and brings protection back with no click, not that on-demand alone started a tunnel with an empty journal",
+        "Operator alarm: allow 4200 s for this row (two en0 cycles of 20 s each plus the editor and toggle GUI steps)"
+      ]
+    },
+    "AUTH-REAL": {
+      "title": "Admin right on a real macOS 27 guest (no right pre-allowed, no password typed into the WGEX right's sheet)",
+      "driver": "auth-real",
+      "steps": [
+        "WGEX_LAB_VM=macos27-wgex WGEX_LAB_USER=admin WGEX_LAB_SNAPSHOT_PREFIX=macos27-; restore macos27-base and confirm no WGEX right exists",
+        "Record the WGEX-relevant network state (utun interfaces and routes, default routes, pf status, references and the com.apple/wgex anchor, utun DNS resolvers, /etc/resolver)",
+        "Build and install the current Lab app; open it; Continue twice; Register the background service and approve it by guest GUI automation in Login Items & Extensions; fill the Login Items approval sheet (com.apple.backgroundtaskmanagement.manage-daemons) with the image's public default administrator password from WGEX_LAB_GUEST_PASSWORD_FILE (DEC-034)",
+        "Wait for the daemon; read the right it wrote with security authorizationdb read (rightDefinition)",
+        "Continue to Secure Install and press it; record the SecurityAgent sheet and authd's builtin:authenticate for the WGEX right (sheetShown)",
+        "Cancel the sheet (Escape); read Secure Install; in Settings > Network turn Allow local network off (tightening, recorded only) and back on (loosening; any WGEX right sheet is cancelled); read the network state again (cancelFailsClosed)"
+      ],
+      "expected": [
+        "No WGEX right before install; the daemon writes it (its identifier is the daemon's)",
+        "rightDefinition equals the M01-T02 read-back fixture on class, rule, shared and timeout (test_auth_real)",
+        "Secure Install raises the authentication sheet for the WGEX right",
+        "After cancel: authd records -60006 for the right, Secure Install is not verified, the loosening settings write is refused (journal keeps allowLAN=false) and the network state is unchanged"
+      ],
+      "state": "unprotected",
+      "action": "none",
+      "profile": "none",
+      "dependencies": {},
+      "limitations": [
+        "No password is typed into the WGEX right's sheet and no right is pre-allowed; the granted path is sitting check E3 (maintainer). The only password entered is the guest administrator's, into the Login Items approval sheet (DEC-034), through stdin and a 0600 file removed after reading; it never reaches a command line, log, report or the tree.",
+        "A tightening settings write is allowed by design while Secure Install is unverified: the daemon is in startup recovery (status phase=failed reason=backendUnavailable) and setRecoverySettings accepts what AuthorisationTable.recoveryAllows permits, so Allow local network off is recorded only; the refused write is Allow local network back on, a loosening change."
+      ]
+    },
+    "UNINSTALL": {
+      "title": "Uninstall from the CLI, keep and purge: no WGEX pf rule, route, resolver or launchd job left; fresh install works (DEC-037, DEC-040)",
+      "steps": [
+        "Restore ready; import full4 without connecting; the first observation is the pre-tunnel baseline (inet routes, resolvers)",
+        "Settings, Service tab, Connection at startup: Connect at login, so the app's own login item is registered",
+        "Keep variant: connect full4 (tunnel up, kill switch armed); probe protected; read pf, routes, resolvers, launchd and BTM; quit the app",
+        "Run wgex uninstall --yes in the console session; the administrator dialog is typed at the guest console (DEC-034)",
+        "Read status, pf anchor and references, routes, resolvers, launchd and BTM; the console user's up and on-demand requests; the app's profile store; probe unprotected",
+        "Open the app; Finish uninstall; wait for the final screen; read launchd and BTM; Quit WGEX",
+        "Fresh secure install from the app: Settings, Service, Register Background Service, then Secure install (administrator dialog typed at the guest console); connect full4; probe protected",
+        "Purge variant: the same with wgex uninstall --purge --yes, and the daemon state root read right after the CLI",
+        "Probe the final unprotected control after explicit down"
+      ],
+      "expected": [
+        "With the tunnel up and the kill switch armed, wgex uninstall --yes (keep) and --purge --yes (purge) exit 0 with result uninstalled after the console approval",
+        "The tunnel is stopped: idle and unprotected, no utun with the tunnel address, no route on a utun",
+        "No WGEX pf rule: the com.apple/wgex anchor holds no rule, table or nested anchor and no pf reference is held",
+        "No WGEX route: the IPv4 routing table (link-layer entries aside) equals the pre-tunnel baseline, and no route added while protected remains",
+        "DNS as before the tunnel: the resolver set equals the pre-tunnel baseline and no resolver names the tunnel's server",
+        "wgex status reports the uninstalled state, and the console user's up and on-demand requests are refused with uninstallFailed",
+        "Opening the app offers to finish; Finish removes the launchd job and the login item (keep), reaches the final screen within 90 s (ServiceController.unregister does not hang) and its Quit ends the app",
+        "The app's profiles are still there after the CLI and after the finish",
+        "Purge leaves the daemon state root holding only the journal, reduced to the uninstall marker (completed, purgeState) and its generation",
+        "Afterwards a fresh secure install from the app brings the daemon back (launchd job, daemon, secure install verified) and a tunnel starts within 90 s",
+        "A final unprotected window requires receipts for every configured host protocol"
+      ],
+      "state": "protected",
+      "exercise": [
+        "protected",
+        "unprotected"
+      ],
+      "action": "uninstall",
+      "profile": "full4",
+      "connect": false,
+      "checks": "uninstall",
+      "dependencies": {},
+      "limitations": [
+        "pf keeps an emptied anchor's name listed under com.apple once the daemon has loaded it (the pre-tunnel baseline lists it too); the row requires that anchor empty (no rule, table or nested anchor) with no pf reference held, and records whether it is listed",
+        "The mutating requests come from the console user in the console session (the profile's owner), so only the uninstall fence can refuse them; a stop with no tunnel running is answered as done without a change and is recorded, not judged",
+        "A tunnel that does not start after the fresh install is recorded with the daemon's start-failure line; the driver then restarts the daemon once (recorded as driverRestartedDaemon) so the purge variant can still run, and the check stays unmet",
+        "A final-screen Quit that leaves the app running is recorded (finalQuitEndsApp unmet); the driver then stops the app itself so the fresh install can start",
+        "Operator alarm: allow 4200 s for this row (two uninstall, finish and reinstall cycles with four console approvals and the Settings walks)"
+      ]
+    },
+    "M04-T13-NAME": {
+      "title": "Name endpoint under connecting protection",
+      "steps": [
+        "Restore base and import full4-name; the underlay resolver must answer 192-168-64-1.sslip.io with 192.168.64.1",
+        "Start under connecting protection, measure protected, connecting, error and disconnected; restore relay after loss and require protected recovery",
+        "Keep the host SSH escape hatch available"
+      ],
+      "expected": [
+        "Connected: only peer receives",
+        "Connecting/error: reasserting/blocked (or failed/blocked) during loss, polled every 250 ms for up to 90 s with the daemon's status stream kept; failed is accepted but not required; no outside receiver sees markers",
+        "Disconnected: host receives all protocols",
+        "Automatic recovery to protected within 120 s after fault removal; M1-04 backoff may reach 60 s"
+      ],
+      "state": "protected",
+      "action": "none",
+      "exercise": [
+        "protected",
+        "connecting",
+        "error",
+        "unprotected"
+      ],
+      "profile": "full4-name",
+      "dependencies": {}
+    },
+    "M04-T13-NAME-FAIL": {
+      "title": "Fresh endpoint lookup fails and rolls back",
+      "steps": [
+        "Restore base; import a never-used .invalid endpoint name without connecting or resolving it",
+        "Guest-only port-53 blackhole makes the underlay resolver unreachable; start the fresh profile as a cutover trial",
+        "Require underlayResolverNoAnswer, exit 8, automatic rollback and prior unprotected policy within 15 s; never abort"
+      ],
+      "expected": [
+        "No resolver-cache or last-good answer from an earlier success",
+        "Named failure, bounded automatic rollback and unchanged prior protection",
+        "Unprotected positive control receives all protocols"
+      ],
+      "state": "unprotected",
+      "action": "endpoint-name-fail",
+      "profile": "full4-name",
+      "connect": false,
+      "dependencies": {}
+    },
+    "M04-T13-VPS-LOOKUP": {
+      "title": "VPS DNS lookup only under connecting protection",
+      "steps": [
+        "Restore base; import a never-used .invalid endpoint name without connecting or resolving it",
+        "Guest-only port-53 blackhole makes the underlay resolver unreachable; start the fresh profile as a cutover trial",
+        "Require underlayResolverNoAnswer, exit 8, automatic rollback and prior unprotected policy within 15 s; never abort",
+        "While the trial is connecting, remove the DNS fault, look up cdn.example.net using the resolver process GID and the recorded underlay resolver; require 203.0.113.75 and connecting rules before and after",
+        "The trial endpoint stays .invalid; the VPS address is never installed as an endpoint or contacted beyond DNS"
+      ],
+      "expected": [
+        "No resolver-cache or last-good answer from an earlier success",
+        "Named failure, bounded automatic rollback and unchanged prior protection",
+        "Unprotected positive control receives all protocols"
+      ],
+      "state": "unprotected",
+      "action": "endpoint-name-lookup",
+      "profile": "full4-name",
+      "connect": false,
+      "dependencies": {}
+    }
+  }
+}

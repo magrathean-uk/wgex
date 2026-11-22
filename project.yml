@@ -1,0 +1,412 @@
+# XcodeGen spec (plan 03 §4). Generated project: WGEX.xcodeproj (git-ignored),
+# produced by `just gen`. Build settings live in Config/*.xcconfig; target
+# settings here only name what differs per target.
+name: WGEX
+options:
+  bundleIdPrefix: com.magrathean
+  deploymentTarget:
+    macOS: "26.0"
+    iOS: "27.0"
+    tvOS: "27.0"
+  xcodeVersion: "27.2"
+  createIntermediateGroups: true
+  generateEmptyDirectories: false
+configs:
+  Debug: debug
+  Lab: debug
+  Release: release
+configFiles:
+  Debug: Config/Debug.xcconfig
+  Lab: Config/Lab.xcconfig
+  Release: Config/Release.xcconfig
+
+# Project-level presets from XcodeGen would otherwise override the xcconfig
+# files, so the settings that must win are restated as references to them.
+settings:
+  base:
+    SWIFT_VERSION: $(inherited)
+    ONLY_ACTIVE_ARCH: NO
+    DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
+
+packages:
+  WGEXCore: { path: Packages/WGEXCore }
+  WGEXProfileStore: { path: Packages/WGEXProfileStore }
+  WGEXAppComposition: { path: Packages/WGEXAppComposition }
+  WGEXPolicy: { path: Packages/WGEXPolicy }
+  WGEXEngineInterface: { path: Packages/WGEXEngineInterface }
+  WGEXEngine: { path: Packages/WGEXEngine }
+  WGEXBackendMac: { path: Packages/WGEXBackendMac } # products WGEXDaemonProtocol, WGEXDaemonClient, WGEXDaemonCore
+  WGEXBackendNE: { path: Packages/WGEXBackendNE } # products WGEXNEClient, WGEXNEProvider
+  WGEXPairing: { path: Packages/WGEXPairing }
+  WGEXUI: { path: Packages/WGEXUI }
+  WGEXActivityShared: { path: Packages/WGEXActivityShared }
+  WGEXDiagnostics: { path: Packages/WGEXDiagnostics }
+  WGEXTesting: { path: Packages/WGEXTesting }
+  WGEXUITesting: { path: Packages/WGEXUITesting }
+  CWGEXSysShim: { path: Packages/CWGEXSysShim }
+  # Sparkle (exactVersion 2.9.3, plan 03 §4) is added with its first use in
+  # phase 7 together with the Package.resolved verification (P0-23); adding it
+  # now would make every clean build fetch it from the network.
+
+settingGroups:
+  signing:
+    CODE_SIGN_IDENTITY: $(inherited)
+    CODE_SIGN_STYLE: $(inherited)
+    DEVELOPMENT_TEAM: $(inherited)
+    GENERATE_INFOPLIST_FILE: NO
+  appTesting:
+    configs:
+      Debug:
+        OTHER_LDFLAGS: '$(inherited) "$(BUILT_PRODUCTS_DIR)/WGEXTesting.o" "$(BUILT_PRODUCTS_DIR)/WGEXEngineInterface.o"'
+      Lab:
+        OTHER_LDFLAGS: '$(inherited) "$(BUILT_PRODUCTS_DIR)/WGEXTesting.o" "$(BUILT_PRODUCTS_DIR)/WGEXEngineInterface.o"'
+  appExtension:
+    APPLICATION_EXTENSION_API_ONLY: YES
+    SWIFT_DEFAULT_ACTOR_ISOLATION: nonisolated
+
+targets:
+  WGEXMac:
+    type: application
+    platform: macOS
+    sources:
+      - path: Apps/WGEXMac
+        excludes: ["*.entitlements", "Info.plist"]
+    settings:
+      groups: [signing, appTesting]
+      base:
+        PRODUCT_NAME: WGEX
+        PRODUCT_BUNDLE_IDENTIFIER: $(WGEX_BUNDLE_ID_BASE)
+        INFOPLIST_FILE: Apps/WGEXMac/Info.plist
+        # Sidebar and control highlight use the design-sheet accent (design-sheet.json accent).
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        CODE_SIGN_ENTITLEMENTS: Apps/WGEXMac/WGEXMac$(WGEX_ENTITLEMENTS_VARIANT).entitlements
+        PROVISIONING_PROFILE_SPECIFIER: $(WGEX_OWN_MAC_PROFILE)
+        ENABLE_HARDENED_RUNTIME: YES
+        SWIFT_DEFAULT_ACTOR_ISOLATION: MainActor
+    dependencies:
+      - package: WGEXUI
+      - package: WGEXBackendMac
+        product: WGEXDaemonClient
+      - package: WGEXProfileStore
+      - package: WGEXPairing
+      - package: WGEXDiagnostics
+      # XcodeGen order-only package dependency plus config-scoped object linking (M1-01).
+      - package: WGEXTesting
+        link: false # Build-order dependency; appTesting links objects only in Debug/Lab.
+      - target: WGEXDaemon
+        embed: true
+        # Keep the target signature: CodeSignOnCopy strips embedded launch constraints.
+        codeSign: false
+        copy:
+          destination: executables
+      - target: WGEXCLI
+        embed: true
+        codeSign: true
+        copy:
+          destination: wrapper
+          subpath: Contents/Helpers
+    postCompileScripts:
+      - name: Install daemon launchd plist
+        script: bash "${SRCROOT}/Config/Scripts/preprocess-daemon-plist.sh"
+        showEnvVars: false
+        inputFiles:
+          - $(SRCROOT)/Daemon/WGEXDaemon/com.magrathean.WGEXApp.daemon.plist.in
+          - $(SRCROOT)/Config/Scripts/preprocess-daemon-plist.sh
+        outputFiles:
+          - $(TARGET_BUILD_DIR)/$(CONTENTS_FOLDER_PATH)/Library/LaunchDaemons/$(WGEX_BUNDLE_ID_BASE).daemon.plist
+
+  WGEXDaemon:
+    type: tool
+    platform: macOS
+    sources:
+      - path: Daemon/WGEXDaemon
+        excludes: ["*.plist.in", "Info.plist"]
+    settings:
+      groups: [signing]
+      base:
+        PRODUCT_NAME: WGEXDaemon
+        PRODUCT_BUNDLE_IDENTIFIER: $(WGEX_BUNDLE_ID_BASE).daemon
+        CREATE_INFOPLIST_SECTION_IN_BINARY: YES
+        LAUNCH_CONSTRAINT_PARENT: $(SRCROOT)/Config/DaemonParent.coderequirement
+        INFOPLIST_FILE: Daemon/WGEXDaemon/Info.plist
+        ENABLE_HARDENED_RUNTIME: YES
+        SWIFT_DEFAULT_ACTOR_ISOLATION: nonisolated
+        SWIFT_STRICT_MEMORY_SAFETY: YES
+        SKIP_INSTALL: YES
+        OTHER_LDFLAGS: "$(inherited) -Wl,-u,_wgex_build_info"
+    dependencies:
+      - package: WGEXBackendMac
+        product: WGEXDaemonCore
+      - package: WGEXDiagnostics
+      - package: WGEXEngine
+        product: WGEXEngine
+
+  WGEXCLI:
+    type: tool
+    platform: macOS
+    sources:
+      - path: Apps/WGEXCLI
+        excludes: ["Info.plist"]
+    settings:
+      groups: [signing]
+      base:
+        PRODUCT_NAME: wgex
+        PRODUCT_BUNDLE_IDENTIFIER: $(WGEX_BUNDLE_ID_BASE).cli
+        CREATE_INFOPLIST_SECTION_IN_BINARY: YES
+        INFOPLIST_FILE: Apps/WGEXCLI/Info.plist
+        ENABLE_HARDENED_RUNTIME: YES
+        SWIFT_DEFAULT_ACTOR_ISOLATION: nonisolated
+        SKIP_INSTALL: YES
+    dependencies:
+      - package: WGEXBackendMac
+        product: WGEXDaemonClient
+
+  WGEXiOS:
+    type: application
+    platform: iOS
+    sources:
+      - path: Apps/WGEXiOS
+        excludes: ["*.entitlements", "Info.plist"]
+    settings:
+      groups: [signing, appTesting]
+      base:
+        PRODUCT_NAME: WGEX
+        PRODUCT_BUNDLE_IDENTIFIER: $(WGEX_BUNDLE_ID_BASE)
+        INFOPLIST_FILE: Apps/WGEXiOS/Info.plist
+        CODE_SIGN_ENTITLEMENTS: Apps/WGEXiOS/WGEXiOS$(WGEX_ENTITLEMENTS_VARIANT).entitlements
+        # The app icon lives in Apps/WGEXiOS/Assets.xcassets (one 1024 px picture for iPhone and iPad).
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        TARGETED_DEVICE_FAMILY: "1,2"
+        SWIFT_DEFAULT_ACTOR_ISOLATION: MainActor
+    dependencies:
+      - package: WGEXUI
+      - package: WGEXBackendNE
+        product: WGEXNEClient
+      - package: WGEXProfileStore
+      - package: WGEXAppComposition
+      - package: WGEXDiagnostics
+      - package: WGEXActivityShared
+      - package: WGEXTesting
+        link: false # Build-order dependency; appTesting links objects only in Debug/Lab.
+      - target: WGEXTunnel-iOS
+        embed: true
+      - target: WGEXLiveActivity
+        embed: true
+
+  WGEXTunnel-iOS:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: Extensions/WGEXTunnel-iOS
+        excludes: ["*.entitlements", "Info.plist"]
+      - path: Extensions/WGEXTunnel-Shared
+    settings:
+      groups: [signing, appExtension]
+      base:
+        PRODUCT_NAME: WGEXTunnel
+        PRODUCT_BUNDLE_IDENTIFIER: $(WGEX_BUNDLE_ID_BASE).tunnel
+        INFOPLIST_FILE: Extensions/WGEXTunnel-iOS/Info.plist
+        OTHER_LDFLAGS: "$(inherited) -Wl,-u,_wgex_build_info"
+        CODE_SIGN_ENTITLEMENTS: Extensions/WGEXTunnel-iOS/WGEXTunnel-iOS$(WGEX_ENTITLEMENTS_VARIANT).entitlements
+        TARGETED_DEVICE_FAMILY: "1,2"
+    dependencies:
+      - package: WGEXBackendNE
+        product: WGEXNEProvider
+      - package: WGEXEngine
+        product: WGEXEngine
+      - package: WGEXDiagnostics
+
+  WGEXLiveActivity:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: Extensions/WGEXLiveActivity
+        excludes: ["Info.plist"]
+    settings:
+      groups: [signing]
+      base:
+        PRODUCT_NAME: WGEXLiveActivity
+        PRODUCT_BUNDLE_IDENTIFIER: $(WGEX_BUNDLE_ID_BASE).liveactivity
+        INFOPLIST_FILE: Extensions/WGEXLiveActivity/Info.plist
+        APPLICATION_EXTENSION_API_ONLY: YES
+        SWIFT_DEFAULT_ACTOR_ISOLATION: MainActor
+        TARGETED_DEVICE_FAMILY: "1,2"
+    dependencies:
+      - package: WGEXActivityShared
+      - sdk: SwiftUI.framework
+      - sdk: WidgetKit.framework
+
+  WGEXTV:
+    type: application
+    platform: tvOS
+    sources:
+      - path: Apps/WGEXTV
+        excludes: ["*.entitlements", "Info.plist"]
+    settings:
+      groups: [signing, appTesting]
+      base:
+        PRODUCT_NAME: WGEX
+        PRODUCT_BUNDLE_IDENTIFIER: $(WGEX_BUNDLE_ID_BASE)
+        INFOPLIST_FILE: Apps/WGEXTV/Info.plist
+        CODE_SIGN_ENTITLEMENTS: Apps/WGEXTV/WGEXTV$(WGEX_ENTITLEMENTS_VARIANT).entitlements
+        SWIFT_DEFAULT_ACTOR_ISOLATION: MainActor
+    dependencies:
+      - package: WGEXUI
+      - package: WGEXBackendNE
+        product: WGEXNEClient
+      - package: WGEXProfileStore
+      - package: WGEXAppComposition
+      - package: WGEXPairing
+      - package: WGEXDiagnostics
+      - package: WGEXTesting
+        link: false # Build-order dependency; appTesting links objects only in Debug/Lab.
+      - target: WGEXTunnel-tvOS
+        embed: true
+
+  WGEXTunnel-tvOS:
+    type: app-extension
+    platform: tvOS
+    sources:
+      - path: Extensions/WGEXTunnel-tvOS
+        excludes: ["*.entitlements", "Info.plist"]
+      - path: Extensions/WGEXTunnel-Shared
+    settings:
+      groups: [signing, appExtension]
+      base:
+        PRODUCT_NAME: WGEXTunnel
+        PRODUCT_BUNDLE_IDENTIFIER: $(WGEX_BUNDLE_ID_BASE).tunnel
+        INFOPLIST_FILE: Extensions/WGEXTunnel-tvOS/Info.plist
+        OTHER_LDFLAGS: "$(inherited) -Wl,-u,_wgex_build_info"
+        CODE_SIGN_ENTITLEMENTS: Extensions/WGEXTunnel-tvOS/WGEXTunnel-tvOS$(WGEX_ENTITLEMENTS_VARIANT).entitlements
+    dependencies:
+      - package: WGEXBackendNE
+        product: WGEXNEProvider
+      - package: WGEXEngine
+        product: WGEXEngine
+      - package: WGEXDiagnostics
+
+  WGEXMacUnitTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources: [Apps/Tests/WGEXMacUnitTests]
+    settings:
+      groups: [signing]
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: $(WGEX_BUNDLE_ID_BASE).unittests
+        GENERATE_INFOPLIST_FILE: YES
+        # PRODUCT_NAME of the app is WGEX, not the target name.
+        TEST_HOST: $(BUILT_PRODUCTS_DIR)/WGEX.app/Contents/MacOS/WGEX
+        BUNDLE_LOADER: $(TEST_HOST)
+    dependencies:
+      - target: WGEXMac
+      - package: WGEXCore
+
+  WGEXiOSUnitTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources: [Apps/Tests/WGEXiOSUnitTests]
+    settings:
+      groups: [signing]
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: $(WGEX_BUNDLE_ID_BASE).unittests
+        GENERATE_INFOPLIST_FILE: YES
+        # PRODUCT_NAME of the app is WGEX, not the target name.
+        TEST_HOST: $(BUILT_PRODUCTS_DIR)/WGEX.app/WGEX
+        BUNDLE_LOADER: $(TEST_HOST)
+    dependencies:
+      - target: WGEXiOS
+      - package: WGEXCore
+
+  WGEXMacUITests:
+    type: bundle.ui-testing
+    platform: macOS
+    sources: [Apps/Tests/WGEXMacUITests]
+    settings:
+      groups: [signing]
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: $(WGEX_BUNDLE_ID_BASE).uitests
+        GENERATE_INFOPLIST_FILE: YES
+    dependencies:
+      - target: WGEXMac
+
+  WGEXiOSUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources: [Apps/Tests/WGEXiOSUITests]
+    settings:
+      groups: [signing]
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: $(WGEX_BUNDLE_ID_BASE).uitests
+        GENERATE_INFOPLIST_FILE: YES
+    dependencies:
+      - target: WGEXiOS
+
+  WGEXTVUITests:
+    type: bundle.ui-testing
+    platform: tvOS
+    sources: [Apps/Tests/WGEXTVUITests]
+    settings:
+      groups: [signing]
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: $(WGEX_BUNDLE_ID_BASE).uitests
+        GENERATE_INFOPLIST_FILE: YES
+    dependencies:
+      - target: WGEXTV
+
+schemes:
+  WGEX-Mac:
+    build:
+      targets:
+        WGEXMac: all
+        WGEXDaemon: all
+        WGEXCLI: all
+      preActions:
+        - name: Generate build identifiers
+          script: bash "${SRCROOT}/Config/Scripts/generate-build-identifiers.sh"
+          settingsTarget: WGEXMac
+    test:
+      config: Debug
+      testPlans:
+        - path: Apps/Tests/TestPlans/WGEX-Mac.xctestplan
+          defaultPlan: true
+    run:
+      config: Debug
+    archive:
+      config: Release
+  WGEX-iOS:
+    build:
+      targets:
+        WGEXiOS: all
+        WGEXTunnel-iOS: all
+        WGEXLiveActivity: all
+      preActions:
+        - name: Generate build identifiers
+          script: bash "${SRCROOT}/Config/Scripts/generate-build-identifiers.sh"
+          settingsTarget: WGEXiOS
+    test:
+      config: Debug
+      testPlans:
+        - path: Apps/Tests/TestPlans/WGEX-iOS.xctestplan
+          defaultPlan: true
+    run:
+      config: Debug
+    archive:
+      config: Release
+  WGEX-TV:
+    build:
+      targets:
+        WGEXTV: all
+        WGEXTunnel-tvOS: all
+      preActions:
+        - name: Generate build identifiers
+          script: bash "${SRCROOT}/Config/Scripts/generate-build-identifiers.sh"
+          settingsTarget: WGEXTV
+    test:
+      config: Debug
+      testPlans:
+        - path: Apps/Tests/TestPlans/WGEX-TV.xctestplan
+          defaultPlan: true
+    run:
+      config: Debug
+    archive:
+      config: Release

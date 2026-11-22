@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "about": "Modelled read-back of the WGEX admin right (rightDefinition, as `security authorizationdb read <right>` returns it) and of its delegate authenticate-admin-nonshared (delegateDefinition). authd stores a rule-class right without shared or timeout; the delegate's timeout decides the daemon recheck. Shapes follow the macOS 26.6.2 (25G83) guest probe of 7 November 2026; created, modified, identifier and requirement are creator metadata. M03-T11 compares class, rule, shared and timeout with macOS 27.",
+  "rightDefinition": {
+    "class": "rule",
+    "comment": "WGEX administrator authorisation; authenticate-admin-nonshared, not shared, 30 seconds",
+    "created": 814991105.489426,
+    "identifier": "com.magrathean.WGEXApp.dev.daemon",
+    "modified": 815724327.901619,
+    "requirement": "cdhash H\"0000000000000000000000000000000000000000\"",
+    "rule": ["authenticate-admin-nonshared"],
+    "version": 0
+  },
+  "delegateDefinition": {
+    "allow-root": false,
+    "authenticate-user": true,
+    "class": "user",
+    "comment": "Authenticate as an administrator.",
+    "created": 812372687.547022,
+    "group": "admin",
+    "modified": 812372687.547022,
+    "session-owner": false,
+    "shared": false,
+    "timeout": 30,
+    "tries": 10000,
+    "version": 1
+  }
+}

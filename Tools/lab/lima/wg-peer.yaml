@@ -1,0 +1,41 @@
+# Owner-created peer only. No image is fetched by this definition.
+# Supply a locally approved Debian 13 ARM64 generic cloud image at this path,
+# or change location to another local copy before using the lab vm-lima wrapper.
+# Image size has not been measured; report the actual bytes before any download.
+vmType: vz
+arch: aarch64
+cpus: 2
+memory: 2GiB
+disk: 12GiB
+images:
+  - location: ~/wgex-lab-vm/Lima/media/wg-peer-debian13-arm64.qcow2
+    arch: aarch64
+mounts: []
+# No container runtime: skip the nerdctl archive download on first boot.
+containerd:
+  system: false
+  user: false
+networks:
+  - vzNAT: true
+user:
+  name: labuser
+ssh:
+  loadDotSSHPubKeys: false
+# Lima supplies its instance key. Owner must authorise the standard Mac public
+# key inside this guest before scripted access; never copy the private key in.
+provision:
+  - mode: system
+    script: |
+      #!/bin/bash
+      set -euo pipefail
+      # Runs inside Linux only, when the owner explicitly creates the peer.
+      test "$(uname -s)" = Linux
+      # Provisioning is explicit and idempotent: just lab peer up.
+      # WGEX_LAB_APT_MIRROR supplies a bounded apt source without rewriting this VM.
+      install -d -m 0700 /etc/wireguard/wgex-lab
+probes:
+  - script: |
+      #!/bin/bash
+      set -euo pipefail
+      test "$(uname -s)" = Linux
+    hint: Run just lab peer up to install the dedicated peer tools and fixture keys.

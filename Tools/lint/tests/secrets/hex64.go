@@ -1,0 +1,3 @@
+package fixture
+
+const fixtureDigest = "41572af461c33cee7a183961fc5ca47e7f13c40b9b656500e7dfb2378c4fa4a7"
